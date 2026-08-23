@@ -1,0 +1,1626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>arizeba. — Categories</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --cream: #f8eee9;
+      --cream-light: #fffaf7;
+      --rose: #d98c9d;
+      --rose-dark: #a85f73;
+      --plum: #49313f;
+      --text: #30252b;
+      --muted: #8d7b82;
+      --white: #fffdfc;
+      --border: rgba(103, 69, 80, 0.10);
+    }
+
+    body {
+      min-height: 100vh;
+
+      background:
+        radial-gradient(
+          circle at 10% 5%,
+          rgba(255,255,255,.95),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 90% 25%,
+          rgba(220,163,173,.20),
+          transparent 30%
+        ),
+        linear-gradient(
+          135deg,
+          #fffaf7 0%,
+          #f7e9e5 50%,
+          #f1dfdd 100%
+        );
+
+      color: var(--text);
+      font-family: "DM Sans", sans-serif;
+      overflow-x: hidden;
+    }
+
+    button,
+    input {
+      font-family: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .topbar {
+      max-width: 1500px;
+      margin: auto;
+      padding: 24px 42px 10px;
+
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+    }
+
+    .back-btn,
+    .header-action {
+      width: 45px;
+      height: 45px;
+
+      border-radius: 50%;
+
+      border: 1px solid rgba(110,70,82,.12);
+
+      background: rgba(255,255,255,.50);
+
+      backdrop-filter: blur(15px);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      color: var(--plum);
+
+      font-size: 20px;
+
+      box-shadow:
+        0 8px 25px rgba(82,47,60,.06);
+
+      transition: .25s ease;
+    }
+
+    .back-btn:hover,
+    .header-action:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,.75);
+    }
+
+    .brand {
+      font-family: "Playfair Display", serif;
+
+      font-size: clamp(38px,5vw,64px);
+
+      font-weight: 500;
+
+      letter-spacing: -2px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #8e4f61,
+          #d5a07f,
+          #a96070,
+          #e2b48d
+        );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+
+      filter:
+        drop-shadow(
+          0 5px 12px rgba(157,91,108,.18)
+        );
+
+      white-space: nowrap;
+    }
+
+    .brand::after {
+      content: "";
+
+      display: inline-block;
+
+      width: 8px;
+      height: 8px;
+
+      margin-left: 5px;
+      margin-bottom: 6px;
+
+      border-radius: 50%;
+
+      background: #e78fa3;
+
+      box-shadow:
+        0 0 8px rgba(231,143,163,.7),
+        0 0 20px rgba(231,143,163,.4);
+    }
+
+    .right-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+
+    .page {
+      width: min(1450px, calc(100% - 42px));
+      margin: auto;
+      padding-bottom: 40px;
+    }
+
+    .intro {
+      text-align: center;
+      padding: 28px 10px 20px;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      font-size: 11px;
+      color: var(--rose-dark);
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .intro h1 {
+      font-family: "Playfair Display", serif;
+
+      font-size: clamp(38px,5vw,64px);
+
+      font-weight: 500;
+
+      color: var(--plum);
+
+      line-height: 1;
+
+      margin-bottom: 13px;
+    }
+
+    .intro h1 span {
+      color: var(--rose-dark);
+    }
+
+    .intro p {
+      max-width: 580px;
+      margin: auto;
+
+      color: var(--muted);
+
+      font-size: 14px;
+
+      line-height: 1.7;
+    }
+
+    .search-wrapper {
+      max-width: 850px;
+      margin: 20px auto 35px;
+    }
+
+    .search-box {
+      height: 60px;
+
+      display: flex;
+      align-items: center;
+
+      gap: 13px;
+
+      padding: 0 20px;
+
+      border-radius: 32px;
+
+      background: rgba(255,255,255,.62);
+
+      backdrop-filter: blur(20px);
+
+      border: 1px solid rgba(111,76,87,.12);
+
+      box-shadow:
+        0 15px 40px rgba(91,54,68,.07),
+        inset 0 1px 0 rgba(255,255,255,.9);
+
+      transition: .25s ease;
+    }
+
+    .search-box:focus-within {
+      transform: translateY(-2px);
+
+      box-shadow:
+        0 18px 45px rgba(91,54,68,.12),
+        0 0 0 3px rgba(217,140,157,.10);
+    }
+
+    .search-icon {
+      font-size: 22px;
+      color: var(--rose-dark);
+    }
+
+    .search-box input {
+      flex: 1;
+
+      border: none;
+
+      outline: none;
+
+      background: transparent;
+
+      color: var(--text);
+
+      font-size: 15px;
+    }
+
+    .search-box input::placeholder {
+      color: #9c898f;
+    }
+
+    .result-count {
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      margin: 20px 3px 18px;
+    }
+
+    .section-header h2 {
+      font-family: "Playfair Display", serif;
+
+      font-size: 29px;
+
+      font-weight: 500;
+
+      color: var(--plum);
+    }
+
+    .section-header span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 18px;
+    }
+
+    .category-card {
+      position: relative;
+
+      min-height: 250px;
+
+      border-radius: 25px;
+
+      overflow: hidden;
+
+      cursor: pointer;
+
+      background: #eadbd7;
+
+      border: 1px solid rgba(112,74,86,.08);
+
+      box-shadow:
+        0 15px 35px rgba(79,45,58,.08);
+
+      transition:
+        transform .35s ease,
+        box-shadow .35s ease;
+    }
+
+    .category-card:hover {
+      transform:
+        translateY(-7px)
+        scale(1.01);
+
+      box-shadow:
+        0 25px 50px rgba(79,45,58,.16);
+    }
+
+    .category-card img {
+      width: 100%;
+      height: 100%;
+
+      min-height: 250px;
+
+      object-fit: cover;
+
+      transition:
+        transform .55s ease;
+    }
+
+    .category-card:hover img {
+      transform: scale(1.08);
+    }
+
+    .category-overlay {
+      position: absolute;
+      inset: 0;
+
+      background:
+        linear-gradient(
+          to top,
+          rgba(42,27,35,.78),
+          rgba(42,27,35,.10) 65%,
+          transparent
+        );
+    }
+
+    .category-content {
+      position: absolute;
+
+      left: 20px;
+      right: 20px;
+      bottom: 18px;
+
+      color: white;
+    }
+
+    .category-number {
+      font-size: 10px;
+
+      letter-spacing: 2px;
+
+      opacity: .75;
+
+      margin-bottom: 5px;
+    }
+
+    .category-content h3 {
+      font-family: "Playfair Display", serif;
+
+      font-size: 27px;
+
+      font-weight: 500;
+
+      margin-bottom: 4px;
+    }
+
+    .category-content p {
+      font-size: 11px;
+      opacity: .82;
+    }
+
+    .category-arrow {
+      position: absolute;
+
+      right: 18px;
+      bottom: 18px;
+
+      width: 38px;
+      height: 38px;
+
+      border-radius: 50%;
+
+      background:
+        rgba(255,255,255,.20);
+
+      backdrop-filter: blur(10px);
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      font-size: 17px;
+
+      transition: .25s ease;
+    }
+
+    .category-card:hover .category-arrow {
+      background: white;
+      color: var(--rose-dark);
+      transform: rotate(-8deg);
+    }
+
+    .no-results {
+      display: none;
+
+      text-align: center;
+
+      padding: 60px 20px;
+
+      color: var(--muted);
+    }
+
+    .no-results strong {
+      display: block;
+
+      font-family: "Playfair Display", serif;
+
+      color: var(--plum);
+
+      font-size: 28px;
+
+      margin-bottom: 8px;
+    }
+
+    .bottom-nav {
+      position: sticky;
+
+      bottom: 12px;
+
+      z-index: 50;
+
+      width: min(700px,calc(100% - 30px));
+
+      margin: 35px auto 0;
+
+      padding: 10px;
+
+      display: grid;
+
+      grid-template-columns: repeat(5,1fr);
+
+      background: rgba(255,255,255,.72);
+
+      backdrop-filter: blur(25px);
+
+      border:
+        1px solid rgba(255,255,255,.85);
+
+      border-radius: 25px;
+
+      box-shadow:
+        0 15px 45px rgba(66,40,51,.15);
+    }
+
+    .nav-item {
+      border: none;
+
+      background: transparent;
+
+      min-height: 55px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 4px;
+
+      color: #725b64;
+
+      font-size: 11px;
+    }
+
+    .nav-item span:first-child {
+      font-size: 19px;
+    }
+
+    .nav-item.active {
+      color: #b85e79;
+      font-weight: 700;
+    }
+
+    @media (max-width: 1050px) {
+      .categories {
+        grid-template-columns: repeat(3,1fr);
+      }
+    }
+
+    @media (max-width: 700px) {
+      .topbar {
+        padding: 18px 17px 8px;
+      }
+
+      .page {
+        width: calc(100% - 22px);
+      }
+
+      .brand {
+        font-size: 38px;
+      }
+
+      .back-btn,
+      .header-action {
+        width: 38px;
+        height: 38px;
+      }
+
+      .intro {
+        padding-top: 25px;
+      }
+
+      .intro h1 {
+        font-size: 44px;
+      }
+
+      .categories {
+        grid-template-columns: repeat(2,1fr);
+        gap: 11px;
+      }
+
+      .category-card {
+        min-height: 210px;
+        border-radius: 19px;
+      }
+
+      .category-card img {
+        min-height: 210px;
+      }
+
+      .category-content {
+        left: 14px;
+        right: 14px;
+        bottom: 14px;
+      }
+
+      .category-content h3 {
+        font-size: 22px;
+      }
+
+      .category-arrow {
+        width: 32px;
+        height: 32px;
+
+        right: 12px;
+        bottom: 12px;
+      }
+
+      .result-count {
+        display: none;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .brand {
+        font-size: 31px;
+      }
+
+      .back-btn,
+      .header-action {
+        width: 34px;
+        height: 34px;
+      }
+
+      .right-actions {
+        gap: 5px;
+      }
+
+      .intro h1 {
+        font-size: 38px;
+      }
+
+      .search-box {
+        height: 55px;
+        padding: 0 15px;
+      }
+
+      .categories {
+        gap: 8px;
+      }
+
+      .category-card {
+        min-height: 190px;
+      }
+
+      .category-card img {
+        min-height: 190px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="topbar">
+
+    <div>
+      <button
+        class="back-btn"
+        onclick="goBack()"
+        aria-label="Go back"
+      >
+        ←
+      </button>
+    </div>
+
+    <div class="brand">
+      arizeba
+    </div>
+
+    <div class="right-actions">
+
+      <button
+        class="header-action"
+        onclick="openCart()"
+        aria-label="Open cart"
+      >
+        🛍
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <main class="page">
+
+    <section class="intro">
+
+      <div class="eyebrow">
+        Discover
+      </div>
+
+      <h1>
+        Explore <span>Categories.</span>
+      </h1>
+
+      <p>
+        From everyday essentials to beautiful finds,
+        discover everything you're looking for —
+        all in one place.
+      </p>
+
+    </section>
+
+
+    <div class="search-wrapper">
+
+      <div class="search-box">
+
+        <span class="search-icon">
+          ⌕
+        </span>
+
+        <input
+          type="text"
+          id="categorySearch"
+          placeholder="Search categories..."
+          oninput="searchCategories()"
+          autocomplete="off"
+        >
+
+        <span
+          class="result-count"
+          id="resultCount"
+        >
+          All Categories
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="section-header">
+
+      <h2>
+        All Categories
+      </h2>
+
+      <span id="visibleCount">
+        28 categories
+      </span>
+
+    </div>
+
+
+    <section
+      class="categories"
+      id="categoryGrid"
+    >
+
+      <article
+        class="category-card"
+        data-name="Fashion Clothing"
+        onclick="openCategory('Fashion & Clothing')"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=900&q=90"
+          alt="Fashion"
+        >
+
+        <div class="category-overlay"></div>
+
+        <div class="category-content">
+          <div class="category-number">01</div>
+
+          <h3>Fashion</h3>
+
+          <p>Clothing & style</p>
+        </div>
+
+        <div class="category-arrow">→</div>
+      </article>
+
+
+      <article
+        class="category-card"
+        data-name="Shoes Footwear"
+        onclick="openCategory('Shoes & Footwear')"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=90"
+          alt="Shoes"
+        >
+
+        <div class="category-overlay"></div>
+
+        <div class="category-content">
+          <div class="category-number">02</div>
+
+          <h3>Shoes</h3>
+
+          <p>Footwear for everyone</p>
+        </div>
+
+        <div class="category-arrow">→</div>
+      </article>
+
+
+      <article
+        class="category-card"
+        data-name="Beauty Personal Care"
+        onclick="openCategory('Beauty & Personal Care')"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=900&q=90"
+          alt="Beauty"
+        >
+
+        <div class="category-overlay"></div>
+
+        <div class="category-content">
+          <div class="category-number">03</div>
+
+          <h3>Beauty</h3>
+
+          <p>Beauty & self care</p>
+        </div>
+
+        <div class="category-arrow">→</div>
+      </article>
+
+
+      <article
+        class="category-card"
+        data-name="Electronics Gadgets"
+        onclick="openCategory('Electronics')"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1498049794561-7780e7231661?auto=format&fit=crop&w=900&q=90"
+          alt="Electronics"
+        >
+
+        <div class="category-overlay"></div>
+
+        <div class="category-content">
+          <div class="category-number">04</div>
+
+          <h3>Electronics</h3>
+
+          <p>Smart tech & gadgets</p>
+        </div>
+
+        <div class="category-arrow">→</div>
+      </article>
+
+
+      <article
+        class="category-card"
+        data-name="Home Kitchen"
+        onclick="openCategory('Home & Kitchen')"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1556912167-f556f1f39fdf?auto=format&fit=crop&w=900&q=90"
+          alt="Home and Kitchen"
+        >
+
+        <div class="category-overlay"></div>
+
+        <div class="category-content">
+          <div class="category-number">05</div>
+
+          <h3>Home & Kitchen</h3>
+
+          <p>Make home beautiful</p>
+        </div>
+
+        <div class="category-arrow">→</div>
+      </article>
+
+
+      <article
+        class="category-card"
+        data-name="Furniture Home Decor"
+        onclick="openCategory('Furniture & Home Decor')"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=900&q=90"
+          alt="Furniture"
+        >
+
+        <div class="category-overlay"></div>
+
+        <div class="category-content">
+          <div class="category-number">06</div>
+
+          <h3>Home Decor</h3>
+
+          <p>Furniture & interiors</p>
+        </div>
+
+        <div class="category-arrow">→</div>
+      </article>
+
+
+      <article
+        class="category-card"
+        data-name="Baby Kids Toys"
+        onclick="openCategory('Baby & Kids')"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1514090458221-65bb69cf63e6?auto=format&fit=crop&w=900&q=90"
+          alt="Baby and Kids"
+        >
+
+        <div class="category-overlay"></div>
+
+        <div class="category-content">
+          <div class="category-number">07</div>
+
+          <h3>Baby & Kids</h3>
+
+          <p>Little things they love</p>
+        </div>
+
+        <div class="category-arrow">→</div>
+      </article>
+
+
+      <article
+        class="category-card"
+        data-name="Books Stationery"
+        onclick="openCategory('Books & Stationery')"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&w=900&q=90"
+          alt="Books"
+        >
+
+        <div class="category-overlay"></div>
+
+        <div class="category-content">
+          <div class="category-number">08</div>
+
+          <h3>Books</h3>
+
+          <p>Books & stationery</p>
+        </div>
+
+        <div class="category-arrow">→</div>
+      </article>
+
+
+      <article
+        class="category-card"
+        data-name="Jewelry Accessories"
+        onclick="openCategory('Jewelry & Accessories')"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=900&q=90"
+          alt="Jewelry"
+        >
+
+        <div class="category-overlay"></div>
+
+        <div class="category-content">
+          <div class="category-number">09</div>
+
+          <h3>Jewelry</h3>
+
+          <p>Elegant accessories</p>
+        </div>
+
+        <div class="category-arrow">→</div>
+      </article>
+
+
+      <article
+        class="category-card"
+        data-name="Sports Fitness"
+        onclick="openCategory('Sports & Fitness')"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=900&q=90"
+          alt="Sports"
+        >
+
+        <div class="category-overlay"></div>
+
+        <div class="category-content">
+          <div class="category-number">10</div>
+
+          <h3>Sports</h3>
+
+          <p>Fitness & active life</p>
+        </div>
+
+        <div class="category-arrow">→</div>
+      </article>
+
+
+      <article
+        class="category-card"
+        data-name="Automotive Cars"
+        onclick="openCategory('Automotive')"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=900&q=90"
+          alt="Automotive"
+        >
+
+        <div class="category-overlay"></div>
+
+        <div class="category-content">
+          <div class="category-number">11</div>
+
+          <h3>Automotive</h3>
+
+          <p>Cars & accessories</p>
+        </div>
+
+        <div class="category-arrow">→</div>
+      </article>
+
+
+      <article
+        class="category-card"
+        data-name="Pets Pet Supplies"
+        onclick="openCategory('Pet Supplies')"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=900&q=90"
+          alt="Pets"
+        >
+
+        <div class="category-overlay"></div>
+
+        <div class="category-content">
+          <div class="category-number">12</div>
+
+          <h3>Pet Supplies</h3>
+
+          <p>Everything for pets</p>
+        </div>
+
+        <div class="category-arrow">→</div>
+      </article>
+
+
+      <article
+        class="category-card"
+        data-name="Groceries Essentials"
+        onclick="openCategory('Groceries & Essentials')"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=900&q=90"
+          alt="Groceries"
+        >
+
+        <div class="category-overlay"></div>
+
+        <div class="category-content">
+          <div class="category-number">13</div>
+
+          <h3>Groceries</h3>
+
+          <p>Everyday essentials</p>
+        </div>
+
+        <div class="category-arrow">→</div>
+      </article>
+
+
+      <article
+        class="category-card"
+        data-name="Gifts Lifestyle"
+        onclick="openCategory('Gifts & Lifestyle')"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=900&q=90"
+          alt="Gifts"
+        >
+
+        <div class="category-overlay"></div>
+
+        <div class="category-content">
+          <div class="category-number">14</div>
+
+          <h3>Gifts</h3>
+
+          <p>Thoughtful little moments</p>
+        </div>
+
+        <div class="category-arrow">→</div>
+      </article>
+
+
+      <article
+        class="category-card"
+        data-name="Tools Hardware"
+        onclick="openCategory('Tools & Hardware')"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1581147036324-c17ac41e4f7c?auto=format&fit=crop&w=900&q=90"
+          alt="Tools"
+        >
+
+        <div class="category-overlay"></div>
+
+        <div class="category-content">
+          <div class="category-number">15</div>
+
+          <h3>Tools</h3>
+
+          <p>Tools & hardware</p>
+        </div>
+
+        <div class="category-arrow">→</div>
+      </article>
+
+
+      <article
+        class="category-card"
+        data-name="Health Wellness"
+        onclick="openCategory('Health & Wellness')"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=900&q=90"
+          alt="Health"
+        >
+
+        <div class="category-overlay"></div>
+
+        <div class="category-content">
+          <div class="category-number">16</div>
+
+          <h3>Health</h3>
+
+          <p>Wellness & care</p>
+        </div>
+
+        <div class="category-arrow">→</div>
+      </article>
+
+
+      <article
+        class="category-card"
+        data-name="Office Supplies Business"
+        onclick="openCategory('Office Supplies')"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=90"
+          alt="Office"
+        >
+
+        <div class="category-overlay"></div>
+
+        <div class="category-content">
+          <div class="category-number">17</div>
+
+          <h3>Office</h3>
+
+          <p>Work & productivity</p>
+        </div>
+
+        <div class="category-arrow">→</div>
+      </article>
+
+
+      <article
+        class="category-card"
+        data-name="Garden Outdoor"
+        onclick="openCategory('Garden & Outdoor')"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=900&q=90"
+          alt="Garden"
+        >
+
+        <div class="category-overlay"></div>
+
+        <div class="category-content">
+          <div class="category-number">18</div>
+
+          <h3>Garden</h3>
+
+          <p>Outdoor & greenery</p>
+        </div>
+
+        <div class="category-arrow">→</div>
+      </article>
+
+
+      <article
+        class="category-card"
+        data-name="Gaming Games"
+        onclick="openCategory('Gaming')"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&w=900&q=90"
+          alt="Gaming"
+        >
+
+        <div class="category-overlay"></div>
+
+        <div class="category-content">
+          <div class="category-number">19</div>
+
+          <h3>Gaming</h3>
+
+          <p>Games & gear</p>
+        </div>
+
+        <div class="category-arrow">→</div>
+      </article>
+
+
+      <article
+        class="category-card"
+        data-name="Music Musical Instruments"
+        onclick="openCategory('Musical Instruments')"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1524650359799-842906ca1c06?auto=format&fit=crop&w=900&q=90"
+          alt="Music"
+        >
+
+        <div class="category-overlay"></div>
+
+        <div class="category-content">
+          <div class="category-number">20</div>
+
+          <h3>Music</h3>
+
+          <p>Instruments & audio</p>
+        </div>
+
+        <div class="category-arrow">→</div>
+      </article>
+
+
+      <article
+        class="category-card"
+        data-name="Travel Luggage"
+        onclick="openCategory('Travel & Luggage')"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1553531384-cc64ac80f931?auto=format&fit=crop&w=900&q=90"
+          alt="Travel"
+        >
+
+        <div class="category-overlay"></div>
+
+        <div class="category-content">
+          <div class="category-number">21</div>
+
+          <h3>Travel</h3>
+
+          <p>Bags & travel essentials</p>
+        </div>
+
+        <div class="category-arrow">→</div>
+      </article>
+
+
+      <article
+        class="category-card"
+        data-name="Cameras Photography"
+        onclick="openCategory('Cameras & Photography')"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=900&q=90"
+          alt="Photography"
+        >
+
+        <div class="category-overlay"></div>
+
+        <div class="category-content">
+          <div class="category-number">22</div>
+
+          <h3>Photography</h3>
+
+          <p>Cameras & accessories</p>
+        </div>
+
+        <div class="category-arrow">→</div>
+      </article>
+
+
+      <article
+        class="category-card"
+        data-name="Cleaning Household"
+        onclick="openCategory('Cleaning & Household')"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1583947215259-38e31be8751f?auto=format&fit=crop&w=900&q=90"
+          alt="Cleaning"
+        >
+
+        <div class="category-overlay"></div>
+
+        <div class="category-content">
+          <div class="category-number">23</div>
+
+          <h3>Household</h3>
+
+          <p>Cleaning & home care</p>
+        </div>
+
+        <div class="category-arrow">→</div>
+      </article>
+
+
+      <article
+        class="category-card"
+        data-name="Electrical Lighting"
+        onclick="openCategory('Electrical & Lighting')"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=900&q=90"
+          alt="Lighting"
+        >
+
+        <div class="category-overlay"></div>
+
+        <div class="category-content">
+          <div class="category-number">24</div>
+
+          <h3>Lighting</h3>
+
+          <p>Electrical & lighting</p>
+        </div>
+
+        <div class="category-arrow">→</div>
+      </article>
+
+
+      <article
+        class="category-card"
+        data-name="Computers Accessories"
+        onclick="openCategory('Computers & Accessories')"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=900&q=90"
+          alt="Computers"
+        >
+
+        <div class="category-overlay"></div>
+
+        <div class="category-content">
+          <div class="category-number">25</div>
+
+          <h3>Computers</h3>
+
+          <p>PCs & accessories</p>
+        </div>
+
+        <div class="category-arrow">→</div>
+      </article>
+
+
+      <article
+        class="category-card"
+        data-name="Industrial Business"
+        onclick="openCategory('Business & Industrial')"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=900&q=90"
+          alt="Business Industrial"
+        >
+
+        <div class="category-overlay"></div>
+
+        <div class="category-content">
+          <div class="category-number">26</div>
+
+          <h3>Industrial</h3>
+
+          <p>Business & industrial</p>
+        </div>
+
+        <div class="category-arrow">→</div>
+      </article>
+
+
+      <article
+        class="category-card"
+        data-name="Construction Building"
+        onclick="openCategory('Construction & Building')"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=900&q=90"
+          alt="Construction"
+        >
+
+        <div class="category-overlay"></div>
+
+        <div class="category-content">
+          <div class="category-number">27</div>
+
+          <h3>Construction</h3>
+
+          <p>Building & supplies</p>
+        </div>
+
+        <div class="category-arrow">→</div>
+      </article>
+
+
+      <article
+        class="category-card"
+        data-name="Other More"
+        onclick="openCategory('Other')"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=900&q=90"
+          alt="More categories"
+        >
+
+        <div class="category-overlay"></div>
+
+        <div class="category-content">
+          <div class="category-number">28</div>
+
+          <h3>More</h3>
+
+          <p>Discover something new</p>
+        </div>
+
+        <div class="category-arrow">→</div>
+      </article>
+
+    </section>
+
+
+    <div
+      class="no-results"
+      id="noResults"
+    >
+      <strong>No category found</strong>
+      Try searching for another category.
+    </div>
+
+
+    <nav class="bottom-nav">
+
+      <button
+        class="nav-item"
+        onclick="goHome()"
+      >
+        <span>⌂</span>
+        <span>Home</span>
+      </button>
+
+      <button
+        class="nav-item active"
+      >
+        <span>▦</span>
+        <span>Categories</span>
+      </button>
+
+      <button
+        class="nav-item"
+        onclick="focusSearch()"
+      >
+        <span>⌕</span>
+        <span>Search</span>
+      </button>
+
+      <button
+        class="nav-item"
+        onclick="openCart()"
+      >
+        <span>🛒</span>
+        <span>Cart</span>
+      </button>
+
+      <button
+        class="nav-item"
+        onclick="openAccount()"
+      >
+        <span>♙</span>
+        <span>Account</span>
+      </button>
+
+    </nav>
+
+  </main>
+
+
+  <script>
+
+    const API_URL = "http://localhost:5000";
+
+
+    function searchCategories() {
+
+      const search =
+        document
+          .getElementById("categorySearch")
+          .value
+          .toLowerCase()
+          .trim();
+
+      const cards =
+        document.querySelectorAll(".category-card");
+
+      let visible = 0;
+
+      cards.forEach(card => {
+
+        const name =
+          card.dataset.name.toLowerCase();
+
+        if (name.includes(search)) {
+
+          card.style.display = "";
+
+          visible++;
+
+        } else {
+
+          card.style.display = "none";
+
+        }
+
+      });
+
+      document.getElementById("visibleCount")
+        .textContent =
+        visible +
+        (visible === 1 ? " category" : " categories");
+
+      document.getElementById("resultCount")
+        .textContent =
+        search
+          ? visible + " results"
+          : "All Categories";
+
+      document.getElementById("noResults")
+        .style.display =
+        visible === 0
+          ? "block"
+          : "none";
+    }
+
+
+    function openCategory(category) {
+
+      localStorage.setItem(
+        "arizebaSelectedCategory",
+        category
+      );
+
+      window.location.href =
+        "products.html";
+    }
+
+
+    function goHome() {
+
+      window.location.href =
+        "home.html";
+    }
+
+
+    function goBack() {
+
+      window.history.back();
+    }
+
+
+    function focusSearch() {
+
+      const input =
+        document.getElementById(
+          "categorySearch"
+        );
+
+      input.focus();
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    }
+
+
+    function openCart() {
+
+      window.location.href =
+        "cart.html";
+    }
+
+
+    function openAccount() {
+
+      const user =
+        localStorage.getItem(
+          "arizebaUser"
+        );
+
+      if (user) {
+
+        window.location.href =
+          "my-orders.html";
+
+      } else {
+
+        window.location.href =
+          "index.html";
+
+      }
+    }
+
+
+    // If a category was supplied through URL,
+    // automatically search for it.
+    function loadSelectedCategory() {
+
+      const params =
+        new URLSearchParams(
+          window.location.search
+        );
+
+      const category =
+        params.get("category");
+
+      if (!category) {
+        return;
+      }
+
+      const input =
+        document.getElementById(
+          "categorySearch"
+        );
+
+      input.value =
+        category.replace(
+          /%20/g,
+          " "
+        );
+
+      searchCategories();
+    }
+
+
+    loadSelectedCategory();
+
+  </script>
+
+</body>
+</html>

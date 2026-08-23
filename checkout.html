@@ -1,0 +1,5352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>AriZeba. — Checkout</title>
+
+  <!-- Google Fonts -->
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+
+    :root {
+      --cream: #f8eee9;
+      --cream-light: #fff9f6;
+      --rose: #d98c9d;
+      --rose-dark: #a85f73;
+      --champagne: #d9b49a;
+      --plum: #49313f;
+      --text: #30252b;
+      --muted: #8d7b82;
+      --white: #fffdfc;
+      --border: rgba(103, 69, 80, 0.12);
+      --success: #5b9272;
+      --danger: #c96d85;
+    }
+
+
+    body {
+
+      min-height: 100vh;
+
+      background:
+
+        radial-gradient(
+          circle at 15% 10%,
+          rgba(255,255,255,.95),
+          transparent 28%
+        ),
+
+        radial-gradient(
+          circle at 90% 30%,
+          rgba(220,163,173,.22),
+          transparent 30%
+        ),
+
+        linear-gradient(
+          135deg,
+          #fffaf7 0%,
+          #f6e9e5 48%,
+          #f1dfdd 100%
+        );
+
+      color: var(--text);
+
+      font-family: "DM Sans", sans-serif;
+
+      overflow-x: hidden;
+    }
+
+
+    button,
+    input,
+    textarea,
+    select {
+
+      font-family: inherit;
+
+    }
+
+
+    button {
+
+      cursor: pointer;
+
+    }
+
+
+    /* =====================================================
+       HEADER
+    ===================================================== */
+
+    .topbar {
+
+      width: min(
+        1400px,
+        calc(100% - 35px)
+      );
+
+      margin: auto;
+
+      padding: 22px 0 15px;
+
+      display: grid;
+
+      grid-template-columns:
+        1fr
+        auto
+        1fr;
+
+      align-items: center;
+
+    }
+
+
+    .back-btn,
+    .cart-btn {
+
+      width: 45px;
+      height: 45px;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius: 50%;
+
+      background:
+        rgba(255,255,255,.62);
+
+      backdrop-filter:
+        blur(15px);
+
+      color:
+        var(--plum);
+
+      font-size: 20px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      box-shadow:
+        0 8px 25px
+        rgba(82,47,60,.07);
+
+      transition:
+        .2s ease;
+
+    }
+
+
+    .back-btn:hover,
+    .cart-btn:hover {
+
+      transform:
+        translateY(-2px);
+
+      background:
+        rgba(255,255,255,.9);
+
+    }
+
+
+    .right-header {
+
+      display: flex;
+
+      justify-content:
+        flex-end;
+
+    }
+
+
+    .brand {
+
+      font-family:
+        "Playfair Display",
+        serif;
+
+      font-size:
+        clamp(36px, 5vw, 58px);
+
+      font-weight:
+        500;
+
+      letter-spacing:
+        -2px;
+
+      background:
+
+        linear-gradient(
+          135deg,
+          #8e4f61,
+          #d5a07f,
+          #a96070,
+          #e2b48d
+        );
+
+      -webkit-background-clip:
+        text;
+
+      background-clip:
+        text;
+
+      -webkit-text-fill-color:
+        transparent;
+
+      white-space:
+        nowrap;
+
+    }
+
+
+    /* =====================================================
+       PAGE
+    ===================================================== */
+
+    .page {
+
+      width:
+        min(
+          1200px,
+          calc(100% - 35px)
+        );
+
+      margin:
+        auto;
+
+      padding-bottom:
+        60px;
+
+    }
+
+
+    .checkout-title {
+
+      text-align:
+        center;
+
+      margin:
+        20px 0 35px;
+
+    }
+
+
+    .checkout-title h1 {
+
+      font-family:
+        "Playfair Display",
+        serif;
+
+      font-size:
+        clamp(36px, 5vw, 52px);
+
+      color:
+        var(--plum);
+
+      font-weight:
+        500;
+
+    }
+
+
+    .checkout-title p {
+
+      margin-top:
+        8px;
+
+      color:
+        var(--muted);
+
+      font-size:
+        14px;
+
+    }
+
+
+    /* =====================================================
+       LAYOUT
+    ===================================================== */
+
+    .checkout-layout {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        1.35fr .8fr;
+
+      gap:
+        25px;
+
+      align-items:
+        start;
+
+    }
+
+
+    .checkout-card,
+    .summary-card {
+
+      background:
+        rgba(255,255,255,.66);
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius:
+        25px;
+
+      box-shadow:
+        0 18px 45px
+        rgba(73,42,54,.08);
+
+      backdrop-filter:
+        blur(20px);
+
+    }
+
+
+    .checkout-card {
+
+      padding:
+        27px;
+
+    }
+
+
+    .summary-card {
+
+      padding:
+        25px;
+
+      position:
+        sticky;
+
+      top:
+        18px;
+
+    }
+
+
+    /* =====================================================
+       STEPS
+    ===================================================== */
+
+    .steps {
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      margin-bottom:
+        30px;
+
+    }
+
+
+    .step {
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        8px;
+
+      color:
+        #aa989d;
+
+      font-size:
+        12px;
+
+      font-weight:
+        600;
+
+    }
+
+
+    .step-number {
+
+      width:
+        30px;
+
+      height:
+        30px;
+
+      border-radius:
+        50%;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      background:
+        #eee1df;
+
+      color:
+        #806873;
+
+    }
+
+
+    .step.active {
+
+      color:
+        var(--rose-dark);
+
+    }
+
+
+    .step.active .step-number {
+
+      background:
+        var(--rose-dark);
+
+      color:
+        white;
+
+    }
+
+
+    .step-line {
+
+      width:
+        45px;
+
+      height:
+        1px;
+
+      background:
+        #dfced0;
+
+      margin:
+        0 10px;
+
+    }
+
+
+    /* =====================================================
+       SECTION
+    ===================================================== */
+
+    .section {
+
+      margin-bottom:
+        28px;
+
+    }
+
+
+    .section-title {
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+      margin-bottom:
+        15px;
+
+    }
+
+
+    .section-title h2 {
+
+      font-family:
+        "Playfair Display",
+        serif;
+
+      font-size:
+        25px;
+
+      font-weight:
+        500;
+
+      color:
+        var(--plum);
+
+    }
+
+
+    .section-title span {
+
+      font-size:
+        12px;
+
+      color:
+        var(--muted);
+
+    }
+
+
+    /* =====================================================
+       SAVED ADDRESS
+    ===================================================== */
+
+    .saved-address-box {
+
+      display:
+        none;
+
+      padding:
+        18px;
+
+      border-radius:
+        18px;
+
+      background:
+
+        linear-gradient(
+          135deg,
+          rgba(255,255,255,.8),
+          rgba(250,235,231,.85)
+        );
+
+      border:
+        1px solid
+        rgba(91,146,114,.22);
+
+      margin-bottom:
+        18px;
+
+    }
+
+
+    .saved-address-box.show {
+
+      display:
+        block;
+
+    }
+
+
+    .saved-label {
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        8px;
+
+      color:
+        var(--success);
+
+      font-size:
+        13px;
+
+      font-weight:
+        700;
+
+      margin-bottom:
+        10px;
+
+    }
+
+
+    .saved-address-content {
+
+      color:
+        var(--text);
+
+      line-height:
+        1.7;
+
+      font-size:
+        13px;
+
+    }
+
+
+    .saved-address-actions {
+
+      display:
+        flex;
+
+      gap:
+        9px;
+
+      margin-top:
+        15px;
+
+      flex-wrap:
+        wrap;
+
+    }
+
+
+    .small-btn {
+
+      border:
+        none;
+
+      border-radius:
+        20px;
+
+      padding:
+        9px 14px;
+
+      font-size:
+        12px;
+
+      font-weight:
+        700;
+
+    }
+
+
+    .use-address-btn {
+
+      background:
+        var(--rose-dark);
+
+      color:
+        white;
+
+    }
+
+
+    .delete-address-btn {
+
+      background:
+        #f5e4e5;
+
+      color:
+        #a85f73;
+
+    }
+
+
+    /* =====================================================
+       FORM
+    ===================================================== */
+
+    .form-grid {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      gap:
+        15px;
+
+    }
+
+
+    .form-group {
+
+      display:
+        flex;
+
+      flex-direction:
+        column;
+
+      gap:
+        7px;
+
+      position:
+        relative;
+
+    }
+
+
+    .form-group.full {
+
+      grid-column:
+        1 / -1;
+
+    }
+
+
+    .form-group label {
+
+      font-size:
+        12px;
+
+      font-weight:
+        700;
+
+      color:
+        var(--plum);
+
+    }
+
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+
+      width:
+        100%;
+
+      border:
+        1px solid
+        rgba(103,69,80,.13);
+
+      outline:
+        none;
+
+      background:
+        rgba(255,255,255,.72);
+
+      border-radius:
+        13px;
+
+      padding:
+        13px 14px;
+
+      color:
+        var(--text);
+
+      font-size:
+        13px;
+
+      transition:
+        .2s ease;
+
+    }
+
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+
+      color:
+        #b4a5aa;
+
+    }
+
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+
+      border-color:
+        var(--rose);
+
+      box-shadow:
+        0 0 0 3px
+        rgba(217,140,157,.10);
+
+    }
+
+
+    .form-group textarea {
+
+      min-height:
+        90px;
+
+      resize:
+        vertical;
+
+    }
+
+
+    /* =====================================================
+       CITY AUTOCOMPLETE
+    ===================================================== */
+
+    .city-wrapper {
+
+      position:
+        relative;
+
+    }
+
+
+    .city-hint {
+
+      margin-top:
+        4px;
+
+      font-size:
+        10px;
+
+      color:
+        var(--muted);
+
+    }
+
+
+    /* =====================================================
+       SAVE ADDRESS BUTTON
+    ===================================================== */
+
+    .save-address-row {
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        9px;
+
+      margin-top:
+        14px;
+
+      font-size:
+        12px;
+
+      color:
+        var(--muted);
+
+    }
+
+
+    .save-address-row input {
+
+      accent-color:
+        var(--rose-dark);
+
+    }
+
+
+    .save-address-btn {
+
+      margin-top:
+        13px;
+
+      border:
+        none;
+
+      border-radius:
+        22px;
+
+      padding:
+        10px 17px;
+
+      background:
+        rgba(168,95,115,.10);
+
+      color:
+        var(--rose-dark);
+
+      font-size:
+        12px;
+
+      font-weight:
+        700;
+
+      transition:
+        .2s ease;
+
+    }
+
+
+    .save-address-btn:hover {
+
+      background:
+        var(--rose-dark);
+
+      color:
+        white;
+
+      transform:
+        translateY(-1px);
+
+    }
+
+
+    /* =====================================================
+       DELIVERY
+    ===================================================== */
+
+    .delivery-options {
+
+      display:
+        grid;
+
+      gap:
+        11px;
+
+    }
+
+
+    .delivery-option {
+
+      position:
+        relative;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+      padding:
+        15px;
+
+      border-radius:
+        16px;
+
+      border:
+        1px solid
+        rgba(103,69,80,.12);
+
+      background:
+        rgba(255,255,255,.58);
+
+      transition:
+        .2s ease;
+
+    }
+
+
+    .delivery-option:hover {
+
+      border-color:
+        var(--rose);
+
+    }
+
+
+    .delivery-option.selected {
+
+      border-color:
+        var(--rose-dark);
+
+      background:
+        rgba(250,230,232,.72);
+
+      box-shadow:
+        0 8px 20px
+        rgba(168,95,115,.08);
+
+    }
+
+
+    .delivery-left {
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        12px;
+
+    }
+
+
+    .delivery-left input {
+
+      accent-color:
+        var(--rose-dark);
+
+    }
+
+
+    .delivery-name {
+
+      font-size:
+        13px;
+
+      font-weight:
+        700;
+
+    }
+
+
+    .delivery-description {
+
+      font-size:
+        11px;
+
+      color:
+        var(--muted);
+
+      margin-top:
+        3px;
+
+    }
+
+
+    .delivery-price {
+
+      font-size:
+        13px;
+
+      font-weight:
+        700;
+
+      color:
+        var(--plum);
+
+    }
+
+
+    /* =====================================================
+       PAYMENT
+    ===================================================== */
+
+    .payment-options {
+
+      display:
+        grid;
+
+      gap:
+        11px;
+
+    }
+
+
+    .payment-option {
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        12px;
+
+      padding:
+        15px;
+
+      border:
+        1px solid
+        rgba(103,69,80,.12);
+
+      border-radius:
+        16px;
+
+      background:
+        rgba(255,255,255,.58);
+
+      font-size:
+        13px;
+
+      font-weight:
+        600;
+
+    }
+
+
+    .payment-option.selected {
+
+      border-color:
+        var(--rose-dark);
+
+      background:
+        rgba(250,230,232,.72);
+
+    }
+
+
+    .payment-option input {
+
+      accent-color:
+        var(--rose-dark);
+
+    }
+
+
+    /* =====================================================
+       SUMMARY
+    ===================================================== */
+
+    .summary-card h2 {
+
+      font-family:
+        "Playfair Display",
+        serif;
+
+      font-size:
+        27px;
+
+      font-weight:
+        500;
+
+      color:
+        var(--plum);
+
+      margin-bottom:
+        20px;
+
+    }
+
+
+    .cart-items {
+
+      display:
+        grid;
+
+      gap:
+        13px;
+
+      max-height:
+        400px;
+
+      overflow-y:
+        auto;
+
+      padding-right:
+        3px;
+
+    }
+
+
+    .cart-item {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        62px 1fr auto;
+
+      gap:
+        11px;
+
+      align-items:
+        center;
+
+    }
+
+
+    .cart-item-image {
+
+      width:
+        62px;
+
+      height:
+        62px;
+
+      border-radius:
+        13px;
+
+      overflow:
+        hidden;
+
+      background:
+        #f1e1de;
+
+    }
+
+
+    .cart-item-image img {
+
+      width:
+        100%;
+
+      height:
+        100%;
+
+      object-fit:
+        cover;
+
+    }
+
+
+    .cart-item-name {
+
+      font-size:
+        12px;
+
+      font-weight:
+        700;
+
+      line-height:
+        1.4;
+
+    }
+
+
+    .cart-item-quantity {
+
+      color:
+        var(--muted);
+
+      font-size:
+        11px;
+
+      margin-top:
+        4px;
+
+    }
+
+
+    .cart-item-price {
+
+      font-size:
+        12px;
+
+      font-weight:
+        700;
+
+      white-space:
+        nowrap;
+
+    }
+
+
+    .summary-divider {
+
+      height:
+        1px;
+
+      background:
+        rgba(103,69,80,.10);
+
+      margin:
+        20px 0;
+
+    }
+
+
+    .summary-row {
+
+      display:
+        flex;
+
+      justify-content:
+        space-between;
+
+      align-items:
+        center;
+
+      font-size:
+        13px;
+
+      margin-bottom:
+        12px;
+
+    }
+
+
+    .summary-row span:first-child {
+
+      color:
+        var(--muted);
+
+    }
+
+
+    .summary-row span:last-child {
+
+      font-weight:
+        600;
+
+      color:
+        var(--plum);
+
+    }
+
+
+    .summary-total {
+
+      display:
+        flex;
+
+      justify-content:
+        space-between;
+
+      align-items:
+        center;
+
+      font-size:
+        18px;
+
+      font-weight:
+        700;
+
+      color:
+        var(--plum);
+
+    }
+
+
+    .place-order-btn {
+
+      width:
+        100%;
+
+      border:
+        none;
+
+      border-radius:
+        28px;
+
+      padding:
+        16px;
+
+      margin-top:
+        20px;
+
+      background:
+
+        linear-gradient(
+          135deg,
+          #d98c9d,
+          #a85f73
+        );
+
+      color:
+        white;
+
+      font-size:
+        14px;
+
+      font-weight:
+        700;
+
+      box-shadow:
+        0 12px 28px
+        rgba(168,95,115,.22);
+
+      transition:
+        .2s ease;
+
+    }
+
+
+    .place-order-btn:hover {
+
+      transform:
+        translateY(-2px);
+
+    }
+
+
+    .place-order-btn:disabled {
+
+      opacity:
+        .6;
+
+      cursor:
+        not-allowed;
+
+      transform:
+        none;
+
+    }
+
+
+    .secure-note {
+
+      text-align:
+        center;
+
+      margin-top:
+        13px;
+
+      color:
+        var(--muted);
+
+      font-size:
+        10px;
+
+    }
+
+
+    /* =====================================================
+       EMPTY CART
+    ===================================================== */
+
+    .empty-cart {
+
+      text-align:
+        center;
+
+      padding:
+        35px 15px;
+
+      color:
+        var(--muted);
+
+    }
+
+
+    .empty-cart-icon {
+
+      font-size:
+        38px;
+
+      margin-bottom:
+        10px;
+
+    }
+
+
+    .empty-cart h3 {
+
+      color:
+        var(--plum);
+
+      font-size:
+        17px;
+
+      margin-bottom:
+        6px;
+
+    }
+
+
+    .continue-btn {
+
+      margin-top:
+        16px;
+
+      border:
+        none;
+
+      border-radius:
+        22px;
+
+      padding:
+        11px 18px;
+
+      background:
+        var(--rose-dark);
+
+      color:
+        white;
+
+      font-size:
+        12px;
+
+      font-weight:
+        700;
+
+    }
+
+
+    /* =====================================================
+       RESPONSIVE
+    ===================================================== */
+
+    @media (max-width: 850px) {
+
+      .checkout-layout {
+
+        grid-template-columns:
+          1fr;
+
+      }
+
+
+      .summary-card {
+
+        position:
+          static;
+
+      }
+
+    }
+
+
+    @media (max-width: 600px) {
+
+      .topbar {
+
+        width:
+          calc(100% - 24px);
+
+        padding-top:
+          15px;
+
+      }
+
+
+      .brand {
+
+        font-size:
+          34px;
+
+      }
+
+
+      .back-btn,
+      .cart-btn {
+
+        width:
+          38px;
+
+        height:
+          38px;
+
+        font-size:
+          17px;
+
+      }
+
+
+      .page {
+
+        width:
+          calc(100% - 20px);
+
+      }
+
+
+      .checkout-card,
+      .summary-card {
+
+        padding:
+          18px;
+
+        border-radius:
+          20px;
+
+      }
+
+
+      .form-grid {
+
+        grid-template-columns:
+          1fr;
+
+      }
+
+
+      .form-group.full {
+
+        grid-column:
+          auto;
+
+      }
+
+
+      .steps {
+
+        transform:
+          scale(.9);
+
+      }
+
+
+      .step-line {
+
+        width:
+          25px;
+
+        margin:
+          0 6px;
+
+      }
+
+
+      .checkout-title {
+
+        margin-top:
+          10px;
+
+      }
+
+    }
+/* =========================================================
+   CHECKOUT PAGE — PART 3
+   CLEAN PROFESSIONAL LAYOUT
+========================================================= */
+
+/* ---------- PAGE BACKGROUND ---------- */
+
+body {
+  background:
+    radial-gradient(
+      circle at 10% 10%,
+      rgba(255,255,255,.95),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 20%,
+      rgba(221,165,177,.18),
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      #fffaf7 0%,
+      #f7ebe7 50%,
+      #f2e2df 100%
+    );
+
+  color: #30252b;
+}
+
+
+/* ---------- CHECKOUT MAIN CONTAINER ---------- */
+
+.checkout-container,
+.checkout-page,
+.checkout-wrapper {
+  width: min(1380px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 35px 0 70px;
+}
+
+
+/* ---------- REMOVE EXCESSIVE EMPTY SPACE ---------- */
+
+main {
+  min-height: auto !important;
+}
+
+.checkout-container {
+  min-height: auto !important;
+}
+
+
+/* ---------- CHECKOUT HEADING ---------- */
+
+.checkout-title,
+.checkout-header h1,
+.checkout-page h1 {
+  font-family: "Playfair Display", serif;
+  color: #49313f;
+}
+
+
+/* ---------- CHECKOUT GRID ---------- */
+
+.checkout-grid,
+.checkout-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(320px, .85fr);
+  gap: 28px;
+  align-items: start;
+}
+
+
+/* ---------- LEFT / RIGHT CARDS ---------- */
+
+.checkout-card,
+.address-card,
+.delivery-card,
+.payment-card,
+.order-summary,
+.summary-card {
+  background: rgba(255,255,255,.70);
+  border: 1px solid rgba(103,69,80,.10);
+  border-radius: 24px;
+
+  box-shadow:
+    0 15px 40px rgba(73,42,54,.07),
+    inset 0 1px 0 rgba(255,255,255,.8);
+
+  backdrop-filter: blur(18px);
+}
+
+
+/* ---------- FORM CARD ---------- */
+
+.address-card,
+.checkout-card {
+  padding: 28px;
+}
+
+
+/* ---------- FORM GRID ---------- */
+
+.form-grid,
+.address-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 20px;
+}
+
+
+/* ---------- FULL WIDTH FIELDS ---------- */
+
+.form-group.full,
+.form-field.full,
+.full-width {
+  grid-column: 1 / -1;
+}
+
+
+/* ---------- LABELS ---------- */
+
+label,
+.form-label {
+  display: block;
+  margin-bottom: 7px;
+
+  color: #5d4b53;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+
+/* ---------- INPUTS ---------- */
+
+input,
+select,
+textarea {
+  width: 100%;
+  min-height: 48px;
+
+  border: 1px solid rgba(111,76,87,.14);
+  border-radius: 13px;
+
+  background: rgba(255,255,255,.72);
+
+  padding: 0 14px;
+
+  color: #30252b;
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+
+  outline: none;
+
+  transition:
+    border-color .2s ease,
+    box-shadow .2s ease,
+    background .2s ease;
+}
+
+
+/* ---------- INPUT FOCUS ---------- */
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #d98c9d;
+
+  background: #fffdfc;
+
+  box-shadow:
+    0 0 0 3px rgba(217,140,157,.12);
+}
+
+
+/* ---------- PLACEHOLDER ---------- */
+
+input::placeholder,
+textarea::placeholder {
+  color: #aa989d;
+}
+
+
+/* ---------- CITY AUTOCOMPLETE DROPDOWN ---------- */
+
+.city-suggestions,
+.autocomplete-list,
+.suggestions-list {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  top: calc(100% + 5px);
+
+  z-index: 1000;
+
+  max-height: 220px;
+  overflow-y: auto;
+
+  background: #fffdfc;
+
+  border: 1px solid rgba(103,69,80,.12);
+  border-radius: 14px;
+
+  box-shadow:
+    0 15px 35px rgba(73,42,54,.14);
+}
+
+
+.city-suggestion,
+.autocomplete-item,
+.suggestion-item {
+  padding: 12px 14px;
+
+  cursor: pointer;
+
+  font-size: 13px;
+  color: #49313f;
+
+  transition: background .2s ease;
+}
+
+
+.city-suggestion:hover,
+.autocomplete-item:hover,
+.suggestion-item:hover {
+  background: #f8e8e9;
+}
+
+
+/* ---------- SAVE ADDRESS ---------- */
+
+.save-address,
+.save-address-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  margin-top: 18px;
+}
+
+
+.save-address input[type="checkbox"],
+.save-address-row input[type="checkbox"] {
+  width: 17px;
+  min-height: 17px;
+
+  accent-color: #c96d85;
+
+  cursor: pointer;
+}
+
+
+.save-address label {
+  margin: 0;
+
+  font-size: 12px;
+  font-weight: 500;
+
+  cursor: pointer;
+}
+
+
+/* ---------- DELIVERY + PAYMENT ---------- */
+
+.delivery-section,
+.payment-section {
+  margin-top: 25px;
+}
+
+
+.delivery-option,
+.payment-option {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  min-height: 70px;
+
+  padding: 15px 17px;
+
+  margin-bottom: 10px;
+
+  border: 1px solid rgba(103,69,80,.12);
+  border-radius: 16px;
+
+  background: rgba(255,255,255,.48);
+
+  cursor: pointer;
+
+  transition: .2s ease;
+}
+
+
+.delivery-option:hover,
+.payment-option:hover {
+  border-color: rgba(201,109,133,.40);
+  background: rgba(255,250,249,.85);
+}
+
+
+.delivery-option:has(input:checked),
+.payment-option:has(input:checked) {
+  border-color: #d98c9d;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(248,224,227,.70),
+      rgba(255,255,255,.80)
+    );
+
+  box-shadow:
+    0 5px 18px rgba(201,109,133,.08);
+}
+
+
+.delivery-option input,
+.payment-option input {
+  width: 17px;
+  min-height: 17px;
+
+  accent-color: #c96d85;
+}
+
+
+/* ---------- DELIVERY TEXT ---------- */
+
+.delivery-info,
+.payment-info {
+  flex: 1;
+  margin-left: 12px;
+}
+
+
+.delivery-info strong,
+.payment-info strong {
+  display: block;
+
+  color: #49313f;
+
+  font-size: 14px;
+}
+
+
+.delivery-info small,
+.payment-info small {
+  display: block;
+
+  margin-top: 4px;
+
+  color: #8d7b82;
+
+  font-size: 11px;
+}
+
+
+/* ---------- PRICE ON OPTIONS ---------- */
+
+.delivery-price,
+.payment-price {
+  font-size: 13px;
+  font-weight: 700;
+
+  color: #49313f;
+}
+
+
+/* ---------- ORDER SUMMARY ---------- */
+
+.order-summary,
+.summary-card {
+  position: sticky;
+  top: 25px;
+
+  padding: 25px;
+}
+
+
+.order-summary h2,
+.summary-card h2 {
+  font-family: "Playfair Display", serif;
+
+  color: #49313f;
+
+  font-size: 27px;
+  font-weight: 500;
+
+  margin-bottom: 20px;
+}
+
+
+/* ---------- ORDER PRODUCT ---------- */
+
+.order-item,
+.summary-product {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding-bottom: 17px;
+  margin-bottom: 17px;
+
+  border-bottom: 1px solid rgba(103,69,80,.09);
+}
+
+
+.order-item img,
+.summary-product img {
+  width: 68px;
+  height: 68px;
+
+  border-radius: 13px;
+
+  object-fit: cover;
+
+  background: #f4e5e1;
+}
+
+
+.order-item-info,
+.summary-product-info {
+  flex: 1;
+}
+
+
+.order-item-name,
+.summary-product-name {
+  color: #30252b;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  line-height: 1.4;
+}
+
+
+.order-item-qty,
+.summary-product-qty {
+  margin-top: 4px;
+
+  color: #8d7b82;
+
+  font-size: 11px;
+}
+
+
+.order-item-price,
+.summary-product-price {
+  color: #49313f;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+
+/* ---------- PRICE ROWS ---------- */
+
+.summary-row,
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin: 12px 0;
+
+  color: #806e75;
+  font-size: 13px;
+}
+
+
+.total-row {
+  margin-top: 18px;
+  padding-top: 17px;
+
+  border-top: 1px solid rgba(103,69,80,.12);
+
+  color: #49313f;
+
+  font-size: 17px;
+  font-weight: 700;
+}
+
+
+/* ---------- PLACE ORDER BUTTON ---------- */
+
+.place-order,
+.place-order-btn,
+button[type="submit"] {
+  width: 100%;
+
+  min-height: 52px;
+
+  margin-top: 18px;
+
+  border: none;
+  border-radius: 28px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #d98c9d,
+      #c96d85
+    );
+
+  color: white;
+
+  font-family: "DM Sans", sans-serif;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 10px 25px rgba(201,109,133,.22);
+
+  transition: .2s ease;
+}
+
+
+.place-order:hover,
+.place-order-btn:hover,
+button[type="submit"]:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 14px 30px rgba(201,109,133,.30);
+}
+
+
+.place-order:active,
+.place-order-btn:active,
+button[type="submit"]:active {
+  transform: translateY(0);
+}
+
+
+/* ---------- SECURE CHECKOUT TEXT ---------- */
+
+.secure-checkout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  margin-top: 12px;
+
+  color: #9a858c;
+
+  font-size: 10px;
+}
+
+
+/* ---------- BACK BUTTON ---------- */
+
+.back-button,
+.back-btn,
+.checkout-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  margin-bottom: 18px;
+
+  padding: 9px 14px;
+
+  border: 1px solid rgba(103,69,80,.12);
+  border-radius: 20px;
+
+  background: rgba(255,255,255,.58);
+
+  color: #6d5961;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition: .2s ease;
+}
+
+
+.back-button:hover,
+.back-btn:hover,
+.checkout-back:hover {
+  background: white;
+
+  color: #b85e79;
+
+  transform: translateX(-2px);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .checkout-grid,
+  .checkout-content {
+    grid-template-columns: 1fr;
+  }
+
+  .order-summary,
+  .summary-card {
+    position: static;
+  }
+
+}
+
+
+@media (max-width: 650px) {
+
+  .checkout-container,
+  .checkout-page,
+  .checkout-wrapper {
+    width: calc(100% - 20px);
+
+    padding-top: 20px;
+    padding-bottom: 45px;
+  }
+
+
+  .form-grid,
+  .address-grid {
+    grid-template-columns: 1fr;
+
+    gap: 15px;
+  }
+
+
+  .form-group.full,
+  .form-field.full,
+  .full-width {
+    grid-column: auto;
+  }
+
+
+  .address-card,
+  .checkout-card,
+  .order-summary,
+  .summary-card {
+    padding: 18px;
+
+    border-radius: 20px;
+  }
+
+
+  .order-summary h2,
+  .summary-card h2 {
+    font-size: 24px;
+  }
+
+
+  input,
+  select,
+  textarea {
+    min-height: 46px;
+  }
+
+
+  .delivery-option,
+  .payment-option {
+    min-height: 64px;
+
+    padding: 12px;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+
+  .checkout-container,
+  .checkout-page,
+  .checkout-wrapper {
+    width: calc(100% - 14px);
+  }
+
+
+  .address-card,
+  .checkout-card,
+  .order-summary,
+  .summary-card {
+    padding: 15px;
+  }
+
+
+  .order-item img,
+  .summary-product img {
+    width: 58px;
+    height: 58px;
+  }
+
+}
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- =====================================================
+       HEADER
+  ===================================================== -->
+
+  <header class="topbar">
+
+
+    <div>
+
+      <button
+        class="back-btn"
+        onclick="goBack()"
+        aria-label="Go back"
+        type="button"
+      >
+        ←
+      </button>
+
+    </div>
+
+
+    <div class="brand">
+      AriZeba.
+    </div>
+
+
+    <div class="right-header">
+
+      <button
+        class="cart-btn"
+        onclick="openCart()"
+        aria-label="Cart"
+        type="button"
+      >
+        🛍
+      </button>
+
+    </div>
+
+  </header>
+
+
+
+  <main class="page">
+
+
+    <!-- ===================================================
+         TITLE
+    =================================================== -->
+
+    <div class="checkout-title">
+
+      <h1>
+        Checkout
+      </h1>
+
+      <p>
+        Complete your order securely.
+      </p>
+
+    </div>
+
+
+
+    <!-- ===================================================
+         CHECKOUT LAYOUT
+    =================================================== -->
+
+    <div class="checkout-layout">
+
+
+      <!-- =================================================
+           LEFT SIDE
+      ================================================= -->
+
+      <div class="checkout-card">
+
+
+        <!-- STEPS -->
+
+        <div class="steps">
+
+
+          <div
+            class="step active"
+            id="stepAddress"
+          >
+
+            <span class="step-number">
+              1
+            </span>
+
+            <span>
+              Address
+            </span>
+
+          </div>
+
+
+          <div class="step-line"></div>
+
+
+          <div
+            class="step"
+            id="stepDelivery"
+          >
+
+            <span class="step-number">
+              2
+            </span>
+
+            <span>
+              Delivery
+            </span>
+
+          </div>
+
+
+          <div class="step-line"></div>
+
+
+          <div
+            class="step"
+            id="stepPayment"
+          >
+
+            <span class="step-number">
+              3
+            </span>
+
+            <span>
+              Payment
+            </span>
+
+          </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             ADDRESS
+        ================================================= -->
+
+        <section class="section">
+
+
+          <div class="section-title">
+
+            <h2>
+              Delivery Address
+            </h2>
+
+            <span>
+              Required
+            </span>
+
+          </div>
+
+
+
+          <!-- SAVED ADDRESS -->
+
+          <div
+            class="saved-address-box"
+            id="savedAddressBox"
+          >
+
+            <div class="saved-label">
+              ✓ Saved Address
+            </div>
+
+
+            <div
+              class="saved-address-content"
+              id="savedAddressContent"
+            >
+            </div>
+
+
+            <div class="saved-address-actions">
+
+
+              <button
+                type="button"
+                class="small-btn use-address-btn"
+                onclick="useSavedAddress()"
+              >
+                Use This Address
+              </button>
+
+
+              <button
+                type="button"
+                class="small-btn delete-address-btn"
+                onclick="deleteSavedAddress()"
+              >
+                Delete Saved Address
+              </button>
+
+
+            </div>
+
+          </div>
+
+
+
+          <!-- ADDRESS FORM -->
+
+          <div class="form-grid">
+
+
+            <!-- FULL NAME -->
+
+            <div class="form-group">
+
+              <label for="customerName">
+                Full Name
+              </label>
+
+              <input
+                type="text"
+                id="customerName"
+                placeholder="Enter your full name"
+                autocomplete="name"
+              >
+
+            </div>
+
+
+
+            <!-- EMAIL -->
+
+            <div class="form-group">
+
+              <label for="customerEmail">
+                Email Address
+              </label>
+
+              <input
+                type="email"
+                id="customerEmail"
+                placeholder="you@example.com"
+                autocomplete="email"
+              >
+
+            </div>
+
+
+
+            <!-- PHONE -->
+
+            <div class="form-group">
+
+              <label for="customerPhone">
+                Phone Number
+              </label>
+
+              <input
+                type="tel"
+                id="customerPhone"
+                placeholder="03XX XXXXXXX"
+                autocomplete="tel"
+              >
+
+            </div>
+
+
+
+            <!-- POSTAL CODE -->
+
+            <div class="form-group">
+
+              <label for="postalCode">
+                Postal Code
+              </label>
+
+              <input
+                type="text"
+                id="postalCode"
+                placeholder="e.g. 61100"
+                autocomplete="postal-code"
+              >
+
+            </div>
+
+
+
+            <!-- STREET -->
+
+            <div class="form-group full">
+
+              <label for="street">
+                Street / House Address
+              </label>
+
+              <input
+                type="text"
+                id="street"
+                placeholder="House no, street, building..."
+                autocomplete="street-address"
+              >
+
+            </div>
+
+
+
+            <!-- AREA -->
+
+            <div class="form-group">
+
+              <label for="area">
+                Area / Locality
+              </label>
+
+              <input
+                type="text"
+                id="area"
+                placeholder="e.g. Model Town"
+              >
+
+            </div>
+
+
+
+            <!-- CITY -->
+
+            <div class="form-group">
+
+              <label for="city">
+                City
+              </label>
+
+              <div class="city-wrapper">
+
+                <input
+                  type="text"
+                  id="city"
+                  name="city"
+                  placeholder="Start typing your city..."
+                  autocomplete="address-level2"
+                  list="pakistanCities"
+                >
+
+                <div class="city-hint">
+                  Type a few letters to see Pakistani cities
+                </div>
+
+              </div>
+
+            </div>
+
+
+
+            <!-- PROVINCE -->
+
+            <div class="form-group">
+
+              <label for="province">
+                Province / Region
+              </label>
+
+              <select
+                id="province"
+                name="province"
+              >
+
+                <option value="">
+                  Select Province / Region
+                </option>
+
+                <option value="Punjab">
+                  Punjab
+                </option>
+
+                <option value="Sindh">
+                  Sindh
+                </option>
+
+                <option value="Khyber Pakhtunkhwa">
+                  Khyber Pakhtunkhwa
+                </option>
+
+                <option value="Balochistan">
+                  Balochistan
+                </option>
+
+                <option value="Islamabad Capital Territory">
+                  Islamabad Capital Territory
+                </option>
+
+                <option value="Gilgit-Baltistan">
+                  Gilgit-Baltistan
+                </option>
+
+                <option value="Azad Jammu and Kashmir">
+                  Azad Jammu and Kashmir
+                </option>
+
+              </select>
+
+            </div>
+
+
+
+            <!-- COUNTRY -->
+
+            <div class="form-group">
+
+              <label for="country">
+                Country
+              </label>
+
+              <input
+                type="text"
+                id="country"
+                value="Pakistan"
+                readonly
+              >
+
+            </div>
+
+
+          </div>
+
+
+
+          <!-- PAKISTAN CITY SUGGESTIONS -->
+
+          <datalist id="pakistanCities">
+
+            <!-- Punjab -->
+
+            <option value="Lahore"></option>
+            <option value="Faisalabad"></option>
+            <option value="Rawalpindi"></option>
+            <option value="Multan"></option>
+            <option value="Gujranwala"></option>
+            <option value="Sialkot"></option>
+            <option value="Bahawalpur"></option>
+            <option value="Sargodha"></option>
+            <option value="Sheikhupura"></option>
+            <option value="Jhang"></option>
+            <option value="Rahim Yar Khan"></option>
+            <option value="Gujrat"></option>
+            <option value="Sahiwal"></option>
+            <option value="Okara"></option>
+            <option value="Kasur"></option>
+            <option value="Dera Ghazi Khan"></option>
+            <option value="Mandi Bahauddin"></option>
+            <option value="Muzaffargarh"></option>
+            <option value="Khanewal"></option>
+            <option value="Hafizabad"></option>
+            <option value="Jhelum"></option>
+            <option value="Attock"></option>
+            <option value="Chakwal"></option>
+            <option value="Mianwali"></option>
+            <option value="Bhakkar"></option>
+            <option value="Layyah"></option>
+            <option value="Toba Tek Singh"></option>
+            <option value="Vehari"></option>
+            <option value="Burewala"></option>
+            <option value="Chiniot"></option>
+            <option value="Wazirabad"></option>
+            <option value="Kamoke"></option>
+            <option value="Narowal"></option>
+            <option value="Shakargarh"></option>
+            <option value="Pakpattan"></option>
+            <option value="Arifwala"></option>
+            <option value="Lodhran"></option>
+            <option value="Jalalpur Jattan"></option>
+            <option value="Daska"></option>
+            <option value="Sambrial"></option>
+            <option value="Taxila"></option>
+            <option value="Wah Cantt"></option>
+            <option value="Murree"></option>
+
+
+            <!-- Sindh -->
+
+            <option value="Karachi"></option>
+            <option value="Hyderabad"></option>
+            <option value="Sukkur"></option>
+            <option value="Larkana"></option>
+            <option value="Nawabshah"></option>
+            <option value="Mirpur Khas"></option>
+            <option value="Jacobabad"></option>
+            <option value="Shikarpur"></option>
+            <option value="Khairpur"></option>
+            <option value="Dadu"></option>
+            <option value="Thatta"></option>
+            <option value="Badin"></option>
+            <option value="Tando Adam"></option>
+            <option value="Tando Allahyar"></option>
+            <option value="Matiari"></option>
+            <option value="Umerkot"></option>
+            <option value="Sanghar"></option>
+            <option value="Ghotki"></option>
+
+
+            <!-- Khyber Pakhtunkhwa -->
+
+            <option value="Peshawar"></option>
+            <option value="Mardan"></option>
+            <option value="Mingora"></option>
+            <option value="Abbottabad"></option>
+            <option value="Kohat"></option>
+            <option value="Dera Ismail Khan"></option>
+            <option value="Bannu"></option>
+            <option value="Swabi"></option>
+            <option value="Nowshera"></option>
+            <option value="Charsadda"></option>
+            <option value="Mansehra"></option>
+            <option value="Haripur"></option>
+            <option value="Chitral"></option>
+            <option value="Karak"></option>
+            <option value="Tank"></option>
+
+
+            <!-- Balochistan -->
+
+            <option value="Quetta"></option>
+            <option value="Gwadar"></option>
+            <option value="Turbat"></option>
+            <option value="Khuzdar"></option>
+            <option value="Chaman"></option>
+            <option value="Sibi"></option>
+            <option value="Zhob"></option>
+            <option value="Loralai"></option>
+            <option value="Kalat"></option>
+
+
+            <!-- Islamabad -->
+
+            <option value="Islamabad"></option>
+
+
+            <!-- Gilgit-Baltistan -->
+
+            <option value="Gilgit"></option>
+            <option value="Skardu"></option>
+            <option value="Hunza"></option>
+            <option value="Chilas"></option>
+
+
+            <!-- Azad Jammu & Kashmir -->
+
+            <option value="Muzaffarabad"></option>
+            <option value="Mirpur"></option>
+            <option value="Rawalakot"></option>
+            <option value="Kotli"></option>
+            <option value="Bagh"></option>
+            <option value="Bhimber"></option>
+
+          </datalist>
+
+
+
+          <!-- SAVE ADDRESS -->
+
+          <label class="save-address-row">
+
+            <input
+              type="checkbox"
+              id="saveAddress"
+              checked
+            >
+
+            <span>
+              Save this address for my next order
+            </span>
+
+          </label>
+
+
+          <button
+            type="button"
+            class="save-address-btn"
+            onclick="saveAddressFromButton()"
+          >
+            ✓ Save Address
+          </button>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             DELIVERY
+        ================================================= -->
+
+        <section class="section">
+
+
+          <div class="section-title">
+
+            <h2>
+              Delivery Method
+            </h2>
+
+          </div>
+
+
+          <div class="delivery-options">
+
+
+            <label
+              class="delivery-option selected"
+              data-delivery="standard"
+            >
+
+              <div class="delivery-left">
+
+                <input
+                  type="radio"
+                  name="delivery"
+                  value="standard"
+                  data-price="250"
+                  checked
+                  onchange="selectDelivery(this)"
+                >
+
+                <div>
+
+                  <div class="delivery-name">
+                    Standard Delivery
+                  </div>
+
+                  <div class="delivery-description">
+                    Delivered in 3–5 working days
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <div class="delivery-price">
+                PKR 250
+              </div>
+
+            </label>
+
+
+
+            <label
+              class="delivery-option"
+              data-delivery="express"
+            >
+
+              <div class="delivery-left">
+
+                <input
+                  type="radio"
+                  name="delivery"
+                  value="express"
+                  data-price="450"
+                  onchange="selectDelivery(this)"
+                >
+
+                <div>
+
+                  <div class="delivery-name">
+                    Express Delivery
+                  </div>
+
+                  <div class="delivery-description">
+                    Delivered in 1–2 working days
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <div class="delivery-price">
+                PKR 450
+              </div>
+
+            </label>
+
+
+          </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             PAYMENT
+        ================================================= -->
+
+        <section class="section">
+
+
+          <div class="section-title">
+
+            <h2>
+              Payment Method
+            </h2>
+
+          </div>
+
+
+          <div class="payment-options">
+
+
+            <label
+              class="payment-option selected"
+              id="codPayment"
+            >
+
+              <input
+                type="radio"
+                name="payment"
+                value="cod"
+                checked
+                onchange="selectPayment(this)"
+              >
+
+              <span>
+                💵 Cash on Delivery
+              </span>
+
+            </label>
+
+
+
+            <label
+              class="payment-option"
+            >
+
+              <input
+                type="radio"
+                name="payment"
+                value="card"
+                onchange="selectPayment(this)"
+              >
+
+              <span>
+                💳 Credit / Debit Card
+              </span>
+
+            </label>
+
+
+          </div>
+
+        </section>
+
+
+      </div>
+
+
+
+      <!-- =================================================
+           RIGHT SIDE — ORDER SUMMARY
+      ================================================= -->
+
+      <aside class="summary-card">
+
+
+        <h2>
+          Your Order
+        </h2>
+
+
+        <div
+          class="cart-items"
+          id="cartItems"
+        >
+        </div>
+
+
+        <div class="summary-divider"></div>
+
+
+        <div class="summary-row">
+
+          <span>
+            Subtotal
+          </span>
+
+          <span id="subtotal">
+            PKR 0
+          </span>
+
+        </div>
+
+
+        <div class="summary-row">
+
+          <span>
+            Delivery
+          </span>
+
+          <span id="delivery">
+            PKR 250
+          </span>
+
+        </div>
+
+
+        <div class="summary-row">
+
+          <span>
+            Discount
+          </span>
+
+          <span id="discount">
+            PKR 0
+          </span>
+
+        </div>
+
+
+        <div class="summary-divider"></div>
+
+
+        <div class="summary-total">
+
+          <span>
+            Total
+          </span>
+
+          <span id="total">
+            PKR 0
+          </span>
+
+        </div>
+
+
+        <button
+          class="place-order-btn"
+          onclick="placeOrder()"
+          type="button"
+        >
+          Place Order →
+        </button>
+
+
+        <div class="secure-note">
+          🔒 Your order information is securely processed.
+        </div>
+
+
+      </aside>
+
+
+    </div>
+
+  </main>
+
+
+  <!-- =====================================================
+       JAVASCRIPT WILL BE ADDED IN PART 2
+  ===================================================== -->
+<script>
+
+/* =====================================================
+   ARIZEBA CHECKOUT — PART 2
+   Cart + Address + Saved Address + Delivery
+   + Payment + Order
+===================================================== */
+
+
+/* =====================================================
+   GLOBAL DATA
+===================================================== */
+
+let cart = [];
+
+let savedAddress = null;
+
+let selectedDelivery = {
+  type: "standard",
+  price: 250
+};
+
+let selectedPayment = "cod";
+
+
+/* =====================================================
+   API
+===================================================== */
+
+const API_URL =
+  "http://localhost:5000";
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(value) {
+
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
+}
+
+
+/* =====================================================
+   FORMAT PRICE
+===================================================== */
+
+function formatPrice(value) {
+
+  return "PKR " +
+    Number(value || 0)
+      .toLocaleString();
+
+}
+
+
+/* =====================================================
+   LOAD CART
+===================================================== */
+
+function loadCart() {
+
+  try {
+
+    const storedCart =
+      localStorage.getItem(
+        "arizebaCart"
+      );
+
+
+    if (!storedCart) {
+
+      cart = [];
+
+    } else {
+
+      const parsed =
+        JSON.parse(storedCart);
+
+
+      cart =
+        Array.isArray(parsed)
+          ? parsed
+          : [];
+
+    }
+
+
+  } catch (error) {
+
+    console.error(
+      "Cart loading error:",
+      error
+    );
+
+    cart = [];
+
+  }
+
+
+  renderCart();
+
+  updateTotals();
+
+}
+
+
+/* =====================================================
+   RENDER CART
+===================================================== */
+
+function renderCart() {
+
+  const container =
+    document.getElementById(
+      "cartItems"
+    );
+
+
+  if (!container) {
+    return;
+  }
+
+
+  container.innerHTML = "";
+
+
+  if (
+    !Array.isArray(cart) ||
+    cart.length === 0
+  ) {
+
+    container.innerHTML = `
+
+      <div class="empty-cart">
+
+        <div class="empty-cart-icon">
+          🛍
+        </div>
+
+        <h3>
+          Your cart is empty
+        </h3>
+
+        <p>
+          Add some products before checkout.
+        </p>
+
+        <button
+          class="continue-btn"
+          onclick="continueShopping()"
+          type="button"
+        >
+          Continue Shopping
+        </button>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  cart.forEach(
+    product => {
+
+
+      const quantity =
+        Math.max(
+          1,
+          Number(
+            product.quantity || 1
+          )
+        );
+
+
+      const price =
+        Math.max(
+          0,
+          Number(
+            product.price || 0
+          )
+        );
+
+
+      const itemTotal =
+        price * quantity;
+
+
+      const item =
+        document.createElement(
+          "div"
+        );
+
+
+      item.className =
+        "cart-item";
+
+
+      item.innerHTML = `
+
+        <div class="cart-item-image">
+
+          <img
+            src="${escapeHTML(
+              product.image || ""
+            )}"
+            alt="${escapeHTML(
+              product.name ||
+              "Product"
+            )}"
+            onerror="
+              this.style.display='none'
+            "
+          >
+
+        </div>
+
+
+        <div>
+
+          <div class="cart-item-name">
+
+            ${escapeHTML(
+              product.name ||
+              "Product"
+            )}
+
+          </div>
+
+
+          <div class="cart-item-quantity">
+
+            Quantity:
+            ${quantity}
+
+          </div>
+
+        </div>
+
+
+        <div class="cart-item-price">
+
+          ${formatPrice(itemTotal)}
+
+        </div>
+
+      `;
+
+
+      container.appendChild(
+        item
+      );
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   CALCULATE SUBTOTAL
+===================================================== */
+
+function calculateSubtotal() {
+
+  let subtotal = 0;
+
+
+  cart.forEach(
+    product => {
+
+      const price =
+        Number(
+          product.price || 0
+        );
+
+
+      const quantity =
+        Number(
+          product.quantity || 1
+        );
+
+
+      subtotal +=
+        price * quantity;
+
+    }
+  );
+
+
+  return subtotal;
+
+}
+
+
+/* =====================================================
+   UPDATE TOTALS
+===================================================== */
+
+function updateTotals() {
+
+  const subtotal =
+    calculateSubtotal();
+
+
+  const delivery =
+    Number(
+      selectedDelivery.price || 0
+    );
+
+
+  const discount = 0;
+
+
+  const total =
+    subtotal +
+    delivery -
+    discount;
+
+
+  const subtotalElement =
+    document.getElementById(
+      "subtotal"
+    );
+
+
+  const deliveryElement =
+    document.getElementById(
+      "delivery"
+    );
+
+
+  const discountElement =
+    document.getElementById(
+      "discount"
+    );
+
+
+  const totalElement =
+    document.getElementById(
+      "total"
+    );
+
+
+  if (subtotalElement) {
+
+    subtotalElement.textContent =
+      formatPrice(subtotal);
+
+  }
+
+
+  if (deliveryElement) {
+
+    deliveryElement.textContent =
+      formatPrice(delivery);
+
+  }
+
+
+  if (discountElement) {
+
+    discountElement.textContent =
+      formatPrice(discount);
+
+  }
+
+
+  if (totalElement) {
+
+    totalElement.textContent =
+      formatPrice(total);
+
+  }
+
+}
+
+
+/* =====================================================
+   SAVE CART
+===================================================== */
+
+function saveCart() {
+
+  try {
+
+    localStorage.setItem(
+
+      "arizebaCart",
+
+      JSON.stringify(cart)
+
+    );
+
+  } catch (error) {
+
+    console.error(
+      "Could not save cart:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   ADDRESS — GET CURRENT FORM
+===================================================== */
+
+function getCurrentAddress() {
+
+  return {
+
+    name:
+      document
+        .getElementById(
+          "customerName"
+        )
+        ?.value
+        .trim() || "",
+
+
+    email:
+      document
+        .getElementById(
+          "customerEmail"
+        )
+        ?.value
+        .trim()
+        .toLowerCase() || "",
+
+
+    phone:
+      document
+        .getElementById(
+          "customerPhone"
+        )
+        ?.value
+        .trim() || "",
+
+
+    street:
+      document
+        .getElementById(
+          "street"
+        )
+        ?.value
+        .trim() || "",
+
+
+    area:
+      document
+        .getElementById(
+          "area"
+        )
+        ?.value
+        .trim() || "",
+
+
+    city:
+      document
+        .getElementById(
+          "city"
+        )
+        ?.value
+        .trim() || "",
+
+
+    province:
+      document
+        .getElementById(
+          "province"
+        )
+        ?.value
+        .trim() || "",
+
+
+    postalCode:
+      document
+        .getElementById(
+          "postalCode"
+        )
+        ?.value
+        .trim() || "",
+
+
+    country:
+      "Pakistan"
+
+  };
+
+}
+
+
+/* =====================================================
+   VALIDATE ADDRESS
+===================================================== */
+
+function validateAddress(
+  address
+) {
+
+  if (!address.name) {
+
+    alert(
+      "Please enter your full name."
+    );
+
+    return false;
+
+  }
+
+
+  if (!address.email) {
+
+    alert(
+      "Please enter your email address."
+    );
+
+    return false;
+
+  }
+
+
+  if (!address.phone) {
+
+    alert(
+      "Please enter your phone number."
+    );
+
+    return false;
+
+  }
+
+
+  if (!address.street) {
+
+    alert(
+      "Please enter your street / house address."
+    );
+
+    return false;
+
+  }
+
+
+  if (!address.area) {
+
+    alert(
+      "Please enter your area / locality."
+    );
+
+    return false;
+
+  }
+
+
+  if (!address.city) {
+
+    alert(
+      "Please select or enter your city."
+    );
+
+    return false;
+
+  }
+
+
+  if (!address.province) {
+
+    alert(
+      "Please select your province / region."
+    );
+
+    return false;
+
+  }
+
+
+  if (!address.postalCode) {
+
+    alert(
+      "Please enter your postal code."
+    );
+
+    return false;
+
+  }
+
+
+  return true;
+
+}
+
+
+/* =====================================================
+   SAVE ADDRESS
+===================================================== */
+
+function saveCurrentAddress() {
+
+  const address =
+    getCurrentAddress();
+
+
+  if (
+    !validateAddress(
+      address
+    )
+  ) {
+
+    return false;
+
+  }
+
+
+  try {
+
+    localStorage.setItem(
+
+      "arizebaSavedAddress",
+
+      JSON.stringify(
+        address
+      )
+
+    );
+
+
+    savedAddress =
+      address;
+
+
+    renderSavedAddress();
+
+
+    return true;
+
+
+  } catch (error) {
+
+    console.error(
+      "Address save error:",
+      error
+    );
+
+
+    alert(
+      "Could not save your address."
+    );
+
+
+    return false;
+
+  }
+
+}
+
+
+/* =====================================================
+   SAVE ADDRESS BUTTON
+===================================================== */
+
+function saveAddressFromButton() {
+
+  const saved =
+    saveCurrentAddress();
+
+
+  if (saved) {
+
+    const checkbox =
+      document.getElementById(
+        "saveAddress"
+      );
+
+
+    if (checkbox) {
+      checkbox.checked = true;
+    }
+
+
+    alert(
+      "Your address has been saved successfully! ✓"
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   LOAD SAVED ADDRESS
+===================================================== */
+
+function loadSavedAddress() {
+
+  try {
+
+    const stored =
+      localStorage.getItem(
+        "arizebaSavedAddress"
+      );
+
+
+    if (!stored) {
+
+      savedAddress = null;
+
+      return;
+
+    }
+
+
+    const parsed =
+      JSON.parse(stored);
+
+
+    if (
+      parsed &&
+      typeof parsed === "object"
+    ) {
+
+      savedAddress =
+        parsed;
+
+    } else {
+
+      savedAddress =
+        null;
+
+    }
+
+
+  } catch (error) {
+
+    console.error(
+      "Saved address loading error:",
+      error
+    );
+
+
+    savedAddress = null;
+
+  }
+
+
+  renderSavedAddress();
+
+}
+
+
+/* =====================================================
+   RENDER SAVED ADDRESS
+===================================================== */
+
+function renderSavedAddress() {
+
+  const box =
+    document.getElementById(
+      "savedAddressBox"
+    );
+
+
+  const content =
+    document.getElementById(
+      "savedAddressContent"
+    );
+
+
+  if (!box || !content) {
+    return;
+  }
+
+
+  if (!savedAddress) {
+
+    box.classList.remove(
+      "show"
+    );
+
+    content.innerHTML = "";
+
+    return;
+
+  }
+
+
+  const addressParts = [
+
+    savedAddress.street,
+
+    savedAddress.area,
+
+    savedAddress.city,
+
+    savedAddress.province,
+
+    savedAddress.postalCode,
+
+    savedAddress.country
+
+  ].filter(Boolean);
+
+
+  content.innerHTML = `
+
+    <strong>
+      ${escapeHTML(
+        savedAddress.name ||
+        "Customer"
+      )}
+    </strong>
+
+    <br>
+
+    ${escapeHTML(
+      savedAddress.phone ||
+      ""
+    )}
+
+    <br>
+
+    ${escapeHTML(
+      savedAddress.email ||
+      ""
+    )}
+
+    <br>
+
+    ${escapeHTML(
+      addressParts.join(", ")
+    )}
+
+  `;
+
+
+  box.classList.add(
+    "show"
+  );
+
+}
+
+
+/* =====================================================
+   USE SAVED ADDRESS
+===================================================== */
+
+function useSavedAddress() {
+
+  if (!savedAddress) {
+
+    alert(
+      "No saved address found."
+    );
+
+    return;
+
+  }
+
+
+  const fields = {
+
+    customerName:
+      savedAddress.name,
+
+    customerEmail:
+      savedAddress.email,
+
+    customerPhone:
+      savedAddress.phone,
+
+    street:
+      savedAddress.street,
+
+    area:
+      savedAddress.area,
+
+    city:
+      savedAddress.city,
+
+    province:
+      savedAddress.province,
+
+    postalCode:
+      savedAddress.postalCode
+
+  };
+
+
+  Object.entries(
+    fields
+  ).forEach(
+    ([id, value]) => {
+
+      const element =
+        document.getElementById(
+          id
+        );
+
+
+      if (element) {
+
+        element.value =
+          value || "";
+
+      }
+
+    }
+  );
+
+
+  const checkbox =
+    document.getElementById(
+      "saveAddress"
+    );
+
+
+  if (checkbox) {
+
+    checkbox.checked =
+      true;
+
+  }
+
+
+  alert(
+    "Saved address applied successfully! ✓"
+  );
+
+}
+
+
+/* =====================================================
+   DELETE SAVED ADDRESS
+===================================================== */
+
+function deleteSavedAddress() {
+
+  if (!savedAddress) {
+    return;
+  }
+
+
+  const confirmed =
+    confirm(
+      "Are you sure you want to delete your saved address?"
+    );
+
+
+  if (!confirmed) {
+    return;
+  }
+
+
+  localStorage.removeItem(
+    "arizebaSavedAddress"
+  );
+
+
+  savedAddress =
+    null;
+
+
+  renderSavedAddress();
+
+
+  alert(
+    "Saved address deleted."
+  );
+
+}
+
+
+/* =====================================================
+   CITY → PROVINCE
+===================================================== */
+
+const pakistanCityProvince = {
+
+  /* Punjab */
+
+  "Lahore":
+    "Punjab",
+
+  "Faisalabad":
+    "Punjab",
+
+  "Rawalpindi":
+    "Punjab",
+
+  "Multan":
+    "Punjab",
+
+  "Gujranwala":
+    "Punjab",
+
+  "Sialkot":
+    "Punjab",
+
+  "Bahawalpur":
+    "Punjab",
+
+  "Sargodha":
+    "Punjab",
+
+  "Sheikhupura":
+    "Punjab",
+
+  "Jhang":
+    "Punjab",
+
+  "Rahim Yar Khan":
+    "Punjab",
+
+  "Gujrat":
+    "Punjab",
+
+  "Sahiwal":
+    "Punjab",
+
+  "Okara":
+    "Punjab",
+
+  "Kasur":
+    "Punjab",
+
+  "Dera Ghazi Khan":
+    "Punjab",
+
+  "Mandi Bahauddin":
+    "Punjab",
+
+  "Muzaffargarh":
+    "Punjab",
+
+  "Khanewal":
+    "Punjab",
+
+  "Hafizabad":
+    "Punjab",
+
+  "Jhelum":
+    "Punjab",
+
+  "Attock":
+    "Punjab",
+
+  "Chakwal":
+    "Punjab",
+
+  "Mianwali":
+    "Punjab",
+
+  "Bhakkar":
+    "Punjab",
+
+  "Layyah":
+    "Punjab",
+
+  "Toba Tek Singh":
+    "Punjab",
+
+  "Vehari":
+    "Punjab",
+
+  "Burewala":
+    "Punjab",
+
+  "Chiniot":
+    "Punjab",
+
+  "Wazirabad":
+    "Punjab",
+
+  "Kamoke":
+    "Punjab",
+
+  "Narowal":
+    "Punjab",
+
+  "Shakargarh":
+    "Punjab",
+
+  "Pakpattan":
+    "Punjab",
+
+  "Arifwala":
+    "Punjab",
+
+  "Lodhran":
+    "Punjab",
+
+  "Jalalpur Jattan":
+    "Punjab",
+
+  "Daska":
+    "Punjab",
+
+  "Sambrial":
+    "Punjab",
+
+  "Taxila":
+    "Punjab",
+
+  "Wah Cantt":
+    "Punjab",
+
+  "Murree":
+    "Punjab",
+
+
+  /* Sindh */
+
+  "Karachi":
+    "Sindh",
+
+  "Hyderabad":
+    "Sindh",
+
+  "Sukkur":
+    "Sindh",
+
+  "Larkana":
+    "Sindh",
+
+  "Nawabshah":
+    "Sindh",
+
+  "Mirpur Khas":
+    "Sindh",
+
+  "Jacobabad":
+    "Sindh",
+
+  "Shikarpur":
+    "Sindh",
+
+  "Khairpur":
+    "Sindh",
+
+  "Dadu":
+    "Sindh",
+
+  "Thatta":
+    "Sindh",
+
+  "Badin":
+    "Sindh",
+
+  "Tando Adam":
+    "Sindh",
+
+  "Tando Allahyar":
+    "Sindh",
+
+  "Matiari":
+    "Sindh",
+
+  "Umerkot":
+    "Sindh",
+
+  "Sanghar":
+    "Sindh",
+
+  "Ghotki":
+    "Sindh",
+
+
+  /* KPK */
+
+  "Peshawar":
+    "Khyber Pakhtunkhwa",
+
+  "Mardan":
+    "Khyber Pakhtunkhwa",
+
+  "Mingora":
+    "Khyber Pakhtunkhwa",
+
+  "Abbottabad":
+    "Khyber Pakhtunkhwa",
+
+  "Kohat":
+    "Khyber Pakhtunkhwa",
+
+  "Dera Ismail Khan":
+    "Khyber Pakhtunkhwa",
+
+  "Bannu":
+    "Khyber Pakhtunkhwa",
+
+  "Swabi":
+    "Khyber Pakhtunkhwa",
+
+  "Nowshera":
+    "Khyber Pakhtunkhwa",
+
+  "Charsadda":
+    "Khyber Pakhtunkhwa",
+
+  "Mansehra":
+    "Khyber Pakhtunkhwa",
+
+  "Haripur":
+    "Khyber Pakhtunkhwa",
+
+  "Chitral":
+    "Khyber Pakhtunkhwa",
+
+  "Karak":
+    "Khyber Pakhtunkhwa",
+
+  "Tank":
+    "Khyber Pakhtunkhwa",
+
+
+  /* Balochistan */
+
+  "Quetta":
+    "Balochistan",
+
+  "Gwadar":
+    "Balochistan",
+
+  "Turbat":
+    "Balochistan",
+
+  "Khuzdar":
+    "Balochistan",
+
+  "Chaman":
+    "Balochistan",
+
+  "Sibi":
+    "Balochistan",
+
+  "Zhob":
+    "Balochistan",
+
+  "Loralai":
+    "Balochistan",
+
+  "Kalat":
+    "Balochistan",
+
+
+  /* Islamabad */
+
+  "Islamabad":
+    "Islamabad Capital Territory",
+
+
+  /* Gilgit Baltistan */
+
+  "Gilgit":
+    "Gilgit-Baltistan",
+
+  "Skardu":
+    "Gilgit-Baltistan",
+
+  "Hunza":
+    "Gilgit-Baltistan",
+
+  "Chilas":
+    "Gilgit-Baltistan",
+
+
+  /* AJK */
+
+  "Muzaffarabad":
+    "Azad Jammu and Kashmir",
+
+  "Mirpur":
+    "Azad Jammu and Kashmir",
+
+  "Rawalakot":
+    "Azad Jammu and Kashmir",
+
+  "Kotli":
+    "Azad Jammu and Kashmir",
+
+  "Bagh":
+    "Azad Jammu and Kashmir",
+
+  "Bhimber":
+    "Azad Jammu and Kashmir"
+
+};
+
+
+/* =====================================================
+   AUTO SELECT PROVINCE
+===================================================== */
+
+function updateProvinceFromCity() {
+
+  const cityInput =
+    document.getElementById(
+      "city"
+    );
+
+
+  const provinceSelect =
+    document.getElementById(
+      "province"
+    );
+
+
+  if (
+    !cityInput ||
+    !provinceSelect
+  ) {
+
+    return;
+
+  }
+
+
+  const typedCity =
+    cityInput.value
+      .trim()
+      .toLowerCase();
+
+
+  const cityNames =
+    Object.keys(
+      pakistanCityProvince
+    );
+
+
+  const matchedCity =
+    cityNames.find(
+      city =>
+        city.toLowerCase() ===
+        typedCity
+    );
+
+
+  if (matchedCity) {
+
+    provinceSelect.value =
+      pakistanCityProvince[
+        matchedCity
+      ];
+
+  }
+
+}
+
+
+/* =====================================================
+   CITY INPUT EVENTS
+===================================================== */
+
+function setupCityAutocomplete() {
+
+  const cityInput =
+    document.getElementById(
+      "city"
+    );
+
+
+  if (!cityInput) {
+    return;
+  }
+
+
+  cityInput.addEventListener(
+    "input",
+    function() {
+
+      updateProvinceFromCity();
+
+    }
+  );
+
+
+  cityInput.addEventListener(
+    "change",
+    function() {
+
+      updateProvinceFromCity();
+
+    }
+  );
+
+
+  cityInput.addEventListener(
+    "blur",
+    function() {
+
+      updateProvinceFromCity();
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   DELIVERY
+===================================================== */
+
+function selectDelivery(
+  radio
+) {
+
+  if (!radio) {
+    return;
+  }
+
+
+  const type =
+    radio.value;
+
+
+  const price =
+    Number(
+      radio.dataset.price ||
+      0
+    );
+
+
+  selectedDelivery = {
+
+    type:
+      type,
+
+    price:
+      price
+
+  };
+
+
+  document
+    .querySelectorAll(
+      ".delivery-option"
+    )
+    .forEach(
+      option => {
+
+        option.classList.remove(
+          "selected"
+        );
+
+      }
+    );
+
+
+  const selectedOption =
+    radio.closest(
+      ".delivery-option"
+    );
+
+
+  if (selectedOption) {
+
+    selectedOption.classList.add(
+      "selected"
+    );
+
+  }
+
+
+  updateTotals();
+
+}
+
+
+/* =====================================================
+   PAYMENT
+===================================================== */
+
+function selectPayment(
+  radio
+) {
+
+  if (!radio) {
+    return;
+  }
+
+
+  selectedPayment =
+    radio.value;
+
+
+  document
+    .querySelectorAll(
+      ".payment-option"
+    )
+    .forEach(
+      option => {
+
+        option.classList.remove(
+          "selected"
+        );
+
+      }
+    );
+
+
+  const selectedOption =
+    radio.closest(
+      ".payment-option"
+    );
+
+
+  if (selectedOption) {
+
+    selectedOption.classList.add(
+      "selected"
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   BACK BUTTON
+===================================================== */
+
+function goBack() {
+
+  /*
+    Directly open cart.
+    This works better for local HTML files
+    than window.history.back().
+  */
+
+  window.location.href =
+    "cart.html";
+
+}
+
+
+/* =====================================================
+   OPEN CART
+===================================================== */
+
+function openCart() {
+
+  window.location.href =
+    "cart.html";
+
+}
+
+
+/* =====================================================
+   CONTINUE SHOPPING
+===================================================== */
+
+function continueShopping() {
+
+  window.location.href =
+    "products.html";
+
+}
+
+
+/* =====================================================
+   PLACE ORDER
+===================================================== */
+
+async function placeOrder() {
+
+
+  /* -----------------------------------------------
+     CHECK CART
+  ----------------------------------------------- */
+
+  if (
+    !Array.isArray(cart) ||
+    cart.length === 0
+  ) {
+
+    alert(
+      "Your cart is empty."
+    );
+
+    return;
+
+  }
+
+
+  /* -----------------------------------------------
+     GET CURRENT ADDRESS
+  ----------------------------------------------- */
+
+  const currentAddress =
+    getCurrentAddress();
+
+
+  /* -----------------------------------------------
+     SAVE ADDRESS IF CHECKED
+  ----------------------------------------------- */
+
+  const saveCheckbox =
+    document.getElementById(
+      "saveAddress"
+    );
+
+
+  if (
+    saveCheckbox &&
+    saveCheckbox.checked
+  ) {
+
+    const saved =
+      saveCurrentAddress();
+
+
+    if (!saved) {
+      return;
+    }
+
+
+  } else {
+
+    if (
+      !validateAddress(
+        currentAddress
+      )
+    ) {
+
+      return;
+
+    }
+
+
+    savedAddress =
+      currentAddress;
+
+  }
+
+
+  /* -----------------------------------------------
+     CHECK SAVED ADDRESS
+  ----------------------------------------------- */
+
+  if (!savedAddress) {
+
+    alert(
+      "Please add your delivery address first."
+    );
+
+    return;
+
+  }
+
+
+  /* -----------------------------------------------
+     CALCULATE TOTAL
+  ----------------------------------------------- */
+
+  const subtotal =
+    calculateSubtotal();
+
+
+  const delivery =
+    Number(
+      selectedDelivery.price ||
+      0
+    );
+
+
+  const discount =
+    0;
+
+
+  const total =
+    subtotal +
+    delivery -
+    discount;
+
+
+  /* -----------------------------------------------
+     BUTTON
+  ----------------------------------------------- */
+
+  const button =
+    document.querySelector(
+      ".place-order-btn"
+    );
+
+
+  if (button) {
+
+    button.disabled =
+      true;
+
+    button.textContent =
+      "Placing Order...";
+
+  }
+
+
+  /* -----------------------------------------------
+     ORDER ID
+  ----------------------------------------------- */
+
+  const orderId =
+    "ARZ-" +
+    Date.now()
+      .toString()
+      .slice(-8);
+
+
+  /* -----------------------------------------------
+     ORDER DATA
+  ----------------------------------------------- */
+
+  const orderData = {
+
+    orderId:
+
+
+      orderId,
+
+
+    customer: {
+
+      name:
+        savedAddress.name,
+
+      email:
+        savedAddress.email,
+
+      phone:
+        savedAddress.phone,
+
+      street:
+        savedAddress.street,
+
+      area:
+        savedAddress.area,
+
+      city:
+        savedAddress.city,
+
+      province:
+        savedAddress.province,
+
+      postalCode:
+        savedAddress.postalCode,
+
+      country:
+        "Pakistan"
+
+    },
+
+
+    /*
+      Also keep flat fields because
+      existing order pages may use them.
+    */
+
+    customerName:
+      savedAddress.name,
+
+    customerEmail:
+      savedAddress.email,
+
+    customerPhone:
+      savedAddress.phone,
+
+
+    address:
+
+      [
+
+        savedAddress.street,
+
+        savedAddress.area,
+
+        savedAddress.city,
+
+        savedAddress.province,
+
+        savedAddress.postalCode,
+
+        "Pakistan"
+
+      ]
+
+      .filter(Boolean)
+
+      .join(", "),
+
+
+    items:
+
+      cart.map(
+        product => ({
+
+          productId:
+
+            product.id ||
+            product.productId ||
+            product.product_id ||
+            "",
+
+
+          name:
+
+            product.name ||
+            "Product",
+
+
+          price:
+
+            Number(
+              product.price ||
+              0
+            ),
+
+
+          quantity:
+
+            Number(
+              product.quantity ||
+              1
+            ),
+
+
+          image:
+
+            product.image ||
+            ""
+
+        })
+      ),
+
+
+    delivery: {
+
+      type:
+        selectedDelivery.type,
+
+      price:
+        delivery
+
+    },
+
+
+    deliveryMethod:
+
+      selectedDelivery.type,
+
+
+    payment:
+
+      selectedPayment,
+
+
+    paymentMethod:
+
+      selectedPayment,
+
+
+    subtotal:
+      subtotal,
+
+
+    discount:
+      discount,
+
+
+    deliveryFee:
+      delivery,
+
+
+    total:
+      total,
+
+
+    status:
+      "Order Placed",
+
+
+    createdAt:
+      new Date()
+        .toISOString()
+
+  };
+
+
+  /* -----------------------------------------------
+     SEND TO BACKEND
+  ----------------------------------------------- */
+
+  try {
+
+    const response =
+      await fetch(
+
+        `${API_URL}/api/orders`,
+
+        {
+
+          method:
+            "POST",
+
+
+          headers: {
+
+            "Content-Type":
+              "application/json"
+
+          },
+
+
+          body:
+
+            JSON.stringify(
+              orderData
+            )
+
+        }
+
+      );
+
+
+    let data = {};
+
+
+    try {
+
+      data =
+        await response.json();
+
+    } catch (jsonError) {
+
+      data = {};
+
+    }
+
+
+    /* ---------------------------------------------
+       BACKEND ERROR
+    --------------------------------------------- */
+
+    if (!response.ok) {
+
+      throw new Error(
+
+        data.message ||
+
+        "Order could not be placed."
+
+      );
+
+    }
+
+
+    /* ---------------------------------------------
+       SAVE LAST ORDER
+    --------------------------------------------- */
+
+    const finalOrderId =
+
+      data.orderId ||
+
+      data.order_id ||
+
+      orderId;
+
+
+    localStorage.setItem(
+
+      "arizebaLastOrder",
+
+      JSON.stringify({
+
+        ...orderData,
+
+        orderId:
+          finalOrderId
+
+      })
+
+    );
+
+
+    localStorage.setItem(
+
+      "arizebaLastOrderId",
+
+      String(
+        finalOrderId
+      )
+
+    );
+
+
+    /* ---------------------------------------------
+       CLEAR CART
+    --------------------------------------------- */
+
+    localStorage.removeItem(
+      "arizebaCart"
+    );
+
+
+    cart = [];
+
+
+    /* ---------------------------------------------
+       SUCCESS
+    --------------------------------------------- */
+
+    alert(
+      "Order placed successfully! ✓"
+    );
+
+
+    window.location.href =
+      "order-confirmation.html";
+
+
+  } catch (error) {
+
+    console.error(
+      "Order placement error:",
+      error
+    );
+
+
+    alert(
+
+      "Order could not be placed.\n\n" +
+
+      error.message +
+
+      "\n\nPlease make sure the AriZeba server is running."
+
+    );
+
+
+    if (button) {
+
+      button.disabled =
+        false;
+
+      button.textContent =
+        "Place Order →";
+
+    }
+
+  }
+
+}
+
+
+/* =====================================================
+   PAGE LOAD
+===================================================== */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function() {
+
+
+    /* -----------------------------------------------
+       LOAD CART
+    ----------------------------------------------- */
+
+    loadCart();
+
+
+    /* -----------------------------------------------
+       LOAD SAVED ADDRESS
+    ----------------------------------------------- */
+
+    loadSavedAddress();
+
+
+    /* -----------------------------------------------
+       CITY AUTOCOMPLETE
+    ----------------------------------------------- */
+
+    setupCityAutocomplete();
+
+
+    /* -----------------------------------------------
+       DELIVERY DEFAULT
+    ----------------------------------------------- */
+
+    const deliveryRadio =
+      document.querySelector(
+        'input[name="delivery"]:checked'
+      );
+
+
+    if (deliveryRadio) {
+
+      selectDelivery(
+        deliveryRadio
+      );
+
+    }
+
+
+    /* -----------------------------------------------
+       PAYMENT DEFAULT
+    ----------------------------------------------- */
+
+    const paymentRadio =
+      document.querySelector(
+        'input[name="payment"]:checked'
+      );
+
+
+    if (paymentRadio) {
+
+      selectPayment(
+        paymentRadio
+      );
+
+    }
+
+
+    /* -----------------------------------------------
+       RESTORE SAVED ADDRESS
+    ----------------------------------------------- */
+
+    if (savedAddress) {
+
+      useSavedAddress();
+
+    }
+
+
+    /* -----------------------------------------------
+       FINAL TOTAL UPDATE
+    ----------------------------------------------- */
+
+    updateTotals();
+
+  }
+);
+
+
+/* =====================================================
+   PAGE SHOW
+===================================================== */
+
+window.addEventListener(
+  "pageshow",
+  function() {
+
+    const button =
+      document.querySelector(
+        ".place-order-btn"
+      );
+
+
+    if (button) {
+
+      button.disabled =
+        false;
+
+      button.textContent =
+        "Place Order →";
+
+    }
+
+  }
+);
+</script>
+
+</body>
+</html>

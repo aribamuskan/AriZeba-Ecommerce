@@ -1,0 +1,2629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>AriZeba. — Product Details</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --rose: #d98c9d;
+      --rose-dark: #a85f73;
+      --plum: #49313f;
+      --text: #30252b;
+      --muted: #8d7b82;
+      --border: rgba(103,69,80,.10);
+      --white: #fffdfc;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(255,255,255,.95), transparent 28%),
+        radial-gradient(circle at 90% 30%, rgba(220,163,173,.22), transparent 30%),
+        linear-gradient(135deg, #fffaf7 0%, #f6e9e5 48%, #f1dfdd 100%);
+      color: var(--text);
+      font-family: "DM Sans", sans-serif;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    /* =====================================================
+       HEADER
+    ===================================================== */
+
+    .topbar {
+      max-width: 1450px;
+      margin: auto;
+      padding: 22px 35px;
+
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+    }
+
+    .brand {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(38px, 5vw, 62px);
+      font-weight: 500;
+      letter-spacing: -2px;
+
+      background: linear-gradient(
+        135deg,
+        #8e4f61,
+        #d5a07f,
+        #a96070,
+        #e2b48d
+      );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+
+      white-space: nowrap;
+    }
+
+    .left-actions,
+    .right-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .right-actions {
+      justify-content: flex-end;
+    }
+
+    .header-btn {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+
+      border: 1px solid rgba(110,70,82,.12);
+      background: rgba(255,255,255,.58);
+
+      backdrop-filter: blur(15px);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      color: var(--plum);
+      font-size: 20px;
+
+      box-shadow: 0 8px 25px rgba(82,47,60,.06);
+    }
+
+    .cart-wrapper {
+      position: relative;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+
+      min-width: 18px;
+      height: 18px;
+      padding: 0 5px;
+
+      border-radius: 20px;
+
+      background: #d9788d;
+      color: white;
+
+      font-size: 10px;
+      font-weight: 700;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* =====================================================
+       PAGE
+    ===================================================== */
+
+    .page {
+      width: min(1250px, calc(100% - 35px));
+      margin: auto;
+      padding-bottom: 70px;
+    }
+
+    .back-row {
+      margin: 8px 0 22px;
+    }
+
+    .back-btn {
+      border: none;
+      background: transparent;
+
+      color: var(--rose-dark);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    /* =====================================================
+       LOADING
+    ===================================================== */
+
+    #loading {
+      text-align: center;
+      padding: 100px 20px;
+      color: var(--plum);
+    }
+
+    .loader {
+      width: 42px;
+      height: 42px;
+
+      margin: 0 auto 18px;
+
+      border-radius: 50%;
+      border: 4px solid rgba(216,140,157,.25);
+      border-top-color: var(--rose-dark);
+
+      animation: spin .8s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* =====================================================
+       ERROR
+    ===================================================== */
+
+    #errorBox {
+      display: none;
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    #errorBox h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 35px;
+      color: var(--plum);
+      margin-bottom: 10px;
+    }
+
+    #errorBox p {
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+
+    .error-back {
+      border: none;
+      padding: 13px 24px;
+      border-radius: 25px;
+
+      background: var(--rose-dark);
+      color: white;
+
+      font-weight: 700;
+    }
+
+    /* =====================================================
+       PRODUCT DETAILS
+    ===================================================== */
+
+    #productDetails {
+      display: none;
+    }
+
+    .product-details {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 42px;
+
+      background: rgba(255,255,255,.48);
+
+      border: 1px solid var(--border);
+      border-radius: 30px;
+
+      padding: 22px;
+
+      box-shadow: 0 20px 50px rgba(73,42,54,.08);
+    }
+
+    /* =====================================================
+       PRODUCT IMAGE
+    ===================================================== */
+
+    .product-gallery {
+      position: relative;
+    }
+
+    .main-image-wrapper {
+      position: relative;
+
+      width: 100%;
+      height: 570px;
+
+      border-radius: 24px;
+      overflow: hidden;
+
+      background: #f2e3df;
+    }
+
+    .main-image-wrapper img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+      display: block;
+    }
+
+    .discount {
+      position: absolute;
+
+      top: 18px;
+      left: 18px;
+
+      z-index: 3;
+
+      padding: 7px 12px;
+
+      border-radius: 20px;
+
+      background: #c96d85;
+      color: white;
+
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .image-wishlist {
+      position: absolute;
+
+      top: 15px;
+      right: 15px;
+
+      z-index: 3;
+
+      width: 43px;
+      height: 43px;
+
+      border: none;
+      border-radius: 50%;
+
+      background: rgba(255,255,255,.88);
+
+      color: #76505d;
+      font-size: 21px;
+    }
+
+    .thumbnail-gallery {
+      display: flex;
+      gap: 10px;
+
+      margin-top: 13px;
+
+      overflow-x: auto;
+    }
+
+    .thumbnail-gallery img {
+      width: 75px;
+      height: 75px;
+
+      object-fit: cover;
+
+      border-radius: 13px;
+
+      cursor: pointer;
+
+      border: 2px solid transparent;
+    }
+
+    .thumbnail-gallery img:hover {
+      border-color: var(--rose);
+    }
+
+    /* =====================================================
+       PRODUCT INFORMATION
+    ===================================================== */
+
+    .product-info {
+      padding: 18px 12px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .product-label {
+      text-transform: uppercase;
+      letter-spacing: 3px;
+
+      font-size: 11px;
+
+      color: var(--rose-dark);
+
+      margin-bottom: 12px;
+    }
+
+    .product-title {
+      font-family: "Playfair Display", serif;
+
+      font-size: clamp(34px, 4vw, 54px);
+
+      line-height: 1.05;
+
+      color: var(--plum);
+
+      margin-bottom: 15px;
+    }
+
+    .rating {
+      color: #c08b42;
+
+      font-size: 13px;
+
+      margin-bottom: 18px;
+    }
+
+    .price-row {
+      display: flex;
+      align-items: center;
+
+      flex-wrap: wrap;
+
+      gap: 8px;
+
+      margin-bottom: 20px;
+    }
+
+    .product-price {
+      font-size: 25px;
+      font-weight: 700;
+
+      color: var(--plum);
+    }
+
+    .old-price {
+      color: #aa989d;
+
+      font-size: 14px;
+
+      text-decoration: line-through;
+    }
+
+    .description {
+      color: #675961;
+
+      line-height: 1.8;
+
+      font-size: 14px;
+
+      margin-bottom: 25px;
+    }
+
+    /* =====================================================
+       QUANTITY
+    ===================================================== */
+
+    .quantity-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      margin-bottom: 20px;
+
+      padding: 13px 15px;
+
+      border-radius: 16px;
+
+      background: rgba(255,255,255,.65);
+
+      border: 1px solid var(--border);
+    }
+
+    .quantity-label {
+      font-weight: 600;
+      color: var(--plum);
+    }
+
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .quantity-control button {
+      width: 34px;
+      height: 34px;
+
+      border-radius: 50%;
+
+      border: 1px solid rgba(103,69,80,.15);
+
+      background: white;
+
+      color: var(--plum);
+
+      font-size: 18px;
+    }
+
+    .quantity-value {
+      min-width: 22px;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    /* =====================================================
+       ACTION BUTTONS
+    ===================================================== */
+
+    .action-buttons {
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 12px;
+    }
+
+    .add-cart-btn,
+    .buy-now-btn {
+      min-height: 52px;
+
+      border-radius: 28px;
+
+      font-weight: 700;
+
+      font-size: 14px;
+    }
+
+    .add-cart-btn {
+      border: 1px solid var(--rose-dark);
+
+      background: transparent;
+
+      color: var(--rose-dark);
+    }
+
+    .add-cart-btn:hover {
+      background: rgba(216,140,157,.10);
+    }
+
+    .buy-now-btn {
+      border: none;
+
+      background: linear-gradient(
+        135deg,
+        #d98c9d,
+        #b85e79
+      );
+
+      color: white;
+
+      box-shadow:
+        0 12px 25px rgba(184,94,121,.25);
+    }
+
+    .product-id {
+      margin-top: 18px;
+
+      font-size: 11px;
+
+      color: var(--muted);
+    }
+
+    /* =====================================================
+       RELATED PRODUCTS
+    ===================================================== */
+
+    .related-section {
+      margin-top: 48px;
+    }
+
+    .related-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      margin-bottom: 18px;
+    }
+
+    .related-header h2 {
+      font-family: "Playfair Display", serif;
+
+      font-size: 30px;
+
+      font-weight: 500;
+
+      color: var(--plum);
+    }
+
+    .related-header span {
+      color: var(--rose-dark);
+
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .related-products {
+      display: grid;
+
+      grid-template-columns:
+        repeat(4, 1fr);
+
+      gap: 17px;
+    }
+
+    .related-card {
+      position: relative;
+
+      background: rgba(255,255,255,.63);
+
+      border: 1px solid rgba(112,74,86,.08);
+
+      border-radius: 22px;
+
+      padding: 9px;
+
+      box-shadow:
+        0 13px 30px rgba(73,42,54,.06);
+
+      transition: .25s ease;
+
+      cursor: pointer;
+    }
+
+    .related-card:hover {
+      transform: translateY(-6px);
+
+      box-shadow:
+        0 20px 40px rgba(73,42,54,.13);
+    }
+
+    .related-image {
+      position: relative;
+
+      height: 245px;
+
+      border-radius: 17px;
+
+      overflow: hidden;
+
+      background: #f2e3df;
+    }
+
+    .related-image img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      display: block;
+    }
+
+    .related-discount {
+      position: absolute;
+
+      top: 10px;
+      left: 10px;
+
+      background: #c96d85;
+
+      color: white;
+
+      padding: 5px 9px;
+
+      border-radius: 12px;
+
+      font-size: 10px;
+
+      font-weight: 700;
+    }
+
+    .related-heart {
+      position: absolute;
+
+      top: 10px;
+      right: 10px;
+
+      width: 34px;
+      height: 34px;
+
+      border: none;
+
+      border-radius: 50%;
+
+      background: rgba(255,255,255,.86);
+
+      color: #76505d;
+
+      font-size: 17px;
+
+      z-index: 2;
+    }
+
+    .related-info {
+      padding: 12px 5px 5px;
+    }
+
+    .related-name {
+      font-size: 14px;
+
+      font-weight: 600;
+
+      color: var(--text);
+
+      margin-bottom: 7px;
+
+      min-height: 36px;
+    }
+
+    .related-rating {
+      color: #c08b42;
+
+      font-size: 12px;
+
+      margin-bottom: 7px;
+    }
+
+    .related-price {
+      font-size: 16px;
+
+      font-weight: 700;
+
+      color: var(--plum);
+    }
+
+    .related-old-price {
+      color: #aa989d;
+
+      font-size: 11px;
+
+      text-decoration: line-through;
+
+      margin-left: 5px;
+
+      font-weight: 400;
+    }
+
+    /* =====================================================
+       MOBILE
+    ===================================================== */
+
+    @media (max-width: 900px) {
+
+      .product-details {
+        grid-template-columns: 1fr;
+      }
+
+      .main-image-wrapper {
+        height: 500px;
+      }
+
+      .related-products {
+        grid-template-columns:
+          repeat(2, 1fr);
+      }
+
+    }
+
+    @media (max-width: 600px) {
+
+      .topbar {
+        padding: 18px 15px;
+      }
+
+      .brand {
+        font-size: 34px;
+      }
+
+      .header-btn {
+        width: 38px;
+        height: 38px;
+      }
+
+      .page {
+        width: calc(100% - 20px);
+      }
+
+      .product-details {
+        padding: 10px;
+        border-radius: 22px;
+      }
+
+      .main-image-wrapper {
+        height: 390px;
+        border-radius: 18px;
+      }
+
+      .product-title {
+        font-size: 36px;
+      }
+
+      .action-buttons {
+        grid-template-columns: 1fr;
+      }
+
+      .related-products {
+        grid-template-columns:
+          repeat(2, 1fr);
+
+        gap: 10px;
+      }
+
+      .related-card {
+        border-radius: 16px;
+        padding: 7px;
+      }
+
+      .related-image {
+        height: 185px;
+        border-radius: 12px;
+      }
+
+      .related-name {
+        font-size: 12px;
+      }
+
+      .related-price {
+        font-size: 14px;
+      }
+
+      .related-old-price {
+        font-size: 10px;
+      }
+
+      .related-header h2 {
+        font-size: 25px;
+      }
+
+    }
+
+    @media (max-width: 400px) {
+
+      .brand {
+        font-size: 29px;
+      }
+
+      .main-image-wrapper {
+        height: 340px;
+      }
+
+      .related-image {
+        height: 160px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- =====================================================
+       HEADER
+  ===================================================== -->
+
+  <header class="topbar">
+
+    <div class="left-actions">
+
+      <button
+        class="header-btn"
+        onclick="goBack()"
+        title="Back"
+      >
+        ←
+      </button>
+
+    </div>
+
+
+    <div class="brand">
+      AriZeba.
+    </div>
+
+
+    <div class="right-actions">
+
+      <button
+        class="header-btn"
+        onclick="goHome()"
+        title="Home"
+      >
+        ⌂
+      </button>
+
+
+      <div class="cart-wrapper">
+
+        <button
+          class="header-btn"
+          onclick="openCart()"
+          title="Cart"
+        >
+          🛍
+        </button>
+
+        <span
+          id="cartCount"
+          class="cart-count"
+        >
+          0
+        </span>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <main class="page">
+
+    <!-- BACK -->
+
+    <div class="back-row">
+
+      <button
+        class="back-btn"
+        onclick="goBack()"
+      >
+        ← Back to shopping
+      </button>
+
+    </div>
+
+
+    <!-- =================================================
+         LOADING
+    ================================================= -->
+
+    <div id="loading">
+
+      <div class="loader"></div>
+
+      <p>
+        Loading product...
+      </p>
+
+    </div>
+
+
+    <!-- =================================================
+         ERROR
+    ================================================= -->
+
+    <div id="errorBox">
+
+      <h2>
+        Product could not be loaded
+      </h2>
+
+      <p id="errorMessage">
+        Please try again.
+      </p>
+
+      <button
+        class="error-back"
+        onclick="goBack()"
+      >
+        ← Go Back
+      </button>
+
+    </div>
+
+
+    <!-- =================================================
+         PRODUCT DETAILS
+    ================================================= -->
+
+    <section
+      id="productDetails"
+      class="product-details"
+    >
+
+      <!-- IMAGE -->
+
+      <div class="product-gallery">
+
+        <div class="main-image-wrapper">
+
+          <span
+            id="discount"
+            class="discount"
+            style="display:none;"
+          ></span>
+
+
+          <button
+            id="wishlist"
+            class="image-wishlist"
+            title="Wishlist"
+          >
+            ♡
+          </button>
+
+
+          <img
+            id="productImage"
+            src=""
+            alt="Product"
+          >
+
+        </div>
+
+
+        <div
+          id="thumbnailGallery"
+          class="thumbnail-gallery"
+        ></div>
+
+      </div>
+
+
+      <!-- INFORMATION -->
+
+      <div class="product-info">
+
+        <div class="product-label">
+          ARIZEBA COLLECTION
+        </div>
+
+
+        <h1
+          id="productName"
+          class="product-title"
+        >
+          Product
+        </h1>
+
+
+        <div
+          id="rating"
+          class="rating"
+        >
+          ★ 4.5
+        </div>
+
+
+        <div class="price-row">
+
+          <span
+            id="productPrice"
+            class="product-price"
+          >
+            PKR 0
+          </span>
+
+
+          <span
+            id="oldPrice"
+            class="old-price"
+            style="display:none;"
+          ></span>
+
+        </div>
+
+
+        <p
+          id="productDescription"
+          class="description"
+        >
+          Beautifully curated product from AriZeba.
+        </p>
+
+
+        <!-- QUANTITY -->
+
+        <div class="quantity-section">
+
+          <span class="quantity-label">
+            Quantity
+          </span>
+
+
+          <div class="quantity-control">
+
+            <button
+              type="button"
+              onclick="decreaseQuantity()"
+            >
+              −
+            </button>
+
+
+            <span
+              id="quantity"
+              class="quantity-value"
+            >
+              1
+            </span>
+
+
+            <button
+              type="button"
+              onclick="increaseQuantity()"
+            >
+              +
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- ACTIONS -->
+
+        <div class="action-buttons">
+
+          <button
+            id="addToCart"
+            class="add-cart-btn"
+            type="button"
+          >
+            Add to Cart
+          </button>
+
+
+          <button
+            id="buyNow"
+            class="buy-now-btn"
+            type="button"
+          >
+            Buy Now →
+          </button>
+
+        </div>
+
+
+        <div
+          id="productId"
+          class="product-id"
+        ></div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =================================================
+         RELATED PRODUCTS
+    ================================================= -->
+
+    <section
+      id="relatedSection"
+      class="related-section"
+    >
+
+      <div class="related-header">
+
+        <h2>
+          You May Also Like ✦
+        </h2>
+
+        <span>
+          More from AriZeba
+        </span>
+
+      </div>
+
+
+      <div
+        id="relatedProducts"
+        class="related-products"
+      ></div>
+
+    </section>
+
+  </main>
+
+
+  <script>
+
+    /* =====================================================
+       CONFIG
+    ===================================================== */
+
+    const API_BASE =
+      "http://localhost:5000/api";
+
+
+    let product = null;
+
+    let productQuantity = 1;
+
+
+    /* =====================================================
+       HOME PRODUCTS
+    ===================================================== */
+
+    const homeProducts = {
+
+      "home-headphones": {
+
+        id: "home-headphones",
+        product_id: "home-headphones",
+
+        name:
+          "Premium Wireless Headphones",
+
+        price: 8999,
+        oldPrice: 11999,
+
+        discount: 25,
+
+        rating: 4.6,
+        reviews: 128,
+
+        description:
+          "Premium wireless headphones with a comfortable design, clear sound and an elegant everyday look.",
+
+        image:
+          "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=90",
+
+        images: [
+          "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=90"
+        ]
+
+      },
+
+
+      "home-handbag": {
+
+        id: "home-handbag",
+        product_id: "home-handbag",
+
+        name:
+          "Premium Quilted Handbag",
+
+        price: 5499,
+        oldPrice: 6999,
+
+        discount: 22,
+
+        rating: 4.7,
+        reviews: 96,
+
+        description:
+          "Elegant quilted handbag designed to add a refined touch to your everyday style.",
+
+        image:
+          "https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?auto=format&fit=crop&w=900&q=90",
+
+        images: [
+          "https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?auto=format&fit=crop&w=900&q=90"
+        ]
+
+      },
+
+
+      "home-smartwatch": {
+
+        id: "home-smartwatch",
+        product_id: "home-smartwatch",
+
+        name:
+          "Rose Gold Smart Watch",
+
+        price: 12999,
+        oldPrice: 15999,
+
+        discount: 18,
+
+        rating: 4.8,
+        reviews: 76,
+
+        description:
+          "A stylish rose gold smart watch combining modern technology with a beautiful everyday design.",
+
+        image:
+          "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=90",
+
+        images: [
+          "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=90"
+        ]
+
+      },
+
+
+      "home-perfume": {
+
+        id: "home-perfume",
+        product_id: "home-perfume",
+
+        name:
+          "Luxury Signature Perfume",
+
+        price: 6499,
+        oldPrice: 8199,
+
+        discount: 20,
+
+        rating: 4.6,
+        reviews: 65,
+
+        description:
+          "A sophisticated signature fragrance presented in an elegant luxury bottle.",
+
+        image:
+          "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=900&q=90",
+
+        images: [
+          "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=900&q=90"
+        ]
+
+      }
+
+    };
+
+
+    /* =====================================================
+       GET PRODUCT ID
+    ===================================================== */
+
+    function getProductId() {
+
+      const params =
+        new URLSearchParams(
+          window.location.search
+        );
+
+      return params.get("id");
+
+    }
+
+
+    /* =====================================================
+       LOAD PRODUCT
+    ===================================================== */
+
+    async function loadProduct() {
+
+      const productId =
+        getProductId();
+
+
+      /* HOME PRODUCT */
+
+      if (
+        productId &&
+        homeProducts[productId]
+      ) {
+
+        product =
+          homeProducts[productId];
+
+        localStorage.setItem(
+          "arizebaSelectedProduct",
+          JSON.stringify(product)
+        );
+
+        renderProduct();
+
+        return;
+
+      }
+
+
+      /* SAVED PRODUCT */
+
+      try {
+
+        const saved =
+          localStorage.getItem(
+            "arizebaSelectedProduct"
+          );
+
+
+        if (saved) {
+
+          const savedProduct =
+            JSON.parse(saved);
+
+
+          const savedId =
+            String(
+              savedProduct.id ||
+              savedProduct.product_id ||
+              savedProduct.productId ||
+              ""
+            );
+
+
+          if (
+            !productId ||
+            savedId === String(productId)
+          ) {
+
+            product =
+              savedProduct;
+
+            renderProduct();
+
+            return;
+
+          }
+
+        }
+
+      } catch (error) {
+
+        console.error(
+          "Saved product error:",
+          error
+        );
+
+      }
+
+
+      /* BACKEND PRODUCT */
+
+      if (!productId) {
+
+        showError(
+          "Product ID is missing."
+        );
+
+        return;
+
+      }
+
+
+      try {
+
+        const response =
+          await fetch(
+            `${API_BASE}/products/${encodeURIComponent(productId)}`
+          );
+
+
+        const data =
+          await response.json();
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            data.message ||
+            "Product could not be loaded."
+          );
+
+        }
+
+
+        product =
+          data.product ||
+          data.data ||
+          data;
+
+
+        if (!product) {
+
+          throw new Error(
+            "Product could not be loaded."
+          );
+
+        }
+
+
+        renderProduct();
+
+      } catch (error) {
+
+        console.error(
+          "Backend product error:",
+          error
+        );
+
+
+        showError(
+          "This product could not be loaded."
+        );
+
+      }
+
+    }
+
+
+    /* =====================================================
+       RENDER PRODUCT
+    ===================================================== */
+
+    function renderProduct() {
+
+      if (!product) {
+
+        showError(
+          "Product information is missing."
+        );
+
+        return;
+
+      }
+
+
+      const name =
+        product.name ||
+        product.title ||
+        "Product";
+
+
+      const price =
+        Number(
+          product.price ||
+          product.sale_price ||
+          0
+        );
+
+
+      const oldPrice =
+        Number(
+          product.oldPrice ||
+          product.old_price ||
+          product.original_price ||
+          0
+        );
+
+
+      const discount =
+        Number(
+          product.discount ||
+          0
+        );
+
+
+      const rating =
+        Number(
+          product.rating ||
+          4.5
+        );
+
+
+      const reviews =
+        Number(
+          product.reviews ||
+          product.review_count ||
+          0
+        );
+
+
+      const image =
+        product.image ||
+        product.image_url ||
+        product.thumbnail ||
+        "";
+
+
+      const description =
+        product.description ||
+        "Beautifully curated product from AriZeba.";
+
+
+      document
+        .getElementById("productName")
+        .textContent =
+          name;
+
+
+      document
+        .getElementById("productPrice")
+        .textContent =
+          "PKR " +
+          price.toLocaleString();
+
+
+      const oldPriceElement =
+        document.getElementById(
+          "oldPrice"
+        );
+
+
+      if (
+        oldPrice > price
+      ) {
+
+        oldPriceElement.textContent =
+          "PKR " +
+          oldPrice.toLocaleString();
+
+        oldPriceElement.style.display =
+          "inline";
+
+      } else {
+
+        oldPriceElement.style.display =
+          "none";
+
+      }
+
+
+      const discountElement =
+        document.getElementById(
+          "discount"
+        );
+
+
+      if (
+        discount > 0
+      ) {
+
+        discountElement.textContent =
+          "-" +
+          discount +
+          "%";
+
+        discountElement.style.display =
+          "block";
+
+      } else {
+
+        discountElement.style.display =
+          "none";
+
+      }
+
+
+      document
+        .getElementById("rating")
+        .textContent =
+          "★ " +
+          rating.toFixed(1) +
+          (
+            reviews
+              ? " (" +
+                reviews +
+                " reviews)"
+              : ""
+          );
+
+
+      document
+        .getElementById(
+          "productDescription"
+        )
+        .textContent =
+          description;
+
+
+      const mainImage =
+        document.getElementById(
+          "productImage"
+        );
+
+
+      if (image) {
+
+        mainImage.src =
+          image;
+
+        mainImage.alt =
+          name;
+
+      }
+
+
+      renderGallery(
+        image,
+        name
+      );
+
+
+      document
+        .getElementById("productId")
+        .textContent =
+          "Product ID: " +
+          (
+            product.id ||
+            product.product_id ||
+            ""
+          );
+
+
+      document
+        .getElementById("loading")
+        .style.display =
+          "none";
+
+
+      document
+        .getElementById("errorBox")
+        .style.display =
+          "none";
+
+
+      document
+        .getElementById("productDetails")
+        .style.display =
+          "grid";
+
+
+      localStorage.setItem(
+        "arizebaSelectedProduct",
+        JSON.stringify(product)
+      );
+
+
+      updateCartBadge();
+
+      loadWishlistState();
+
+      renderRelatedProducts();
+
+    }
+
+
+    /* =====================================================
+       IMAGE GALLERY
+    ===================================================== */
+
+    function renderGallery(
+      mainImage,
+      name
+    ) {
+
+      const gallery =
+        document.getElementById(
+          "thumbnailGallery"
+        );
+
+
+      gallery.innerHTML =
+        "";
+
+
+      let images = [];
+
+
+      if (
+        Array.isArray(product.images)
+      ) {
+
+        images =
+          product.images.filter(Boolean);
+
+      }
+
+
+      if (
+        mainImage &&
+        !images.includes(mainImage)
+      ) {
+
+        images.unshift(
+          mainImage
+        );
+
+      }
+
+
+      images =
+        [...new Set(images)];
+
+
+      images.forEach(
+        imageUrl => {
+
+          const img =
+            document.createElement(
+              "img"
+            );
+
+
+          img.src =
+            imageUrl;
+
+          img.alt =
+            name;
+
+
+          img.onclick =
+            function() {
+
+              document
+                .getElementById(
+                  "productImage"
+                )
+                .src =
+                  imageUrl;
+
+            };
+
+
+          gallery.appendChild(
+            img
+          );
+
+        }
+      );
+
+    }
+
+
+    /* =====================================================
+       RELATED PRODUCTS
+    ===================================================== */
+
+    function renderRelatedProducts() {
+
+      const container =
+        document.getElementById(
+          "relatedProducts"
+        );
+
+
+      if (!container) {
+        return;
+      }
+
+
+      container.innerHTML =
+        "";
+
+
+      const currentId =
+        String(
+          product.id ||
+          product.product_id ||
+          product.productId ||
+          ""
+        );
+
+
+      Object.values(
+        homeProducts
+      ).forEach(
+        related => {
+
+          const relatedId =
+            String(
+              related.id
+            );
+
+
+          /*
+            Don't show currently opened
+            product inside related products.
+          */
+
+          if (
+            relatedId === currentId
+          ) {
+
+            return;
+
+          }
+
+
+          const card =
+            document.createElement(
+              "article"
+            );
+
+
+          card.className =
+            "related-card";
+
+
+          card.innerHTML = `
+
+            <div class="related-image">
+
+              ${
+                related.discount
+                  ? `
+                    <span class="related-discount">
+                      -${related.discount}%
+                    </span>
+                  `
+                  : ""
+              }
+
+
+              <button
+                class="related-heart"
+                type="button"
+                title="Wishlist"
+              >
+                ♡
+              </button>
+
+
+              <img
+                src="${escapeHTML(
+                  related.image
+                )}"
+                alt="${escapeHTML(
+                  related.name
+                )}"
+              >
+
+            </div>
+
+
+            <div class="related-info">
+
+              <div class="related-name">
+                ${escapeHTML(
+                  related.name
+                )}
+              </div>
+
+
+              <div class="related-rating">
+                ★ ${related.rating}
+                (${related.reviews})
+              </div>
+
+
+              <div class="related-price">
+
+                PKR ${Number(
+                  related.price
+                ).toLocaleString()}
+
+                ${
+                  related.oldPrice
+                    ? `
+                      <span class="related-old-price">
+                        PKR ${Number(
+                          related.oldPrice
+                        ).toLocaleString()}
+                      </span>
+                    `
+                    : ""
+                }
+
+              </div>
+
+            </div>
+
+          `;
+
+
+          /*
+            CARD CLICK
+          */
+
+          card.addEventListener(
+            "click",
+            function(event) {
+
+              if (
+                event.target.closest(
+                  ".related-heart"
+                )
+              ) {
+
+                return;
+
+              }
+
+
+              openRelatedProduct(
+                related.id
+              );
+
+            }
+          );
+
+
+          /*
+            RELATED WISHLIST
+          */
+
+          const heart =
+            card.querySelector(
+              ".related-heart"
+            );
+
+
+          heart.addEventListener(
+            "click",
+            function(event) {
+
+              event.stopPropagation();
+
+              toggleRelatedWishlist(
+                related,
+                heart
+              );
+
+            }
+          );
+
+
+          container.appendChild(
+            card
+          );
+
+        }
+      );
+
+    }
+
+
+    /* =====================================================
+       OPEN RELATED PRODUCT
+    ===================================================== */
+
+    function openRelatedProduct(
+      productId
+    ) {
+
+      const selected =
+        homeProducts[
+          productId
+        ];
+
+
+      if (!selected) {
+        return;
+      }
+
+
+      localStorage.setItem(
+        "arizebaSelectedProduct",
+        JSON.stringify(selected)
+      );
+
+
+      window.location.href =
+        "product-details.html?id=" +
+        encodeURIComponent(
+          productId
+        );
+
+    }
+
+
+    /* =====================================================
+       ESCAPE HTML
+    ===================================================== */
+
+    function escapeHTML(
+      value
+    ) {
+
+      return String(value)
+
+        .replace(
+          /&/g,
+          "&amp;"
+        )
+
+        .replace(
+          /</g,
+          "&lt;"
+        )
+
+        .replace(
+          />/g,
+          "&gt;"
+        )
+
+        .replace(
+          /"/g,
+          "&quot;"
+        )
+
+        .replace(
+          /'/g,
+          "&#039;"
+        );
+
+    }
+
+
+    /* =====================================================
+       ERROR
+    ===================================================== */
+
+    function showError(
+      message
+    ) {
+
+      document
+        .getElementById("loading")
+        .style.display =
+          "none";
+
+
+      document
+        .getElementById("productDetails")
+        .style.display =
+          "none";
+
+
+      document
+        .getElementById("errorBox")
+        .style.display =
+          "block";
+
+
+      document
+        .getElementById("errorMessage")
+        .textContent =
+          message;
+
+    }
+
+
+    /* =====================================================
+       QUANTITY
+    ===================================================== */
+
+    function increaseQuantity() {
+
+      if (
+        productQuantity < 10
+      ) {
+
+        productQuantity++;
+
+      }
+
+      updateQuantity();
+
+    }
+
+
+    function decreaseQuantity() {
+
+      if (
+        productQuantity > 1
+      ) {
+
+        productQuantity--;
+
+      }
+
+      updateQuantity();
+
+    }
+
+
+    function updateQuantity() {
+
+      document
+        .getElementById("quantity")
+        .textContent =
+          productQuantity;
+
+    }
+
+
+    /* =====================================================
+       CART
+    ===================================================== */
+
+    function getCart() {
+
+      try {
+
+        return JSON.parse(
+          localStorage.getItem(
+            "arizebaCart"
+          ) || "[]"
+        );
+
+      } catch {
+
+        return [];
+
+      }
+
+    }
+
+
+    function addProductToCart() {
+
+      if (!product) {
+
+        alert(
+          "Product is not available."
+        );
+
+        return;
+
+      }
+
+
+      let cart =
+        getCart();
+
+
+      const productId =
+        product.id ||
+        product.product_id ||
+        product.productId ||
+        product.name;
+
+
+      const existingIndex =
+        cart.findIndex(
+          item =>
+            String(
+              item.id ||
+              item.product_id ||
+              item.productId ||
+              item.name
+            ) ===
+            String(productId)
+        );
+
+
+      if (
+        existingIndex !== -1
+      ) {
+
+        cart[
+          existingIndex
+        ].quantity =
+          Number(
+            cart[
+              existingIndex
+            ].quantity || 1
+          ) +
+          productQuantity;
+
+      } else {
+
+        cart.push({
+
+          ...product,
+
+          id:
+            productId,
+
+          quantity:
+            productQuantity
+
+        });
+
+      }
+
+
+      localStorage.setItem(
+        "arizebaCart",
+        JSON.stringify(cart)
+      );
+
+
+      updateCartBadge();
+
+
+      alert(
+        "Product added to cart!"
+      );
+
+    }
+
+
+    function buyNow() {
+
+      if (!product) {
+
+        alert(
+          "Product is not available."
+        );
+
+        return;
+
+      }
+
+
+      addProductToCart();
+
+
+      setTimeout(
+        function() {
+
+          window.location.href =
+            "checkout.html";
+
+        },
+        300
+      );
+
+    }
+
+
+    function updateCartBadge() {
+
+      const cart =
+        getCart();
+
+
+      const count =
+        cart.reduce(
+          function(total, item) {
+
+            return (
+              total +
+              Number(
+                item.quantity || 1
+              )
+            );
+
+          },
+          0
+        );
+
+
+      const badge =
+        document.getElementById(
+          "cartCount"
+        );
+
+
+      if (badge) {
+
+        badge.textContent =
+          count;
+
+      }
+
+    }
+
+
+    /* =====================================================
+       WISHLIST
+    ===================================================== */
+
+    function getWishlist() {
+
+      try {
+
+        return JSON.parse(
+          localStorage.getItem(
+            "arizebaWishlist"
+          ) || "[]"
+        );
+
+      } catch {
+
+        return [];
+
+      }
+
+    }
+
+
+    function toggleWishlist() {
+
+      if (!product) {
+        return;
+      }
+
+
+      let wishlist =
+        getWishlist();
+
+
+      const productId =
+        String(
+          product.id ||
+          product.product_id ||
+          product.productId ||
+          product.name
+        );
+
+
+      const index =
+        wishlist.findIndex(
+          item =>
+            String(
+              item.id ||
+              item.product_id ||
+              item.productId ||
+              item.name
+            ) ===
+            productId
+        );
+
+
+      const button =
+        document.getElementById(
+          "wishlist"
+        );
+
+
+      if (
+        index === -1
+      ) {
+
+        wishlist.push(
+          product
+        );
+
+
+        button.textContent =
+          "♥";
+
+        button.style.color =
+          "#d56d87";
+
+
+        alert(
+          "Added to wishlist!"
+        );
+
+      } else {
+
+        wishlist.splice(
+          index,
+          1
+        );
+
+
+        button.textContent =
+          "♡";
+
+        button.style.color =
+          "#76505d";
+
+
+        alert(
+          "Removed from wishlist!"
+        );
+
+      }
+
+
+      localStorage.setItem(
+        "arizebaWishlist",
+        JSON.stringify(
+          wishlist
+        )
+      );
+
+    }
+
+
+    function loadWishlistState() {
+
+      if (!product) {
+        return;
+      }
+
+
+      const wishlist =
+        getWishlist();
+
+
+      const productId =
+        String(
+          product.id ||
+          product.product_id ||
+          product.productId ||
+          product.name
+        );
+
+
+      const exists =
+        wishlist.some(
+          item =>
+            String(
+              item.id ||
+              item.product_id ||
+              item.productId ||
+              item.name
+            ) ===
+            productId
+        );
+
+
+      const button =
+        document.getElementById(
+          "wishlist"
+        );
+
+
+      if (
+        exists
+      ) {
+
+        button.textContent =
+          "♥";
+
+        button.style.color =
+          "#d56d87";
+
+      } else {
+
+        button.textContent =
+          "♡";
+
+        button.style.color =
+          "#76505d";
+
+      }
+
+    }
+
+
+    function toggleRelatedWishlist(
+      related,
+      button
+    ) {
+
+      let wishlist =
+        getWishlist();
+
+
+      const id =
+        String(
+          related.id
+        );
+
+
+      const index =
+        wishlist.findIndex(
+          item =>
+            String(
+              item.id ||
+              item.product_id ||
+              item.productId ||
+              ""
+            ) ===
+            id
+        );
+
+
+      if (
+        index === -1
+      ) {
+
+        wishlist.push(
+          related
+        );
+
+        button.textContent =
+          "♥";
+
+        button.style.color =
+          "#d56d87";
+
+      } else {
+
+        wishlist.splice(
+          index,
+          1
+        );
+
+        button.textContent =
+          "♡";
+
+        button.style.color =
+          "#76505d";
+
+      }
+
+
+      localStorage.setItem(
+        "arizebaWishlist",
+        JSON.stringify(
+          wishlist
+        )
+      );
+
+    }
+
+
+    /* =====================================================
+       NAVIGATION
+    ===================================================== */
+
+    function goBack() {
+
+      if (
+        window.history.length > 1
+      ) {
+
+        window.history.back();
+
+      } else {
+
+        goHome();
+
+      }
+
+    }
+
+
+    function goHome() {
+
+      window.location.href =
+        "index.html";
+
+    }
+
+
+    function openCart() {
+
+      window.location.href =
+        "cart.html";
+
+    }
+
+
+    /* =====================================================
+       EVENTS
+    ===================================================== */
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      function() {
+
+        document
+          .getElementById(
+            "addToCart"
+          )
+          .addEventListener(
+            "click",
+            function() {
+
+              addProductToCart();
+
+            }
+          );
+
+
+        document
+          .getElementById(
+            "buyNow"
+          )
+          .addEventListener(
+            "click",
+            function() {
+
+              buyNow();
+
+            }
+          );
+
+
+        document
+          .getElementById(
+            "wishlist"
+          )
+          .addEventListener(
+            "click",
+            function() {
+
+              toggleWishlist();
+
+            }
+          );
+
+
+        updateQuantity();
+
+        updateCartBadge();
+
+        loadProduct();
+
+      }
+    );
+
+  </script>
+
+</body>
+</html>

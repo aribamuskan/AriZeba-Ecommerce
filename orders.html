@@ -1,0 +1,2361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>arizeba. — My Orders</title>
+
+<link
+  rel="preconnect"
+  href="https://fonts.googleapis.com"
+>
+
+<link
+  rel="preconnect"
+  href="https://fonts.gstatic.com"
+  crossorigin
+>
+
+<link
+  href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap"
+  rel="stylesheet"
+>
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+:root {
+
+  --cream: #fff8f5;
+
+  --rose: #d98c9d;
+
+  --rose-dark: #a85f73;
+
+  --plum: #49313f;
+
+  --text: #30252b;
+
+  --muted: #8d7b82;
+
+  --border: rgba(103,69,80,.10);
+
+  --green: #56816a;
+
+}
+
+
+/* =====================================================
+   BODY
+===================================================== */
+
+body {
+
+  min-height: 100vh;
+
+  font-family:
+    "DM Sans",
+    sans-serif;
+
+  color:
+    var(--text);
+
+  background:
+
+    radial-gradient(
+      circle at 8% 5%,
+      rgba(255,255,255,.95),
+      transparent 25%
+    ),
+
+    radial-gradient(
+      circle at 90% 25%,
+      rgba(220,163,173,.20),
+      transparent 30%
+    ),
+
+    linear-gradient(
+      135deg,
+      #fffaf7,
+      #f7eae6 50%,
+      #f1dfdd
+    );
+
+  padding-bottom: 60px;
+
+}
+
+
+button {
+
+  font-family:
+    inherit;
+
+  cursor:
+    pointer;
+
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.topbar {
+
+  max-width:
+    1450px;
+
+  margin:
+    auto;
+
+  padding:
+    23px 42px;
+
+  display:
+    grid;
+
+  grid-template-columns:
+    1fr auto 1fr;
+
+  align-items:
+    center;
+
+}
+
+
+.icon-btn {
+
+  width:
+    44px;
+
+  height:
+    44px;
+
+  border-radius:
+    50%;
+
+  border:
+    1px solid
+    rgba(110,70,82,.12);
+
+  background:
+    rgba(255,255,255,.55);
+
+  backdrop-filter:
+    blur(15px);
+
+  color:
+    var(--plum);
+
+  font-size:
+    19px;
+
+  box-shadow:
+    0 8px 25px
+    rgba(82,47,60,.06);
+
+}
+
+
+.brand {
+
+  font-family:
+    "Playfair Display",
+    serif;
+
+  font-size:
+    clamp(
+      38px,
+      5vw,
+      60px
+    );
+
+  font-weight:
+    500;
+
+  letter-spacing:
+    -2px;
+
+  background:
+
+    linear-gradient(
+      135deg,
+      #8e4f61,
+      #d5a07f,
+      #a96070,
+      #e2b48d
+    );
+
+  -webkit-background-clip:
+    text;
+
+  background-clip:
+    text;
+
+  -webkit-text-fill-color:
+    transparent;
+
+  filter:
+    drop-shadow(
+      0 5px 12px
+      rgba(157,91,108,.18)
+    );
+
+}
+
+
+.brand::after {
+
+  content:
+    "";
+
+  display:
+    inline-block;
+
+  width:
+    8px;
+
+  height:
+    8px;
+
+  margin-left:
+    5px;
+
+  margin-bottom:
+    6px;
+
+  border-radius:
+    50%;
+
+  background:
+    #e78fa3;
+
+  box-shadow:
+    0 0 8px
+    rgba(231,143,163,.7),
+
+    0 0 20px
+    rgba(231,143,163,.4);
+
+}
+
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.page {
+
+  width:
+    min(
+      1150px,
+      calc(100% - 42px)
+    );
+
+  margin:
+    auto;
+
+}
+
+
+/* =====================================================
+   TITLE
+===================================================== */
+
+.title-area {
+
+  text-align:
+    center;
+
+  padding:
+    25px 10px 35px;
+
+}
+
+
+.eyebrow {
+
+  color:
+    var(--rose-dark);
+
+  text-transform:
+    uppercase;
+
+  letter-spacing:
+    4px;
+
+  font-size:
+    10px;
+
+  font-weight:
+    700;
+
+  margin-bottom:
+    10px;
+
+}
+
+
+.title-area h1 {
+
+  font-family:
+    "Playfair Display",
+    serif;
+
+  color:
+    var(--plum);
+
+  font-size:
+    clamp(
+      42px,
+      5vw,
+      62px
+    );
+
+  font-weight:
+    500;
+
+  line-height:
+    1;
+
+}
+
+
+.title-area p {
+
+  color:
+    var(--muted);
+
+  font-size:
+    13px;
+
+  margin-top:
+    12px;
+
+}
+
+
+/* =====================================================
+   ORDER FILTER
+===================================================== */
+
+.filter-bar {
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    space-between;
+
+  gap:
+    12px;
+
+  margin-bottom:
+    20px;
+
+}
+
+
+.filters {
+
+  display:
+    flex;
+
+  gap:
+    8px;
+
+  flex-wrap:
+    wrap;
+
+}
+
+
+.filter-btn {
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius:
+    20px;
+
+  padding:
+    9px 15px;
+
+  background:
+    rgba(255,255,255,.60);
+
+  color:
+    var(--plum);
+
+  font-size:
+    10px;
+
+  font-weight:
+    700;
+
+}
+
+
+.filter-btn.active {
+
+  background:
+    var(--plum);
+
+  color:
+    white;
+
+}
+
+
+.order-count {
+
+  color:
+    var(--muted);
+
+  font-size:
+    11px;
+
+}
+
+
+/* =====================================================
+   ORDERS
+===================================================== */
+
+.orders {
+
+  display:
+    grid;
+
+  gap:
+    15px;
+
+}
+
+
+/* =====================================================
+   ORDER CARD
+===================================================== */
+
+.order-card {
+
+  padding:
+    20px;
+
+  border-radius:
+    24px;
+
+  background:
+    rgba(255,255,255,.57);
+
+  backdrop-filter:
+    blur(20px);
+
+  border:
+    1px solid
+    rgba(255,255,255,.80);
+
+  box-shadow:
+    0 15px 40px
+    rgba(73,42,54,.07);
+
+  transition:
+    .25s ease;
+
+}
+
+
+.order-card:hover {
+
+  transform:
+    translateY(-3px);
+
+  box-shadow:
+    0 20px 45px
+    rgba(73,42,54,.11);
+
+}
+
+
+/* =====================================================
+   ORDER TOP
+===================================================== */
+
+.order-top {
+
+  display:
+    flex;
+
+  justify-content:
+    space-between;
+
+  align-items:
+    center;
+
+  gap:
+    15px;
+
+  padding-bottom:
+    15px;
+
+  border-bottom:
+    1px solid
+    var(--border);
+
+}
+
+
+.order-info {
+
+  min-width:
+    0;
+
+}
+
+
+.order-label {
+
+  color:
+    var(--rose-dark);
+
+  text-transform:
+    uppercase;
+
+  letter-spacing:
+    2px;
+
+  font-size:
+    8px;
+
+  font-weight:
+    700;
+
+  margin-bottom:
+    5px;
+
+}
+
+
+.order-id {
+
+  color:
+    var(--plum);
+
+  font-family:
+    "Playfair Display",
+    serif;
+
+  font-size:
+    20px;
+
+}
+
+
+.order-date {
+
+  color:
+    var(--muted);
+
+  font-size:
+    9px;
+
+  margin-top:
+    4px;
+
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.status {
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  padding:
+    8px 13px;
+
+  border-radius:
+    20px;
+
+  background:
+    rgba(216,173,99,.15);
+
+  color:
+    #a87830;
+
+  font-size:
+    9px;
+
+  font-weight:
+    700;
+
+}
+
+
+.status.confirmed {
+
+  background:
+    rgba(86,129,106,.13);
+
+  color:
+    var(--green);
+
+}
+
+
+.status.shipped {
+
+  background:
+    rgba(83,128,169,.13);
+
+  color:
+    #47769d;
+
+}
+
+
+.status.delivered {
+
+  background:
+    rgba(86,129,106,.16);
+
+  color:
+    #47765b;
+
+}
+
+
+.status.cancelled {
+
+  background:
+    rgba(168,95,115,.14);
+
+  color:
+    var(--rose-dark);
+
+}
+
+
+/* =====================================================
+   ORDER BODY
+===================================================== */
+
+.order-body {
+
+  display:
+    grid;
+
+  grid-template-columns:
+    1fr auto;
+
+  gap:
+    20px;
+
+  padding-top:
+    17px;
+
+}
+
+
+/* =====================================================
+   PRODUCTS PREVIEW
+===================================================== */
+
+.order-products {
+
+  display:
+    flex;
+
+  gap:
+    10px;
+
+  align-items:
+    center;
+
+  overflow:
+    hidden;
+
+}
+
+
+.order-product {
+
+  width:
+    70px;
+
+  height:
+    80px;
+
+  flex:
+    0 0 70px;
+
+  overflow:
+    hidden;
+
+  border-radius:
+    14px;
+
+  background:
+    #f1e1dd;
+
+}
+
+
+.order-product img {
+
+  width:
+    100%;
+
+  height:
+    100%;
+
+  object-fit:
+    cover;
+
+}
+
+
+.more-products {
+
+  width:
+    70px;
+
+  height:
+    80px;
+
+  flex:
+    0 0 70px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  border-radius:
+    14px;
+
+  background:
+    #f1e1dd;
+
+  color:
+    var(--rose-dark);
+
+  font-size:
+    11px;
+
+  font-weight:
+    700;
+
+}
+
+
+/* =====================================================
+   ORDER META
+===================================================== */
+
+.order-meta {
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  justify-content:
+    center;
+
+  gap:
+    7px;
+
+}
+
+
+.meta-row {
+
+  display:
+    flex;
+
+  justify-content:
+    space-between;
+
+  gap:
+    30px;
+
+  color:
+    var(--muted);
+
+  font-size:
+    10px;
+
+}
+
+
+.meta-row strong {
+
+  color:
+    var(--plum);
+
+}
+
+
+/* =====================================================
+   ORDER ACTIONS
+===================================================== */
+
+.order-actions {
+
+  display:
+    flex;
+
+  justify-content:
+    flex-end;
+
+  gap:
+    8px;
+
+  margin-top:
+    17px;
+
+  padding-top:
+    15px;
+
+  border-top:
+    1px solid
+    var(--border);
+
+}
+
+
+.action-btn {
+
+  border:
+    none;
+
+  border-radius:
+    12px;
+
+  padding:
+    10px 16px;
+
+  font-size:
+    9px;
+
+  font-weight:
+    700;
+
+}
+
+
+.track-btn {
+
+  background:
+    var(--plum);
+
+  color:
+    white;
+
+}
+
+
+.reorder-btn {
+
+  background:
+    rgba(217,140,157,.13);
+
+  color:
+    var(--rose-dark);
+
+}
+
+
+.action-btn:hover {
+
+  transform:
+    translateY(-1px);
+
+}
+
+
+/* =====================================================
+   EMPTY
+===================================================== */
+
+.empty {
+
+  display:
+    none;
+
+  text-align:
+    center;
+
+  padding:
+    75px 20px;
+
+}
+
+
+.empty-icon {
+
+  width:
+    80px;
+
+  height:
+    80px;
+
+  margin:
+    auto auto 18px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  border-radius:
+    50%;
+
+  background:
+    #f3dce0;
+
+  font-size:
+    30px;
+
+}
+
+
+.empty h2 {
+
+  color:
+    var(--plum);
+
+  font-family:
+    "Playfair Display",
+    serif;
+
+  font-size:
+    30px;
+
+  margin-bottom:
+    8px;
+
+}
+
+
+.empty p {
+
+  color:
+    var(--muted);
+
+  font-size:
+    12px;
+
+  margin-bottom:
+    20px;
+
+}
+
+
+.shop-btn {
+
+  border:
+    none;
+
+  border-radius:
+    14px;
+
+  padding:
+    13px 22px;
+
+  background:
+    var(--plum);
+
+  color:
+    white;
+
+  font-size:
+    11px;
+
+  font-weight:
+    700;
+
+}
+
+
+/* =====================================================
+   BOTTOM NAV
+===================================================== */
+
+.bottom-nav {
+
+  width:
+    min(
+      700px,
+      calc(100% - 30px)
+    );
+
+  margin:
+    35px auto 0;
+
+  padding:
+    10px;
+
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  background:
+    rgba(255,255,255,.74);
+
+  backdrop-filter:
+    blur(25px);
+
+  border:
+    1px solid
+    rgba(255,255,255,.85);
+
+  border-radius:
+    25px;
+
+  box-shadow:
+    0 15px 45px
+    rgba(66,40,51,.15);
+
+}
+
+
+.nav-item {
+
+  border:
+    none;
+
+  background:
+    transparent;
+
+  min-height:
+    50px;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  gap:
+    4px;
+
+  color:
+    #725b64;
+
+  font-size:
+    10px;
+
+}
+
+
+.nav-item span:first-child {
+
+  font-size:
+    18px;
+
+}
+
+
+.nav-item.active {
+
+  color:
+    #b85e79;
+
+  font-weight:
+    700;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 700px) {
+
+  .topbar {
+
+    padding:
+      18px 15px;
+
+  }
+
+
+  .brand {
+
+    font-size:
+      36px;
+
+  }
+
+
+  .icon-btn {
+
+    width:
+      38px;
+
+    height:
+      38px;
+
+  }
+
+
+  .page {
+
+    width:
+      calc(100% - 20px);
+
+  }
+
+
+  .filter-bar {
+
+    align-items:
+      flex-start;
+
+    flex-direction:
+      column;
+
+  }
+
+
+  .filters {
+
+    width:
+      100%;
+
+    overflow-x:
+      auto;
+
+    flex-wrap:
+      nowrap;
+
+    padding-bottom:
+      3px;
+
+  }
+
+
+  .filter-btn {
+
+    flex:
+      0 0 auto;
+
+  }
+
+
+  .order-card {
+
+    padding:
+      15px;
+
+    border-radius:
+      20px;
+
+  }
+
+
+  .order-top {
+
+    align-items:
+      flex-start;
+
+    flex-direction:
+      column;
+
+  }
+
+
+  .order-body {
+
+    grid-template-columns:
+      1fr;
+
+  }
+
+
+  .order-meta {
+
+    width:
+      100%;
+
+  }
+
+
+  .meta-row {
+
+    gap:
+      10px;
+
+  }
+
+
+  .order-actions {
+
+    justify-content:
+      stretch;
+
+  }
+
+
+  .action-btn {
+
+    flex:
+      1;
+
+  }
+
+
+  .order-product {
+
+    width:
+      60px;
+
+    height:
+      70px;
+
+    flex-basis:
+      60px;
+
+  }
+
+
+  .more-products {
+
+    width:
+      60px;
+
+    height:
+      70px;
+
+    flex-basis:
+      60px;
+
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="topbar">
+
+  <button
+    class="icon-btn"
+    onclick="goBack()"
+  >
+    ←
+  </button>
+
+  <div class="brand">
+    arizeba
+  </div>
+
+  <div></div>
+
+</header>
+
+
+<main class="page">
+
+  <section class="title-area">
+
+    <div class="eyebrow">
+      Your Account
+    </div>
+
+    <h1>
+      My Orders
+    </h1>
+
+    <p>
+      View your previous orders and track your deliveries.
+    </p>
+
+  </section>
+
+
+  <section class="filter-bar">
+
+    <div class="filters">
+
+      <button
+        class="filter-btn active"
+        onclick="filterOrders('all', this)"
+      >
+        All Orders
+      </button>
+
+      <button
+        class="filter-btn"
+        onclick="filterOrders('Processing', this)"
+      >
+        Processing
+      </button>
+
+      <button
+        class="filter-btn"
+        onclick="filterOrders('Shipped', this)"
+      >
+        Shipped
+      </button>
+
+      <button
+        class="filter-btn"
+        onclick="filterOrders('Delivered', this)"
+      >
+        Delivered
+      </button>
+
+    </div>
+
+    <div
+      class="order-count"
+      id="orderCount"
+    >
+      0 orders
+    </div>
+
+  </section>
+
+
+  <section
+    class="orders"
+    id="ordersContainer"
+  >
+  </section>
+
+
+  <section
+    class="empty"
+    id="emptyState"
+  >
+
+    <div class="empty-icon">
+      📦
+    </div>
+
+    <h2>
+      No orders yet
+    </h2>
+
+    <p>
+      Your completed orders will appear here.
+    </p>
+
+    <button
+      class="shop-btn"
+      onclick="continueShopping()"
+    >
+      Start Shopping →
+    </button>
+
+  </section>
+
+
+  <nav class="bottom-nav">
+
+    <button
+      class="nav-item"
+      onclick="goHome()"
+    >
+      <span>⌂</span>
+      <span>Home</span>
+    </button>
+
+
+    <button
+      class="nav-item"
+      onclick="openCategories()"
+    >
+      <span>▦</span>
+      <span>Categories</span>
+    </button>
+
+
+    <button
+      class="nav-item"
+      onclick="openCart()"
+    >
+      <span>🛒</span>
+      <span>Cart</span>
+    </button>
+
+
+    <button
+      class="nav-item active"
+    >
+      <span>♙</span>
+      <span>Orders</span>
+    </button>
+
+  </nav>
+
+</main>
+
+
+<script>
+    /* =====================================================
+   ORDERS DATA
+===================================================== */
+
+let allOrders = [];
+
+let selectedFilter = "all";
+
+
+/* =====================================================
+   LOAD ORDERS
+===================================================== */
+
+function loadOrders() {
+
+  try {
+
+    const savedOrders =
+      localStorage.getItem("arizebaOrders");
+
+    if (savedOrders) {
+
+      const parsed =
+        JSON.parse(savedOrders);
+
+      allOrders =
+        Array.isArray(parsed)
+          ? parsed
+          : [];
+
+    } else {
+
+      allOrders = [];
+
+    }
+
+  } catch (error) {
+
+    console.error(
+      "Orders loading error:",
+      error
+    );
+
+    allOrders = [];
+
+  }
+
+  renderOrders();
+
+}
+
+
+/* =====================================================
+   SAVE ORDERS
+===================================================== */
+
+function saveOrders() {
+
+  localStorage.setItem(
+    "arizebaOrders",
+    JSON.stringify(allOrders)
+  );
+
+}
+
+
+/* =====================================================
+   FILTER ORDERS
+===================================================== */
+
+function filterOrders(
+  filter,
+  button
+) {
+
+  selectedFilter =
+    filter;
+
+
+  document
+    .querySelectorAll(
+      ".filter-btn"
+    )
+    .forEach(btn => {
+
+      btn.classList.remove(
+        "active"
+      );
+
+    });
+
+
+  if (button) {
+
+    button.classList.add(
+      "active"
+    );
+
+  }
+
+
+  renderOrders();
+
+}
+
+
+/* =====================================================
+   RENDER ORDERS
+===================================================== */
+
+function renderOrders() {
+
+  const container =
+    document.getElementById(
+      "ordersContainer"
+    );
+
+  const empty =
+    document.getElementById(
+      "emptyState"
+    );
+
+  const count =
+    document.getElementById(
+      "orderCount"
+    );
+
+
+  container.innerHTML =
+    "";
+
+
+  let orders =
+    [...allOrders];
+
+
+  /* FILTER */
+
+  if (
+    selectedFilter !==
+    "all"
+  ) {
+
+    orders =
+      orders.filter(
+        order =>
+          String(
+            order.status || ""
+          ).toLowerCase() ===
+          String(
+            selectedFilter
+          ).toLowerCase()
+      );
+
+  }
+
+
+  count.textContent =
+    orders.length +
+    (
+      orders.length === 1
+        ? " order"
+        : " orders"
+    );
+
+
+  if (
+    orders.length === 0
+  ) {
+
+    empty.style.display =
+      "block";
+
+    return;
+
+  }
+
+
+  empty.style.display =
+    "none";
+
+
+  orders.forEach(
+    order => {
+
+      container.appendChild(
+        createOrderCard(
+          order
+        )
+      );
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   CREATE ORDER CARD
+===================================================== */
+
+function createOrderCard(
+  order
+) {
+
+  const card =
+    document.createElement(
+      "article"
+    );
+
+  card.className =
+    "order-card";
+
+
+  const orderId =
+    order.order_id ||
+    order.id ||
+    "ARZ-ORDER";
+
+
+  const status =
+    order.status ||
+    "Processing";
+
+
+  const orderDate =
+    order.created_at ||
+    order.date ||
+    new Date().toISOString();
+
+
+  const items =
+    Array.isArray(
+      order.items
+    )
+      ? order.items
+      : [];
+
+
+  const total =
+    Number(
+      order.total ||
+      order.amount ||
+      calculateOrderTotal(
+        items
+      )
+    );
+
+
+  const totalQuantity =
+    items.reduce(
+      (sum, item) =>
+        sum +
+        Number(
+          item.quantity || 1
+        ),
+      0
+    );
+
+
+  const statusClass =
+    getStatusClass(
+      status
+    );
+
+
+  const formattedDate =
+    formatDate(
+      orderDate
+    );
+
+
+  const productImages =
+    items
+      .slice(0, 3)
+      .map(
+        item =>
+          item.image || ""
+      );
+
+
+  let imagesHTML =
+    "";
+
+
+  productImages.forEach(
+    image => {
+
+      if (!image) {
+        return;
+      }
+
+
+      imagesHTML += `
+
+        <div class="order-product">
+
+          <img
+            src="${escapeHTML(image)}"
+            alt="Order product"
+            loading="lazy"
+          >
+
+        </div>
+
+      `;
+
+    }
+  );
+
+
+  if (
+    items.length > 3
+  ) {
+
+    imagesHTML += `
+
+      <div class="more-products">
+
+        +${items.length - 3}
+
+      </div>
+
+    `;
+
+  }
+
+
+  if (
+    !imagesHTML
+  ) {
+
+    imagesHTML = `
+
+      <div class="order-product">
+
+        <div
+          style="
+            width:100%;
+            height:100%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:24px;
+          "
+        >
+          📦
+        </div>
+
+      </div>
+
+    `;
+
+  }
+
+
+  card.innerHTML = `
+
+    <div class="order-top">
+
+      <div class="order-info">
+
+        <div class="order-label">
+          Order Number
+        </div>
+
+        <div class="order-id">
+          ${escapeHTML(orderId)}
+        </div>
+
+        <div class="order-date">
+          Placed on ${formattedDate}
+        </div>
+
+      </div>
+
+
+      <div class="status ${statusClass}">
+        ${escapeHTML(status)}
+      </div>
+
+    </div>
+
+
+    <div class="order-body">
+
+      <div class="order-products">
+
+        ${imagesHTML}
+
+      </div>
+
+
+      <div class="order-meta">
+
+        <div class="meta-row">
+
+          <span>
+            Items
+          </span>
+
+          <strong>
+            ${totalQuantity}
+          </strong>
+
+        </div>
+
+
+        <div class="meta-row">
+
+          <span>
+            Total
+          </span>
+
+          <strong>
+            PKR ${total.toLocaleString()}
+          </strong>
+
+        </div>
+
+
+        <div class="meta-row">
+
+          <span>
+            Payment
+          </span>
+
+          <strong>
+            ${escapeHTML(
+              order.payment_method ||
+              "Cash on Delivery"
+            )}
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="order-actions">
+
+      <button
+        class="action-btn track-btn"
+        onclick="trackOrder('${escapeHTML(orderId)}')"
+      >
+        Track Order →
+      </button>
+
+
+      <button
+        class="action-btn reorder-btn"
+        onclick="reorder('${escapeHTML(orderId)}')"
+      >
+        Buy Again
+      </button>
+
+    </div>
+
+  `;
+
+
+  return card;
+
+}
+
+
+/* =====================================================
+   CALCULATE ORDER TOTAL
+===================================================== */
+
+function calculateOrderTotal(
+  items
+) {
+
+  let total = 0;
+
+
+  items.forEach(
+    item => {
+
+      const price =
+        Number(
+          item.price || 0
+        );
+
+
+      const quantity =
+        Number(
+          item.quantity || 1
+        );
+
+
+      total +=
+        price *
+        quantity;
+
+    }
+  );
+
+
+  return total;
+
+}
+
+
+/* =====================================================
+   STATUS CLASS
+===================================================== */
+
+function getStatusClass(
+  status
+) {
+
+  const value =
+    String(
+      status || ""
+    ).toLowerCase();
+
+
+  if (
+    value.includes(
+      "confirm"
+    )
+  ) {
+
+    return "confirmed";
+
+  }
+
+
+  if (
+    value.includes(
+      "ship"
+    )
+  ) {
+
+    return "shipped";
+
+  }
+
+
+  if (
+    value.includes(
+      "deliver"
+    )
+  ) {
+
+    return "delivered";
+
+  }
+
+
+  if (
+    value.includes(
+      "cancel"
+    )
+  ) {
+
+    return "cancelled";
+
+  }
+
+
+  return "";
+
+}
+
+
+/* =====================================================
+   FORMAT DATE
+===================================================== */
+
+function formatDate(
+  date
+) {
+
+  try {
+
+    const parsed =
+      new Date(date);
+
+
+    if (
+      Number.isNaN(
+        parsed.getTime()
+      )
+    ) {
+
+      return "Recently";
+
+    }
+
+
+    return parsed.toLocaleDateString(
+      "en-PK",
+      {
+        day: "numeric",
+        month: "short",
+        year: "numeric"
+      }
+    );
+
+  } catch (error) {
+
+    return "Recently";
+
+  }
+
+}
+
+
+/* =====================================================
+   TRACK ORDER
+===================================================== */
+
+function trackOrder(
+  orderId
+) {
+
+  localStorage.setItem(
+    "arizebaTrackingOrder",
+    orderId
+  );
+
+
+  window.location.href =
+    "tracking.html";
+
+}
+
+
+/* =====================================================
+   REORDER
+===================================================== */
+
+function reorder(
+  orderId
+) {
+
+  const order =
+    allOrders.find(
+      item =>
+        String(
+          item.order_id ||
+          item.id
+        ) ===
+        String(orderId)
+    );
+
+
+  if (!order) {
+
+    alert(
+      "Order could not be found."
+    );
+
+    return;
+
+  }
+
+
+  const items =
+    Array.isArray(
+      order.items
+    )
+      ? order.items
+      : [];
+
+
+  if (
+    items.length === 0
+  ) {
+
+    alert(
+      "This order has no products available to reorder."
+    );
+
+    return;
+
+  }
+
+
+  let cart = [];
+
+
+  try {
+
+    const savedCart =
+      localStorage.getItem(
+        "arizebaCart"
+      );
+
+
+    if (savedCart) {
+
+      const parsed =
+        JSON.parse(savedCart);
+
+
+      if (
+        Array.isArray(parsed)
+      ) {
+
+        cart =
+          parsed;
+
+      }
+
+    }
+
+  } catch (error) {
+
+    cart = [];
+
+  }
+
+
+  items.forEach(
+    product => {
+
+      const productId =
+        product.product_id ||
+        product.id;
+
+
+      if (!productId) {
+        return;
+      }
+
+
+      const existingIndex =
+        cart.findIndex(
+          item =>
+            String(item.id) ===
+            String(productId)
+        );
+
+
+      const quantity =
+        Number(
+          product.quantity || 1
+        );
+
+
+      if (
+        existingIndex !== -1
+      ) {
+
+        cart[existingIndex]
+          .quantity =
+          Number(
+            cart[existingIndex]
+              .quantity || 1
+          ) + quantity;
+
+      } else {
+
+        cart.push({
+
+          id:
+            productId,
+
+          name:
+            product.name ||
+            "Product",
+
+          price:
+            Number(
+              product.price || 0
+            ),
+
+          image:
+            product.image ||
+            "",
+
+          category:
+            product.category ||
+            "",
+
+          quantity:
+            quantity,
+
+          stock:
+            Number(
+              product.stock ||
+              10
+            )
+
+        });
+
+      }
+
+    }
+  );
+
+
+  localStorage.setItem(
+    "arizebaCart",
+    JSON.stringify(cart)
+  );
+
+
+  alert(
+    "Products added to your cart ✓"
+  );
+
+
+  window.location.href =
+    "cart.html";
+
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+function goBack() {
+
+  window.history.back();
+
+}
+
+
+function goHome() {
+
+  window.location.href =
+    "home.html";
+
+}
+
+
+function openCategories() {
+
+  window.location.href =
+    "categories.html";
+
+}
+
+
+function openCart() {
+
+  window.location.href =
+    "cart.html";
+
+}
+
+
+function continueShopping() {
+
+  window.location.href =
+    "products.html";
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(
+  value
+) {
+
+  return String(value)
+
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+loadOrders();
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,2122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>AriZeba. — Cart</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --cream: #fff8f5;
+      --rose: #d98c9d;
+      --rose-dark: #a85f73;
+      --plum: #49313f;
+      --text: #30252b;
+      --muted: #8d7b82;
+      --border: rgba(103, 69, 80, .10);
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "DM Sans", sans-serif;
+      color: var(--text);
+
+      background:
+        radial-gradient(
+          circle at 8% 5%,
+          rgba(255,255,255,.95),
+          transparent 25%
+        ),
+        radial-gradient(
+          circle at 90% 25%,
+          rgba(220,163,173,.20),
+          transparent 30%
+        ),
+        linear-gradient(
+          135deg,
+          #fffaf7,
+          #f7eae6 50%,
+          #f1dfdd
+        );
+
+      padding-bottom: 60px;
+    }
+
+    button,
+    input {
+      font-family: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    /* ================= HEADER ================= */
+
+    .topbar {
+      max-width: 1450px;
+      margin: auto;
+      padding: 23px 42px;
+
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+    }
+
+    .icon-btn {
+      width: 44px;
+      height: 44px;
+
+      border-radius: 50%;
+      border: 1px solid rgba(110,70,82,.12);
+
+      background: rgba(255,255,255,.55);
+      backdrop-filter: blur(15px);
+
+      color: var(--plum);
+      font-size: 19px;
+
+      box-shadow:
+        0 8px 25px rgba(82,47,60,.06);
+
+      transition: .2s ease;
+    }
+
+    .icon-btn:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,.8);
+    }
+
+    .brand {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(38px, 5vw, 60px);
+      font-weight: 500;
+      letter-spacing: -2px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #8e4f61,
+          #d5a07f,
+          #a96070,
+          #e2b48d
+        );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+
+      filter:
+        drop-shadow(
+          0 5px 12px rgba(157,91,108,.18)
+        );
+    }
+
+    /* ================= PAGE ================= */
+
+    .page {
+      width: min(1300px, calc(100% - 42px));
+      margin: auto;
+    }
+
+    .breadcrumb {
+      color: var(--muted);
+      font-size: 12px;
+      margin: 12px 3px 20px;
+    }
+
+    .breadcrumb span {
+      color: var(--rose-dark);
+      font-weight: 600;
+    }
+
+    /* ================= TITLE ================= */
+
+    .title-area {
+      margin: 20px 3px 28px;
+    }
+
+    .eyebrow {
+      color: var(--rose-dark);
+
+      text-transform: uppercase;
+      letter-spacing: 4px;
+
+      font-size: 10px;
+      font-weight: 700;
+
+      margin-bottom: 8px;
+    }
+
+    .title-area h1 {
+      font-family: "Playfair Display", serif;
+
+      color: var(--plum);
+
+      font-size: clamp(42px, 5vw, 62px);
+
+      font-weight: 500;
+      line-height: 1;
+    }
+
+    .title-area p {
+      color: var(--muted);
+
+      font-size: 13px;
+
+      margin-top: 10px;
+    }
+
+    /* ================= CART LAYOUT ================= */
+
+    .cart-layout {
+      display: grid;
+
+      grid-template-columns:
+        1.55fr .75fr;
+
+      gap: 24px;
+
+      align-items: start;
+    }
+
+    /* ================= CART CARD ================= */
+
+    .cart-card {
+      padding: 18px;
+
+      border-radius: 28px;
+
+      background:
+        rgba(255,255,255,.48);
+
+      backdrop-filter: blur(20px);
+
+      border:
+        1px solid rgba(255,255,255,.75);
+
+      box-shadow:
+        0 20px 55px rgba(73,42,54,.08);
+    }
+
+    .cart-header {
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      padding:
+        3px 5px 17px;
+
+      border-bottom:
+        1px solid var(--border);
+    }
+
+    .cart-header h2 {
+      color: var(--plum);
+
+      font-family: "Playfair Display", serif;
+
+      font-size: 25px;
+
+      font-weight: 500;
+    }
+
+    .cart-count {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    /* ================= CART ITEM ================= */
+
+    .cart-item {
+      display: grid;
+
+      grid-template-columns:
+        125px 1fr auto;
+
+      gap: 18px;
+
+      align-items: center;
+
+      padding: 20px 5px;
+
+      border-bottom:
+        1px solid var(--border);
+    }
+
+    .item-image {
+      width: 125px;
+      height: 135px;
+
+      overflow: hidden;
+
+      border-radius: 20px;
+
+      background: #f1e1dd;
+    }
+
+    .item-image img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+    }
+
+    .item-category {
+      color: var(--rose-dark);
+
+      text-transform: uppercase;
+
+      letter-spacing: 2px;
+
+      font-size: 8px;
+
+      font-weight: 700;
+
+      margin-bottom: 7px;
+    }
+
+    .item-name {
+      color: var(--plum);
+
+      font-family: "Playfair Display", serif;
+
+      font-size: 21px;
+
+      margin-bottom: 7px;
+    }
+
+    .item-meta {
+      color: var(--muted);
+
+      font-size: 11px;
+
+      line-height: 1.7;
+    }
+
+    .item-price-mobile {
+      display: none;
+
+      color: var(--plum);
+
+      font-size: 14px;
+
+      font-weight: 700;
+
+      margin-top: 7px;
+    }
+
+    .item-actions {
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: flex-end;
+
+      gap: 14px;
+    }
+
+    .item-price {
+      color: var(--plum);
+
+      font-size: 17px;
+
+      font-weight: 700;
+    }
+
+    /* ================= QUANTITY ================= */
+
+    .quantity {
+      display: flex;
+
+      align-items: center;
+
+      border:
+        1px solid rgba(103,69,80,.12);
+
+      border-radius: 13px;
+
+      background:
+        rgba(255,255,255,.62);
+
+      overflow: hidden;
+    }
+
+    .quantity button {
+      width: 33px;
+      height: 33px;
+
+      border: none;
+
+      background: transparent;
+
+      color: var(--plum);
+
+      font-size: 16px;
+    }
+
+    .quantity button:hover {
+      background: rgba(217,140,157,.12);
+    }
+
+    .quantity-value {
+      min-width: 30px;
+
+      text-align: center;
+
+      color: var(--plum);
+
+      font-size: 11px;
+
+      font-weight: 700;
+    }
+
+    /* ================= REMOVE ================= */
+
+    .remove {
+      border: none;
+
+      background: transparent;
+
+      color: #a58e95;
+
+      font-size: 10px;
+    }
+
+    .remove:hover {
+      color: #b34f6b;
+    }
+
+    /* ================= SUMMARY ================= */
+
+    .summary {
+      position: sticky;
+
+      top: 20px;
+
+      padding: 24px;
+
+      border-radius: 28px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(73,49,63,.97),
+          rgba(92,58,72,.94)
+        );
+
+      color: white;
+
+      box-shadow:
+        0 25px 55px rgba(73,42,54,.20);
+    }
+
+    .summary-label {
+      text-transform: uppercase;
+
+      letter-spacing: 4px;
+
+      font-size: 9px;
+
+      opacity: .65;
+
+      margin-bottom: 8px;
+    }
+
+    .summary h2 {
+      font-family: "Playfair Display", serif;
+
+      font-size: 30px;
+
+      font-weight: 500;
+
+      margin-bottom: 25px;
+    }
+
+    .summary-row {
+      display: flex;
+
+      justify-content: space-between;
+
+      margin-bottom: 15px;
+
+      font-size: 12px;
+
+      color:
+        rgba(255,255,255,.78);
+    }
+
+    .summary-row strong {
+      color: white;
+    }
+
+    .summary-divider {
+      height: 1px;
+
+      background:
+        rgba(255,255,255,.15);
+
+      margin: 20px 0;
+    }
+
+    /* ================= COUPON ================= */
+
+    .coupon-title {
+      font-size: 11px;
+
+      font-weight: 700;
+
+      margin-bottom: 8px;
+    }
+
+    .coupon {
+      display: flex;
+
+      gap: 7px;
+
+      margin-bottom: 22px;
+    }
+
+    .coupon input {
+      flex: 1;
+
+      min-width: 0;
+
+      border:
+        1px solid rgba(255,255,255,.18);
+
+      border-radius: 11px;
+
+      background:
+        rgba(255,255,255,.09);
+
+      color: white;
+
+      padding: 11px;
+
+      outline: none;
+
+      font-size: 11px;
+    }
+
+    .coupon input::placeholder {
+      color:
+        rgba(255,255,255,.45);
+    }
+
+    .coupon button {
+      border: none;
+
+      border-radius: 11px;
+
+      padding: 0 13px;
+
+      background: #e3a3ad;
+
+      color: #49313f;
+
+      font-size: 10px;
+
+      font-weight: 700;
+    }
+
+    .coupon button:hover {
+      background: #efb9c1;
+    }
+
+    /* ================= TOTAL ================= */
+
+    .total-row {
+      display: flex;
+
+      align-items: baseline;
+
+      justify-content: space-between;
+
+      margin-bottom: 22px;
+    }
+
+    .total-row span {
+      font-size: 13px;
+    }
+
+    .total-row strong {
+      font-size: 24px;
+    }
+
+    /* ================= CHECKOUT ================= */
+
+    .checkout {
+      width: 100%;
+
+      min-height: 53px;
+
+      border: none;
+
+      border-radius: 16px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #f5c7c9,
+          #e7a3ac,
+          #e8c1a5
+        );
+
+      color: #49313f;
+
+      font-size: 12px;
+
+      font-weight: 700;
+
+      box-shadow:
+        0 12px 30px
+        rgba(232,163,174,.20);
+
+      transition: .2s ease;
+    }
+
+    .checkout:hover {
+      transform: translateY(-2px);
+    }
+
+    .continue {
+      width: 100%;
+
+      margin-top: 12px;
+
+      border: none;
+
+      background: transparent;
+
+      color:
+        rgba(255,255,255,.65);
+
+      font-size: 10px;
+    }
+
+    .continue:hover {
+      color: white;
+    }
+
+    /* ================= TRUST ================= */
+
+    .trust {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 9px;
+
+      margin-top: 15px;
+    }
+
+    .trust-card {
+      padding: 12px 5px;
+
+      border-radius: 15px;
+
+      background:
+        rgba(255,255,255,.06);
+
+      text-align: center;
+    }
+
+    .trust-card strong {
+      display: block;
+
+      font-size: 10px;
+
+      margin-bottom: 4px;
+    }
+
+    .trust-card span {
+      color:
+        rgba(255,255,255,.50);
+
+      font-size: 8px;
+    }
+
+    /* ================= EMPTY ================= */
+
+    .empty {
+      display: none;
+
+      text-align: center;
+
+      padding: 70px 20px;
+    }
+
+    .empty-icon {
+      width: 75px;
+      height: 75px;
+
+      margin:
+        auto auto 18px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 50%;
+
+      background: #f3dce0;
+
+      font-size: 28px;
+    }
+
+    .empty h2 {
+      font-family: "Playfair Display", serif;
+
+      color: var(--plum);
+
+      font-size: 29px;
+
+      font-weight: 500;
+    }
+
+    .empty p {
+      color: var(--muted);
+
+      font-size: 12px;
+
+      margin:
+        8px 0 20px;
+    }
+
+    .shop-btn {
+      border: none;
+
+      border-radius: 14px;
+
+      padding: 13px 22px;
+
+      background: var(--plum);
+
+      color: white;
+
+      font-size: 11px;
+
+      font-weight: 700;
+    }
+
+    .shop-btn:hover {
+      background: #634554;
+    }
+
+    /* ================= RESPONSIVE ================= */
+
+    @media (max-width: 950px) {
+
+      .cart-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .summary {
+        position: static;
+      }
+
+    }
+
+    @media (max-width: 650px) {
+
+      .topbar {
+        padding: 18px 15px;
+      }
+
+      .brand {
+        font-size: 36px;
+      }
+
+      .icon-btn {
+        width: 38px;
+        height: 38px;
+      }
+
+      .page {
+        width:
+          calc(100% - 20px);
+      }
+
+      .cart-card {
+        padding: 12px;
+
+        border-radius: 22px;
+      }
+
+      .cart-item {
+        grid-template-columns:
+          85px 1fr;
+
+        gap: 12px;
+      }
+
+      .item-image {
+        width: 85px;
+        height: 105px;
+
+        border-radius: 15px;
+      }
+
+      .item-name {
+        font-size: 17px;
+      }
+
+      .item-actions {
+        grid-column: 2;
+
+        align-items: flex-start;
+      }
+
+      .item-price {
+        display: none;
+      }
+
+      .item-price-mobile {
+        display: block;
+      }
+
+      .summary {
+        padding: 20px;
+      }
+
+      .title-area h1 {
+        font-size: 45px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <!-- ================= HEADER ================= -->
+
+  <header class="topbar">
+
+    <button
+      class="icon-btn"
+      onclick="goBack()"
+      aria-label="Go back"
+    >
+      ←
+    </button>
+
+    <div class="brand">
+      AriZeba.
+    </div>
+
+    <div></div>
+
+  </header>
+
+
+  <main class="page">
+
+    <!-- ================= BREADCRUMB ================= -->
+
+    <div class="breadcrumb">
+      Home / <span>Shopping Cart</span>
+    </div>
+
+
+    <!-- ================= TITLE ================= -->
+
+    <section class="title-area">
+
+      <div class="eyebrow">
+        Your Selection
+      </div>
+
+      <h1>
+        Shopping Cart
+      </h1>
+
+      <p>
+        Review your beautifully selected pieces before checkout.
+      </p>
+
+    </section>
+
+
+    <!-- ================= CART ================= -->
+
+    <div
+      class="cart-layout"
+      id="cartLayout"
+    >
+
+      <!-- CART ITEMS -->
+
+      <section class="cart-card">
+
+        <div class="cart-header">
+
+          <h2>
+            Your Items
+          </h2>
+
+          <div
+            class="cart-count"
+            id="cartCount"
+          >
+            0 items
+          </div>
+
+        </div>
+
+        <div id="cartItems"></div>
+
+
+        <!-- EMPTY STATE -->
+
+        <div
+          class="empty"
+          id="emptyState"
+        >
+
+          <div class="empty-icon">
+            🛍
+          </div>
+
+          <h2>
+            Your cart is empty
+          </h2>
+
+          <p>
+            Discover something beautiful for your everyday.
+          </p>
+
+          <button
+            class="shop-btn"
+            onclick="continueShopping()"
+          >
+            Start Shopping →
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <!-- ORDER SUMMARY -->
+
+      <aside class="summary">
+
+        <div class="summary-label">
+          Order Summary
+        </div>
+
+        <h2>
+          Your Order
+        </h2>
+
+
+        <div class="summary-row">
+
+          <span>
+            Subtotal
+          </span>
+
+          <strong id="subtotal">
+            PKR 0
+          </strong>
+
+        </div>
+
+
+        <div class="summary-row">
+
+          <span>
+            Delivery
+          </span>
+
+          <strong id="delivery">
+            PKR 0
+          </strong>
+
+        </div>
+
+
+        <div class="summary-row">
+
+          <span>
+            Discount
+          </span>
+
+          <strong id="discount">
+            PKR 0
+          </strong>
+
+        </div>
+
+
+        <div class="summary-divider"></div>
+
+
+        <!-- COUPON -->
+
+        <div class="coupon-title">
+          Have a promo code?
+        </div>
+
+        <div class="coupon">
+
+          <input
+            type="text"
+            id="couponInput"
+            placeholder="Enter code"
+          >
+
+          <button onclick="applyCoupon()">
+            Apply
+          </button>
+
+        </div>
+
+
+        <!-- TOTAL -->
+
+        <div class="total-row">
+
+          <span>
+            Total
+          </span>
+
+          <strong id="total">
+            PKR 0
+          </strong>
+
+        </div>
+
+
+        <!-- CHECKOUT -->
+
+        <button
+          class="checkout"
+          onclick="checkout()"
+        >
+          Proceed to Checkout →
+        </button>
+
+
+        <button
+          class="continue"
+          onclick="continueShopping()"
+        >
+          ← Continue Shopping
+        </button>
+
+
+        <!-- TRUST -->
+
+        <div class="trust">
+
+          <div class="trust-card">
+
+            <strong>
+              🔒 Secure
+            </strong>
+
+            <span>
+              Safe checkout
+            </span>
+
+          </div>
+
+
+          <div class="trust-card">
+
+            <strong>
+              🚚 Delivery
+            </strong>
+
+            <span>
+              Pakistan-wide
+            </span>
+
+          </div>
+
+
+          <div class="trust-card">
+
+            <strong>
+              ↩ Returns
+            </strong>
+
+            <span>
+              Easy returns
+            </span>
+
+          </div>
+
+        </div>
+
+      </aside>
+
+    </div>
+
+  </main>
+
+
+  <!-- ================= JAVASCRIPT ================= -->
+
+ <script>
+
+  /* =====================================================
+     ARIZEBA CART SYSTEM
+     ===================================================== */
+
+  let cart = [];
+  let appliedDiscount = 0;
+
+
+  /* =====================================================
+     PRODUCT DATABASE
+     ===================================================== */
+
+  const cartProducts = [
+
+    {
+      id: 1,
+      name: "Premium Wireless Headphones",
+      category: "Electronics",
+      price: 8999,
+      oldPrice: 11999,
+      image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=700&q=90"
+    },
+
+    {
+      id: 2,
+      name: "Premium Quilted Handbag",
+      category: "Fashion",
+      price: 5499,
+      oldPrice: 6999,
+      image: "https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?auto=format&fit=crop&w=700&q=90"
+    },
+
+    {
+      id: 3,
+      name: "Rose Gold Smart Watch",
+      category: "Electronics",
+      price: 12999,
+      oldPrice: 15999,
+      image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=700&q=90"
+    },
+
+    {
+      id: 4,
+      name: "Luxury Signature Perfume",
+      category: "Beauty",
+      price: 6499,
+      oldPrice: 8199,
+      image: "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=700&q=90"
+    },
+
+    {
+      id: 5,
+      name: "Elegant Women's Dress",
+      category: "Fashion",
+      price: 7499,
+      oldPrice: 9499,
+      image: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=700&q=90"
+    },
+
+    {
+      id: 6,
+      name: "Classic Leather Wallet",
+      category: "Fashion",
+      price: 2999,
+      oldPrice: 3999,
+      image: "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=700&q=90"
+    },
+
+    {
+      id: 7,
+      name: "Hydrating Beauty Set",
+      category: "Beauty",
+      price: 3999,
+      oldPrice: 4999,
+      image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=700&q=90"
+    },
+
+    {
+      id: 8,
+      name: "Minimal Ceramic Vase",
+      category: "Home",
+      price: 2499,
+      oldPrice: 3299,
+      image: "https://images.unsplash.com/photo-1612196808214-b8e1d6145a8c?auto=format&fit=crop&w=700&q=90"
+    },
+
+    {
+      id: 9,
+      name: "Luxury Table Lamp",
+      category: "Home",
+      price: 5999,
+      oldPrice: 7499,
+      image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=700&q=90"
+    },
+
+    {
+      id: 10,
+      name: "Kids Casual Outfit",
+      category: "Kids",
+      price: 3299,
+      oldPrice: 4299,
+      image: "https://images.unsplash.com/photo-1503919545889-aef636e10ad4?auto=format&fit=crop&w=700&q=90"
+    },
+
+    {
+      id: 11,
+      name: "Portable Bluetooth Speaker",
+      category: "Electronics",
+      price: 4599,
+      oldPrice: 5999,
+      image: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=700&q=90"
+    },
+
+    {
+      id: 12,
+      name: "Soft Everyday Sneakers",
+      category: "Fashion",
+      price: 6999,
+      oldPrice: 8499,
+      image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=700&q=90"
+    }
+
+  ];
+
+
+  /* =====================================================
+     FIND PRODUCT
+     ===================================================== */
+
+  function findProduct(item) {
+
+    if (!item) {
+      return null;
+    }
+
+    /* Product ID */
+    const productId =
+      item.productId ??
+      item.id ??
+      item.product?.id;
+
+    if (productId !== undefined) {
+
+      const found =
+        cartProducts.find(product =>
+          String(product.id) === String(productId)
+        );
+
+      if (found) {
+        return found;
+      }
+    }
+
+
+    /* Product name */
+    const productName =
+      item.name ??
+      item.product?.name ??
+      item.productName;
+
+    if (productName) {
+
+      const found =
+        cartProducts.find(product =>
+          product.name.toLowerCase() ===
+          String(productName).toLowerCase()
+        );
+
+      if (found) {
+        return found;
+      }
+    }
+
+
+    /* Full product object */
+    if (
+      item.name &&
+      item.price &&
+      item.image
+    ) {
+
+      return {
+
+        id:
+          item.id ??
+          item.productId ??
+          Date.now(),
+
+        name: item.name,
+
+        category:
+          item.category ??
+          "AriZeba",
+
+        price:
+          Number(item.price),
+
+        oldPrice:
+          Number(
+            item.oldPrice ??
+            item.price
+          ),
+
+        image:
+          item.image
+
+      };
+
+    }
+
+
+    /* Nested product object */
+    if (
+      item.product &&
+      item.product.name
+    ) {
+
+      return {
+
+        id:
+          item.product.id ??
+          Date.now(),
+
+        name:
+          item.product.name,
+
+        category:
+          item.product.category ??
+          "AriZeba",
+
+        price:
+          Number(item.product.price),
+
+        oldPrice:
+          Number(
+            item.product.oldPrice ??
+            item.product.price
+          ),
+
+        image:
+          item.product.image
+
+      };
+
+    }
+
+
+    return null;
+
+  }
+
+
+  /* =====================================================
+     LOAD CART
+     ===================================================== */
+
+  function loadCart() {
+
+    try {
+
+      const savedCart =
+        localStorage.getItem("arizebaCart");
+
+
+      if (!savedCart) {
+
+        cart = [];
+
+        renderCart();
+
+        return;
+
+      }
+
+
+      const savedItems =
+        JSON.parse(savedCart);
+
+
+      if (!Array.isArray(savedItems)) {
+
+        cart = [];
+
+        renderCart();
+
+        return;
+
+      }
+
+
+      const loadedCart = [];
+
+
+      savedItems.forEach(item => {
+
+        const product =
+          findProduct(item);
+
+
+        if (!product) {
+          return;
+        }
+
+
+        const quantity =
+          Math.max(
+            1,
+            Math.min(
+              10,
+              Number(
+                item.quantity ??
+                item.qty ??
+                item.count ??
+                1
+              )
+            )
+          );
+
+
+        const existing =
+          loadedCart.find(
+            p =>
+              String(p.id) ===
+              String(product.id)
+          );
+
+
+        if (existing) {
+
+          existing.quantity += quantity;
+
+          if (existing.quantity > 10) {
+            existing.quantity = 10;
+          }
+
+        } else {
+
+          loadedCart.push({
+
+            ...product,
+
+            quantity: quantity
+
+          });
+
+        }
+
+      });
+
+
+      cart = loadedCart;
+
+
+      saveCart();
+
+      renderCart();
+
+    }
+
+    catch (error) {
+
+      console.error(
+        "Cart loading error:",
+        error
+      );
+
+      cart = [];
+
+      renderCart();
+
+    }
+
+  }
+
+
+  /* =====================================================
+     SAVE CART
+     ===================================================== */
+
+  function saveCart() {
+
+    const storageCart =
+      cart.map(product => {
+
+        return {
+
+          productId:
+            product.id,
+
+          id:
+            product.id,
+
+          name:
+            product.name,
+
+          category:
+            product.category,
+
+          price:
+            Number(product.price),
+
+          oldPrice:
+            Number(product.oldPrice),
+
+          image:
+            product.image,
+
+          quantity:
+            Math.max(
+              1,
+              Math.min(
+                10,
+                Number(
+                  product.quantity || 1
+                )
+              )
+            )
+
+        };
+
+      });
+
+
+    localStorage.setItem(
+      "arizebaCart",
+      JSON.stringify(storageCart)
+    );
+
+
+    /* Also notify other pages/tabs */
+    try {
+
+      window.dispatchEvent(
+        new Event("arizebaCartUpdated")
+      );
+
+    }
+
+    catch (error) {}
+
+  }
+
+
+  /* =====================================================
+     ESCAPE HTML
+     ===================================================== */
+
+  function escapeHTML(value) {
+
+    return String(value)
+
+      .replace(/&/g, "&amp;")
+
+      .replace(/</g, "&lt;")
+
+      .replace(/>/g, "&gt;")
+
+      .replace(/"/g, "&quot;")
+
+      .replace(/'/g, "&#039;");
+
+  }
+
+
+  /* =====================================================
+     RENDER CART
+     ===================================================== */
+
+  function renderCart() {
+
+    const container =
+      document.getElementById(
+        "cartItems"
+      );
+
+
+    const emptyState =
+      document.getElementById(
+        "emptyState"
+      );
+
+
+    if (!container || !emptyState) {
+      return;
+    }
+
+
+    container.innerHTML = "";
+
+
+    if (cart.length === 0) {
+
+      emptyState.style.display =
+        "block";
+
+      updateSummary();
+
+      return;
+
+    }
+
+
+    emptyState.style.display =
+      "none";
+
+
+    cart.forEach(
+      (product, index) => {
+
+        const quantity =
+          Number(
+            product.quantity || 1
+          );
+
+
+        const price =
+          Number(
+            product.price || 0
+          );
+
+
+        const itemTotal =
+          price * quantity;
+
+
+        const item =
+          document.createElement(
+            "article"
+          );
+
+
+        item.className =
+          "cart-item";
+
+
+        const image =
+          product.image ||
+          "https://via.placeholder.com/300x350?text=AriZeba";
+
+
+        item.innerHTML = `
+
+          <div class="item-image">
+
+            <img
+              src="${escapeHTML(image)}"
+              alt="${escapeHTML(
+                product.name || "Product"
+              )}"
+            >
+
+          </div>
+
+
+          <div>
+
+            <div class="item-category">
+
+              ${escapeHTML(
+                product.category ||
+                "AriZeba"
+              )}
+
+            </div>
+
+
+            <div class="item-name">
+
+              ${escapeHTML(
+                product.name ||
+                "Product"
+              )}
+
+            </div>
+
+
+            <div class="item-meta">
+
+              ${
+                product.color
+                  ? "Color: " +
+                    escapeHTML(
+                      product.color
+                    ) +
+                    "<br>"
+                  : ""
+              }
+
+              ${
+                product.version
+                  ? "Variant: " +
+                    escapeHTML(
+                      product.version
+                    )
+                  : ""
+              }
+
+            </div>
+
+
+            <div class="item-price-mobile">
+
+              PKR ${itemTotal.toLocaleString()}
+
+            </div>
+
+          </div>
+
+
+          <div class="item-actions">
+
+            <div class="item-price">
+
+              PKR ${itemTotal.toLocaleString()}
+
+            </div>
+
+
+            <div class="quantity">
+
+              <button
+                type="button"
+                onclick="changeQuantity(${index}, -1)"
+              >
+                −
+              </button>
+
+
+              <div class="quantity-value">
+
+                ${quantity}
+
+              </div>
+
+
+              <button
+                type="button"
+                onclick="changeQuantity(${index}, 1)"
+              >
+                +
+              </button>
+
+            </div>
+
+
+            <button
+              type="button"
+              class="remove"
+              onclick="removeItem(${index})"
+            >
+              Remove
+            </button>
+
+          </div>
+
+        `;
+
+
+        container.appendChild(item);
+
+      }
+    );
+
+
+    updateSummary();
+
+  }
+
+
+  /* =====================================================
+     CHANGE QUANTITY
+     ===================================================== */
+
+  function changeQuantity(
+    index,
+    amount
+  ) {
+
+    if (!cart[index]) {
+      return;
+    }
+
+
+    let quantity =
+      Number(
+        cart[index].quantity || 1
+      );
+
+
+    quantity += amount;
+
+
+    if (quantity < 1) {
+      quantity = 1;
+    }
+
+
+    if (quantity > 10) {
+      quantity = 10;
+    }
+
+
+    cart[index].quantity =
+      quantity;
+
+
+    saveCart();
+
+    renderCart();
+
+  }
+
+
+  /* =====================================================
+     REMOVE ITEM
+     ===================================================== */
+
+  function removeItem(index) {
+
+    if (!cart[index]) {
+      return;
+    }
+
+
+    cart.splice(index, 1);
+
+
+    saveCart();
+
+    renderCart();
+
+  }
+
+
+  /* =====================================================
+     UPDATE SUMMARY
+     ===================================================== */
+
+  function updateSummary() {
+
+    let subtotal = 0;
+
+    let totalQuantity = 0;
+
+
+    cart.forEach(product => {
+
+      const price =
+        Number(
+          product.price || 0
+        );
+
+
+      const quantity =
+        Number(
+          product.quantity || 1
+        );
+
+
+      subtotal +=
+        price * quantity;
+
+
+      totalQuantity +=
+        quantity;
+
+    });
+
+
+    const delivery =
+      cart.length > 0
+        ? 250
+        : 0;
+
+
+    let discount =
+      Number(appliedDiscount || 0);
+
+
+    if (discount > subtotal) {
+      discount = subtotal;
+    }
+
+
+    const total =
+      subtotal +
+      delivery -
+      discount;
+
+
+    const subtotalElement =
+      document.getElementById(
+        "subtotal"
+      );
+
+    const deliveryElement =
+      document.getElementById(
+        "delivery"
+      );
+
+    const discountElement =
+      document.getElementById(
+        "discount"
+      );
+
+    const totalElement =
+      document.getElementById(
+        "total"
+      );
+
+    const countElement =
+      document.getElementById(
+        "cartCount"
+      );
+
+
+    if (subtotalElement) {
+
+      subtotalElement.textContent =
+        "PKR " +
+        subtotal.toLocaleString();
+
+    }
+
+
+    if (deliveryElement) {
+
+      deliveryElement.textContent =
+        "PKR " +
+        delivery.toLocaleString();
+
+    }
+
+
+    if (discountElement) {
+
+      discountElement.textContent =
+        "PKR " +
+        discount.toLocaleString();
+
+    }
+
+
+    if (totalElement) {
+
+      totalElement.textContent =
+        "PKR " +
+        total.toLocaleString();
+
+    }
+
+
+    if (countElement) {
+
+      countElement.textContent =
+        totalQuantity +
+        (
+          totalQuantity === 1
+            ? " item"
+            : " items"
+        );
+
+    }
+
+  }
+
+
+  /* =====================================================
+     COUPON
+     ===================================================== */
+
+  function applyCoupon() {
+
+    const input =
+      document.getElementById(
+        "couponInput"
+      );
+
+
+    if (!input) {
+      return;
+    }
+
+
+    const code =
+      input.value
+        .trim()
+        .toUpperCase();
+
+
+    if (!code) {
+
+      alert(
+        "Please enter a promo code."
+      );
+
+      return;
+
+    }
+
+
+    if (code === "ARIZEBA10") {
+
+      let subtotal = 0;
+
+
+      cart.forEach(product => {
+
+        subtotal +=
+          Number(product.price || 0) *
+          Number(product.quantity || 1);
+
+      });
+
+
+      appliedDiscount =
+        Math.round(
+          subtotal * 0.10
+        );
+
+
+      updateSummary();
+
+
+      alert(
+        "Promo code applied successfully! 10% discount added."
+      );
+
+    }
+
+    else {
+
+      appliedDiscount = 0;
+
+      updateSummary();
+
+
+      alert(
+        "This promo code is not valid."
+      );
+
+    }
+
+  }
+
+
+  /* =====================================================
+     CHECKOUT
+     ===================================================== */
+
+  function checkout() {
+
+    if (cart.length === 0) {
+
+      alert(
+        "Your cart is empty."
+      );
+
+      return;
+
+    }
+
+
+    /*
+      Save one more time before checkout
+      so checkout page receives latest cart.
+    */
+
+    saveCart();
+
+
+    window.location.href =
+      "checkout.html";
+
+  }
+
+
+  /* =====================================================
+     CONTINUE SHOPPING
+     ===================================================== */
+
+  function continueShopping() {
+
+    window.location.href =
+      "products.html";
+
+  }
+
+
+  /* =====================================================
+     BACK
+     ===================================================== */
+
+  function goBack() {
+
+    window.history.back();
+
+  }
+
+
+  /* =====================================================
+     LISTEN FOR CART UPDATES
+     ===================================================== */
+
+  window.addEventListener(
+    "storage",
+    function(event) {
+
+      if (
+        event.key ===
+        "arizebaCart"
+      ) {
+
+        loadCart();
+
+      }
+
+    }
+  );
+
+
+  /* =====================================================
+     START
+     ===================================================== */
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+      loadCart();
+
+    }
+  );
+
+</script>

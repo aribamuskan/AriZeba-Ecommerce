@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>AriZeba. — Admin Login</title>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      background:
+        linear-gradient(
+          135deg,
+          #fff8fc,
+          #fdf1f7
+        );
+
+      color: #49313f;
+    }
+
+    .login-wrapper {
+      width: 100%;
+      max-width: 430px;
+      padding: 20px;
+    }
+
+    .login-card {
+
+      background: #ffffff;
+
+      border-radius: 24px;
+
+      padding: 42px 34px;
+
+      box-shadow:
+        0 20px 60px
+        rgba(155, 79, 120, 0.14);
+
+      border:
+        1px solid
+        rgba(204, 104, 157, 0.12);
+    }
+
+    .brand {
+
+      text-align: center;
+
+      font-size: 32px;
+
+      font-weight: 800;
+
+      letter-spacing: -1px;
+
+      color: #cc689d;
+    }
+
+    .admin-label {
+
+      text-align: center;
+
+      margin-top: 8px;
+
+      font-size: 13px;
+
+      color: #8d7b82;
+
+      letter-spacing: 0.5px;
+    }
+
+    .heading {
+
+      text-align: center;
+
+      margin-top: 35px;
+
+      margin-bottom: 28px;
+    }
+
+    .heading h1 {
+
+      font-size: 27px;
+
+      color: #49313f;
+
+      margin-bottom: 8px;
+    }
+
+    .heading p {
+
+      font-size: 13px;
+
+      line-height: 1.6;
+
+      color: #8d7b82;
+    }
+
+    .form-group {
+
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+
+      display: block;
+
+      margin-bottom: 8px;
+
+      font-size: 13px;
+
+      font-weight: 600;
+
+      color: #49313f;
+    }
+
+    .input {
+
+      width: 100%;
+
+      height: 50px;
+
+      padding: 0 15px;
+
+      border-radius: 13px;
+
+      border:
+        1px solid
+        #eadce4;
+
+      background: #fff;
+
+      outline: none;
+
+      font-size: 14px;
+
+      color: #49313f;
+
+      transition: 0.2s;
+    }
+
+    .input:focus {
+
+      border-color: #cc689d;
+
+      box-shadow:
+        0 0 0 3px
+        rgba(204, 104, 157, 0.10);
+    }
+
+    .password-wrapper {
+
+      position: relative;
+    }
+
+    .password-wrapper .input {
+
+      padding-right: 50px;
+    }
+
+    .toggle-password {
+
+      position: absolute;
+
+      right: 14px;
+
+      top: 50%;
+
+      transform:
+        translateY(-50%);
+
+      border: none;
+
+      background: transparent;
+
+      cursor: pointer;
+
+      font-size: 17px;
+
+      color: #8d7b82;
+    }
+
+    .login-btn {
+
+      width: 100%;
+
+      height: 52px;
+
+      margin-top: 8px;
+
+      border: none;
+
+      border-radius: 14px;
+
+      background: #cc689d;
+
+      color: white;
+
+      font-size: 15px;
+
+      font-weight: 700;
+
+      cursor: pointer;
+
+      transition: 0.2s;
+    }
+
+    .login-btn:hover {
+
+      background: #b9558b;
+
+      transform:
+        translateY(-1px);
+    }
+
+    .login-btn:disabled {
+
+      opacity: 0.65;
+
+      cursor: not-allowed;
+
+      transform: none;
+    }
+
+    .message {
+
+      display: none;
+
+      margin-top: 17px;
+
+      padding: 12px 14px;
+
+      border-radius: 11px;
+
+      font-size: 13px;
+
+      line-height: 1.5;
+
+      text-align: center;
+    }
+
+    .message.error {
+
+      display: block;
+
+      color: #a33a58;
+
+      background: #fff0f4;
+
+      border:
+        1px solid
+        #f5c9d5;
+    }
+
+    .message.success {
+
+      display: block;
+
+      color: #367553;
+
+      background: #effaf4;
+
+      border:
+        1px solid
+        #c8ead7;
+    }
+
+    .footer {
+
+      text-align: center;
+
+      margin-top: 25px;
+
+      font-size: 11px;
+
+      color: #a18d96;
+    }
+
+    @media (max-width: 480px) {
+
+      .login-card {
+
+        padding: 34px 23px;
+
+        border-radius: 20px;
+      }
+
+      .brand {
+        font-size: 29px;
+      }
+
+      .heading h1 {
+        font-size: 24px;
+      }
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="login-wrapper">
+
+    <div class="login-card">
+
+      <div class="brand">
+        AriZeba.
+      </div>
+
+      <div class="admin-label">
+        ADMIN PORTAL
+      </div>
+
+
+      <div class="heading">
+
+        <h1>
+          Welcome Back
+        </h1>
+
+        <p>
+          Sign in to manage your AriZeba. store.
+        </p>
+
+      </div>
+
+
+      <form
+        id="adminLoginForm"
+      >
+
+        <div class="form-group">
+
+          <label for="email">
+            Admin Email
+          </label>
+
+          <input
+            class="input"
+            type="email"
+            id="email"
+            placeholder="Enter admin email"
+            autocomplete="username"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="password">
+            Password
+          </label>
+
+          <div class="password-wrapper">
+
+            <input
+              class="input"
+              type="password"
+              id="password"
+              placeholder="Enter password"
+              autocomplete="current-password"
+              required
+            >
+
+            <button
+              type="button"
+              class="toggle-password"
+              id="togglePassword"
+            >
+              👁
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <button
+          type="submit"
+          class="login-btn"
+          id="loginBtn"
+        >
+          Sign In
+        </button>
+
+      </form>
+
+
+      <div
+        id="message"
+        class="message"
+      ></div>
+
+
+      <div class="footer">
+        AriZeba. Admin Dashboard
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    const API_URL =
+      "http://localhost:5000";
+
+
+    const form =
+      document.getElementById(
+        "adminLoginForm"
+      );
+
+    const emailInput =
+      document.getElementById(
+        "email"
+      );
+
+    const passwordInput =
+      document.getElementById(
+        "password"
+      );
+
+    const loginBtn =
+      document.getElementById(
+        "loginBtn"
+      );
+
+    const message =
+      document.getElementById(
+        "message"
+      );
+
+    const togglePassword =
+      document.getElementById(
+        "togglePassword"
+      );
+
+
+    // =====================================================
+    // PASSWORD VISIBILITY
+    // =====================================================
+
+    togglePassword.addEventListener(
+      "click",
+      () => {
+
+        if (
+          passwordInput.type ===
+          "password"
+        ) {
+
+          passwordInput.type =
+            "text";
+
+          togglePassword.textContent =
+            "🙈";
+
+        } else {
+
+          passwordInput.type =
+            "password";
+
+          togglePassword.textContent =
+            "👁";
+
+        }
+
+      }
+    );
+
+
+    // =====================================================
+    // SHOW MESSAGE
+    // =====================================================
+
+    function showMessage(
+      text,
+      type
+    ) {
+
+      message.textContent =
+        text;
+
+      message.className =
+        "message " + type;
+
+    }
+
+
+    // =====================================================
+    // ADMIN LOGIN
+    // =====================================================
+
+    form.addEventListener(
+      "submit",
+      async (event) => {
+
+        event.preventDefault();
+
+
+        const email =
+          emailInput.value.trim();
+
+        const password =
+          passwordInput.value;
+
+
+        if (!email || !password) {
+
+          showMessage(
+            "Please enter your email and password.",
+            "error"
+          );
+
+          return;
+        }
+
+
+        loginBtn.disabled =
+          true;
+
+        loginBtn.textContent =
+          "Signing In...";
+
+        message.className =
+          "message";
+
+
+        try {
+
+          const response =
+            await fetch(
+              `${API_URL}/api/admin/login`,
+              {
+                method: "POST",
+
+                headers: {
+                  "Content-Type":
+                    "application/json"
+                },
+
+                body: JSON.stringify({
+                  email,
+                  password
+                })
+              }
+            );
+
+
+          const data =
+            await response.json();
+
+
+          if (!response.ok) {
+
+            throw new Error(
+              data.message ||
+              "Invalid admin credentials."
+            );
+
+          }
+
+
+          // -------------------------------------------------
+          // SAVE ADMIN LOGIN
+          // -------------------------------------------------
+
+          sessionStorage.setItem(
+            "arizebaAdminLoggedIn",
+            "true"
+          );
+
+          sessionStorage.setItem(
+            "arizebaAdminEmail",
+            data.admin.email
+          );
+
+          sessionStorage.setItem(
+            "arizebaAdminRole",
+            data.admin.role
+          );
+
+
+          showMessage(
+            "Login successful. Opening dashboard...",
+            "success"
+          );
+
+
+          setTimeout(
+            () => {
+
+              window.location.href =
+                "admin.html";
+
+            },
+            500
+          );
+
+
+        } catch (error) {
+
+          console.error(
+            "Admin login error:",
+            error
+          );
+
+          showMessage(
+            error.message ||
+            "Unable to login.",
+            "error"
+          );
+
+        } finally {
+
+          loginBtn.disabled =
+            false;
+
+          loginBtn.textContent =
+            "Sign In";
+
+        }
+
+      }
+    );
+
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Arizeba — Register & Login</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f5f7fb;
+      padding: 20px;
+    }
+
+    .register-box {
+      width: 100%;
+      max-width: 420px;
+      background: white;
+      padding: 35px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+      color: #222;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #777;
+      margin-bottom: 25px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 15px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #6c63ff;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #6c63ff;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #574fd6;
+    }
+
+    button:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    #message,
+    #loginMessage {
+      text-align: center;
+      margin-top: 18px;
+      font-weight: bold;
+      min-height: 20px;
+    }
+
+    .divider {
+      margin: 25px 0;
+      border: 0;
+      border-top: 1px solid #ddd;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #222;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="register-box">
+
+    <!-- REGISTER -->
+
+    <h1>Create Account</h1>
+
+    <p class="subtitle">
+      Register for Arizeba
+    </p>
+
+    <form id="registerForm">
+
+      <div class="form-group">
+
+        <label for="name">
+          Name
+        </label>
+
+        <input
+          type="text"
+          id="name"
+          placeholder="Enter your name"
+          autocomplete="name"
+          required
+        >
+
+      </div>
+
+      <div class="form-group">
+
+        <label for="email">
+          Email
+        </label>
+
+        <input
+          type="email"
+          id="email"
+          placeholder="Enter your email"
+          autocomplete="email"
+          required
+        >
+
+      </div>
+
+      <div class="form-group">
+
+        <label for="password">
+          Password
+        </label>
+
+        <input
+          type="password"
+          id="password"
+          placeholder="Enter your password"
+          autocomplete="new-password"
+          minlength="6"
+          required
+        >
+
+      </div>
+
+      <button
+        type="submit"
+        id="registerButton"
+      >
+        Register
+      </button>
+
+    </form>
+
+    <p id="message"></p>
+
+
+    <!-- LOGIN -->
+
+    <hr class="divider">
+
+    <h2>
+      Login
+    </h2>
+
+    <form id="loginForm">
+
+      <div class="form-group">
+
+        <label for="loginEmail">
+          Email
+        </label>
+
+        <input
+          type="email"
+          id="loginEmail"
+          placeholder="Enter your email"
+          autocomplete="email"
+          required
+        >
+
+      </div>
+
+      <div class="form-group">
+
+        <label for="loginPassword">
+          Password
+        </label>
+
+        <input
+          type="password"
+          id="loginPassword"
+          placeholder="Enter your password"
+          autocomplete="current-password"
+          required
+        >
+
+      </div>
+
+      <button
+        type="submit"
+        id="loginButton"
+      >
+        Login
+      </button>
+
+    </form>
+
+    <p id="loginMessage"></p>
+
+  </div>
+
+
+  <script>
+
+    /* =====================================================
+       BACKEND
+    ===================================================== */
+
+    const API_URL =
+      "http://localhost:5000";
+
+
+    /* =====================================================
+       ELEMENTS
+    ===================================================== */
+
+    const registerForm =
+      document.getElementById(
+        "registerForm"
+      );
+
+    const message =
+      document.getElementById(
+        "message"
+      );
+
+    const registerButton =
+      document.getElementById(
+        "registerButton"
+      );
+
+    const loginForm =
+      document.getElementById(
+        "loginForm"
+      );
+
+    const loginMessage =
+      document.getElementById(
+        "loginMessage"
+      );
+
+    const loginButton =
+      document.getElementById(
+        "loginButton"
+      );
+
+
+    /* =====================================================
+       REGISTER
+    ===================================================== */
+
+    registerForm.addEventListener(
+      "submit",
+      async function (e) {
+
+        e.preventDefault();
+
+
+        const name =
+          document.getElementById(
+            "name"
+          ).value.trim();
+
+
+        const email =
+          document.getElementById(
+            "email"
+          ).value.trim();
+
+
+        const password =
+          document.getElementById(
+            "password"
+          ).value;
+
+
+        if (!name || !email || !password) {
+
+          message.style.color = "red";
+
+          message.textContent =
+            "Please fill in all fields.";
+
+          return;
+
+        }
+
+
+        if (password.length < 6) {
+
+          message.style.color = "red";
+
+          message.textContent =
+            "Password must be at least 6 characters.";
+
+          return;
+
+        }
+
+
+        registerButton.disabled = true;
+
+        registerButton.textContent =
+          "Registering...";
+
+        message.textContent = "";
+
+
+        try {
+
+          const response =
+            await fetch(
+              `${API_URL}/api/register`,
+              {
+                method: "POST",
+
+                headers: {
+                  "Content-Type":
+                    "application/json"
+                },
+
+                body:
+                  JSON.stringify({
+                    name,
+                    email,
+                    password
+                  })
+              }
+            );
+
+
+          const data =
+            await response.json();
+
+
+          if (response.ok) {
+
+            message.style.color =
+              "green";
+
+            message.textContent =
+              data.message ||
+              "Account created successfully!";
+
+
+            registerForm.reset();
+
+
+            /*
+              Automatically put the registered
+              email into the login field.
+            */
+
+            document.getElementById(
+              "loginEmail"
+            ).value = email;
+
+
+            /*
+              Give the user a clear next step.
+            */
+
+            setTimeout(() => {
+
+              document.getElementById(
+                "loginEmail"
+              ).focus();
+
+            }, 300);
+
+
+          } else {
+
+            message.style.color =
+              "red";
+
+            message.textContent =
+              data.message ||
+              "Registration failed.";
+
+          }
+
+
+        } catch (error) {
+
+          console.error(
+            "Registration error:",
+            error
+          );
+
+
+          message.style.color =
+            "red";
+
+          message.textContent =
+            "Unable to connect to Arizeba server.";
+
+        } finally {
+
+          registerButton.disabled =
+            false;
+
+          registerButton.textContent =
+            "Register";
+
+        }
+
+      }
+    );
+
+
+    /* =====================================================
+       LOGIN
+    ===================================================== */
+
+    loginForm.addEventListener(
+      "submit",
+      async function (e) {
+
+        e.preventDefault();
+
+
+        const email =
+          document.getElementById(
+            "loginEmail"
+          ).value.trim();
+
+
+        const password =
+          document.getElementById(
+            "loginPassword"
+          ).value;
+
+
+        if (!email || !password) {
+
+          loginMessage.style.color =
+            "red";
+
+          loginMessage.textContent =
+            "Please enter email and password.";
+
+          return;
+
+        }
+
+
+        loginButton.disabled = true;
+
+        loginButton.textContent =
+          "Logging in...";
+
+        loginMessage.textContent = "";
+
+
+        try {
+
+          const response =
+            await fetch(
+              `${API_URL}/api/login`,
+              {
+                method: "POST",
+
+                headers: {
+                  "Content-Type":
+                    "application/json"
+                },
+
+                body:
+                  JSON.stringify({
+                    email,
+                    password
+                  })
+              }
+            );
+
+
+          const data =
+            await response.json();
+
+
+          if (response.ok) {
+
+            loginMessage.style.color =
+              "green";
+
+            loginMessage.textContent =
+              data.message ||
+              "Login successful!";
+
+
+            /*
+              Save logged-in user.
+            */
+
+            if (data.user) {
+
+              localStorage.setItem(
+                "arizebaUser",
+                JSON.stringify(
+                  data.user
+                )
+              );
+
+            }
+
+
+            /*
+              Redirect to home page.
+            */
+
+            setTimeout(() => {
+
+              window.location.href =
+                "home.html";
+
+            }, 500);
+
+
+          } else {
+
+            loginMessage.style.color =
+              "red";
+
+            loginMessage.textContent =
+              data.message ||
+              "Invalid email or password.";
+
+          }
+
+
+        } catch (error) {
+
+          console.error(
+            "Login error:",
+            error
+          );
+
+
+          loginMessage.style.color =
+            "red";
+
+          loginMessage.textContent =
+            "Unable to connect to Arizeba server.";
+
+        } finally {
+
+          loginButton.disabled =
+            false;
+
+          loginButton.textContent =
+            "Login";
+
+        }
+
+      }
+    );
+
+  </script>
+
+</body>
+
+</html>

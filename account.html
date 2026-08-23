@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>AriZeba. — Account</title>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --rose: #c9788d;
+      --rose-dark: #9e536b;
+      --plum: #49313f;
+      --text: #30252b;
+      --muted: #8d7b82;
+      --white: #fffdfc;
+      --border: rgba(103,69,80,.10);
+    }
+
+    body {
+      min-height: 100vh;
+
+      background:
+        radial-gradient(
+          circle at 15% 10%,
+          rgba(255,255,255,.95),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 90% 30%,
+          rgba(220,163,173,.22),
+          transparent 30%
+        ),
+        linear-gradient(
+          135deg,
+          #fffaf7 0%,
+          #f6e9e5 48%,
+          #f1dfdd 100%
+        );
+
+      color: var(--text);
+      font-family: "DM Sans", sans-serif;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    .topbar {
+      width: min(1200px, calc(100% - 30px));
+      margin: auto;
+
+      padding: 25px 0 15px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .back-btn {
+      width: 44px;
+      height: 44px;
+
+      border-radius: 50%;
+
+      border: 1px solid var(--border);
+
+      background: rgba(255,255,255,.65);
+
+      color: var(--plum);
+
+      font-size: 20px;
+
+      box-shadow:
+        0 8px 25px rgba(82,47,60,.07);
+    }
+
+    .brand {
+      font-family: "Playfair Display", serif;
+
+      font-size: 42px;
+
+      font-weight: 500;
+
+      letter-spacing: -1.5px;
+
+      color: #9b5d72;
+    }
+
+    .header-space {
+      width: 44px;
+    }
+
+    /* =========================
+       PAGE
+    ========================= */
+
+    .page {
+      width: min(850px, calc(100% - 30px));
+
+      margin: 25px auto 50px;
+    }
+
+    .heading {
+      text-align: center;
+
+      margin-bottom: 30px;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+
+      letter-spacing: 4px;
+
+      font-size: 11px;
+
+      color: var(--rose-dark);
+
+      margin-bottom: 8px;
+    }
+
+    .heading h1 {
+      font-family: "Playfair Display", serif;
+
+      font-size: 42px;
+
+      font-weight: 500;
+
+      color: var(--plum);
+    }
+
+    .heading p {
+      margin-top: 8px;
+
+      color: var(--muted);
+
+      font-size: 14px;
+    }
+
+    /* =========================
+       PROFILE CARD
+    ========================= */
+
+    .profile-card {
+
+      background: rgba(255,255,255,.65);
+
+      border: 1px solid var(--border);
+
+      border-radius: 28px;
+
+      padding: 30px;
+
+      box-shadow:
+        0 18px 45px rgba(73,42,54,.08);
+
+      margin-bottom: 18px;
+    }
+
+    .profile-top {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 18px;
+
+      margin-bottom: 25px;
+    }
+
+    .avatar {
+
+      width: 72px;
+      height: 72px;
+
+      border-radius: 50%;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      background:
+        linear-gradient(
+          135deg,
+          #e8b6c0,
+          #c9788d
+        );
+
+      color: white;
+
+      font-family: "Playfair Display", serif;
+
+      font-size: 30px;
+
+      box-shadow:
+        0 10px 25px rgba(201,109,133,.25);
+    }
+
+    .profile-info h2 {
+
+      font-size: 21px;
+
+      color: var(--plum);
+
+      margin-bottom: 5px;
+    }
+
+    .profile-info p {
+
+      font-size: 13px;
+
+      color: var(--muted);
+    }
+
+    /* =========================
+       INFORMATION
+    ========================= */
+
+    .info-grid {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      gap: 12px;
+    }
+
+    .info-box {
+
+      background: rgba(255,255,255,.55);
+
+      border: 1px solid var(--border);
+
+      border-radius: 17px;
+
+      padding: 16px;
+    }
+
+    .info-label {
+
+      font-size: 11px;
+
+      color: var(--muted);
+
+      margin-bottom: 5px;
+
+      text-transform: uppercase;
+
+      letter-spacing: 1px;
+    }
+
+    .info-value {
+
+      font-size: 14px;
+
+      font-weight: 600;
+
+      color: var(--text);
+
+      word-break: break-word;
+    }
+
+    /* =========================
+       ACTIONS
+    ========================= */
+
+    .actions {
+
+      display: grid;
+
+      gap: 12px;
+    }
+
+    .action-btn {
+
+      width: 100%;
+
+      padding: 17px 18px;
+
+      border-radius: 18px;
+
+      border: 1px solid var(--border);
+
+      background: rgba(255,255,255,.65);
+
+      color: var(--plum);
+
+      font-size: 14px;
+
+      font-weight: 600;
+
+      text-align: left;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      transition: .2s ease;
+    }
+
+    .action-btn:hover {
+
+      transform: translateY(-2px);
+
+      box-shadow:
+        0 12px 28px rgba(73,42,54,.08);
+    }
+
+    .action-btn span {
+
+      font-size: 18px;
+    }
+
+    .logout {
+
+      color: #b65d73;
+
+      background:
+        rgba(255,240,243,.75);
+    }
+
+    /* =========================
+       NOT LOGGED IN
+    ========================= */
+
+    .login-card {
+
+      display: none;
+
+      background: rgba(255,255,255,.68);
+
+      border: 1px solid var(--border);
+
+      border-radius: 28px;
+
+      padding: 35px;
+
+      text-align: center;
+
+      box-shadow:
+        0 18px 45px rgba(73,42,54,.08);
+    }
+
+    .login-card h2 {
+
+      font-family: "Playfair Display", serif;
+
+      font-size: 30px;
+
+      color: var(--plum);
+
+      margin-bottom: 10px;
+    }
+
+    .login-card p {
+
+      color: var(--muted);
+
+      font-size: 14px;
+
+      line-height: 1.6;
+
+      margin-bottom: 22px;
+    }
+
+    .login-btn {
+
+      border: none;
+
+      padding: 14px 25px;
+
+      border-radius: 25px;
+
+      color: white;
+
+      background:
+        linear-gradient(
+          135deg,
+          #b86c80,
+          #d58c9e
+        );
+
+      font-weight: 700;
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 600px) {
+
+      .brand {
+        font-size: 32px;
+      }
+
+      .heading h1 {
+        font-size: 35px;
+      }
+
+      .profile-card {
+        padding: 22px;
+      }
+
+      .profile-top {
+        gap: 13px;
+      }
+
+      .avatar {
+        width: 60px;
+        height: 60px;
+        font-size: 25px;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- HEADER -->
+
+  <header class="topbar">
+
+    <button
+      class="back-btn"
+      onclick="goBack()"
+    >
+      ←
+    </button>
+
+    <div class="brand">
+      AriZeba.
+    </div>
+
+    <div class="header-space"></div>
+
+  </header>
+
+
+  <main class="page">
+
+
+    <!-- HEADING -->
+
+    <section class="heading">
+
+      <div class="eyebrow">
+        My Account
+      </div>
+
+      <h1>
+        Welcome Back
+      </h1>
+
+      <p>
+        Manage your AriZeba. account
+      </p>
+
+    </section>
+
+
+    <!-- LOGGED IN -->
+
+    <section
+      class="profile-card"
+      id="profileCard"
+    >
+
+      <div class="profile-top">
+
+        <div
+          class="avatar"
+          id="avatar"
+        >
+          A
+        </div>
+
+        <div class="profile-info">
+
+          <h2 id="userName">
+            Customer
+          </h2>
+
+          <p id="userEmail">
+            —
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="info-grid">
+
+
+        <div class="info-box">
+
+          <div class="info-label">
+            Name
+          </div>
+
+          <div
+            class="info-value"
+            id="nameValue"
+          >
+            —
+          </div>
+
+        </div>
+
+
+        <div class="info-box">
+
+          <div class="info-label">
+            Email
+          </div>
+
+          <div
+            class="info-value"
+            id="emailValue"
+          >
+            —
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- ACTIONS -->
+
+    <section
+      class="actions"
+      id="accountActions"
+    >
+
+      <button
+        class="action-btn"
+        onclick="openOrders()"
+      >
+
+        <span>
+          📦 &nbsp; My Orders
+        </span>
+
+        <span>
+          →
+        </span>
+
+      </button>
+
+
+      <button
+        class="action-btn"
+        onclick="openCart()"
+      >
+
+        <span>
+          🛒 &nbsp; My Cart
+        </span>
+
+        <span>
+          →
+        </span>
+
+      </button>
+
+
+      <button
+        class="action-btn"
+        onclick="openHome()"
+      >
+
+        <span>
+          ⌂ &nbsp; Continue Shopping
+        </span>
+
+        <span>
+          →
+        </span>
+
+      </button>
+
+
+      <button
+        class="action-btn logout"
+        onclick="logout()"
+      >
+
+        <span>
+          ↪ &nbsp; Logout
+        </span>
+
+        <span>
+          →
+        </span>
+
+      </button>
+
+    </section>
+
+
+    <!-- NOT LOGGED IN -->
+
+    <section
+      class="login-card"
+      id="loginCard"
+    >
+
+      <h2>
+        Welcome to AriZeba.
+      </h2>
+
+      <p>
+        Please login or create an account
+        to manage your profile and orders.
+      </p>
+
+      <button
+        class="login-btn"
+        onclick="openLogin()"
+      >
+        Login / Register
+      </button>
+
+    </section>
+
+
+  </main>
+
+
+  <script>
+
+
+    /* =====================================================
+       USER
+    ===================================================== */
+
+    let user = null;
+
+
+    try {
+
+      user =
+        JSON.parse(
+          localStorage.getItem(
+            "arizebaUser"
+          ) || "null"
+        );
+
+    } catch (error) {
+
+      user = null;
+
+    }
+
+
+    /* =====================================================
+       LOAD ACCOUNT
+    ===================================================== */
+
+    function loadAccount() {
+
+
+      const profileCard =
+        document.getElementById(
+          "profileCard"
+        );
+
+
+      const actions =
+        document.getElementById(
+          "accountActions"
+        );
+
+
+      const loginCard =
+        document.getElementById(
+          "loginCard"
+        );
+
+
+      if (!user) {
+
+        profileCard.style.display =
+          "none";
+
+        actions.style.display =
+          "none";
+
+        loginCard.style.display =
+          "block";
+
+        return;
+
+      }
+
+
+      profileCard.style.display =
+        "block";
+
+      actions.style.display =
+        "grid";
+
+      loginCard.style.display =
+        "none";
+
+
+      const name =
+        user.name ||
+        user.full_name ||
+        user.username ||
+        "Customer";
+
+
+      const email =
+        user.email ||
+        "";
+
+
+      document.getElementById(
+        "userName"
+      ).textContent =
+        name;
+
+
+      document.getElementById(
+        "userEmail"
+      ).textContent =
+        email;
+
+
+      document.getElementById(
+        "nameValue"
+      ).textContent =
+        name;
+
+
+      document.getElementById(
+        "emailValue"
+      ).textContent =
+        email;
+
+
+      document.getElementById(
+        "avatar"
+      ).textContent =
+        name
+          .trim()
+          .charAt(0)
+          .toUpperCase() ||
+        "A";
+
+    }
+
+
+    /* =====================================================
+       NAVIGATION
+    ===================================================== */
+
+    function goBack() {
+
+      window.history.back();
+
+    }
+
+
+    function openHome() {
+
+      window.location.href =
+        "home.html";
+
+    }
+
+
+    function openCart() {
+
+      window.location.href =
+        "cart.html";
+
+    }
+
+
+    function openOrders() {
+
+      window.location.href =
+        "my-orders.html";
+
+    }
+
+
+    function openLogin() {
+
+      window.location.href =
+        "index.html";
+
+    }
+
+
+    /* =====================================================
+       LOGOUT
+    ===================================================== */
+
+    function logout() {
+
+      localStorage.removeItem(
+        "arizebaUser"
+      );
+
+      window.location.href =
+        "index.html";
+
+    }
+
+
+    /* =====================================================
+       START
+    ===================================================== */
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      loadAccount
+    );
+
+
+  </script>
+
+
+</body>
+
+</html>

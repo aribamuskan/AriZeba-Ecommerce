@@ -1,0 +1,3096 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>arizeba. — Track Order</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --rose: #d98c9d;
+      --rose-dark: #a85f73;
+      --plum: #49313f;
+      --text: #30252b;
+      --muted: #8d7b82;
+      --green: #56816a;
+      --border: rgba(103,69,80,.10);
+    }
+
+    body {
+      min-height: 100vh;
+
+      font-family: "DM Sans", sans-serif;
+
+      color: var(--text);
+
+      background:
+        radial-gradient(
+          circle at 8% 5%,
+          rgba(255,255,255,.95),
+          transparent 25%
+        ),
+
+        radial-gradient(
+          circle at 90% 20%,
+          rgba(220,163,173,.20),
+          transparent 30%
+        ),
+
+        linear-gradient(
+          135deg,
+          #fffaf7,
+          #f7eae6 50%,
+          #f1dfdd
+        );
+
+      padding-bottom: 60px;
+    }
+
+    button,
+    input {
+      font-family: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    /* =========================================
+       HEADER
+    ========================================= */
+
+    .topbar {
+
+      max-width: 1400px;
+
+      margin: auto;
+
+      padding: 23px 42px;
+
+      display: grid;
+
+      grid-template-columns:
+        1fr auto 1fr;
+
+      align-items: center;
+    }
+
+    .icon-btn {
+
+      width: 44px;
+      height: 44px;
+
+      border-radius: 50%;
+
+      border:
+        1px solid
+        rgba(110,70,82,.12);
+
+      background:
+        rgba(255,255,255,.55);
+
+      backdrop-filter:
+        blur(15px);
+
+      color:
+        var(--plum);
+
+      font-size: 19px;
+
+      box-shadow:
+        0 8px 25px
+        rgba(82,47,60,.06);
+
+      transition: .25s ease;
+    }
+
+    .icon-btn:hover {
+
+      transform:
+        translateY(-2px);
+
+      background:
+        rgba(255,255,255,.80);
+    }
+
+    .brand {
+
+      font-family:
+        "Playfair Display",
+        serif;
+
+      font-size:
+        clamp(38px, 5vw, 58px);
+
+      font-weight: 500;
+
+      letter-spacing: -2px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #8e4f61,
+          #d5a07f,
+          #a96070,
+          #e2b48d
+        );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+
+      -webkit-text-fill-color: transparent;
+
+      filter:
+        drop-shadow(
+          0 5px 12px
+          rgba(157,91,108,.18)
+        );
+    }
+
+    .brand::after {
+
+      content: "";
+
+      display: inline-block;
+
+      width: 8px;
+      height: 8px;
+
+      margin-left: 5px;
+      margin-bottom: 6px;
+
+      border-radius: 50%;
+
+      background: #e78fa3;
+
+      box-shadow:
+        0 0 8px
+        rgba(231,143,163,.7),
+
+        0 0 20px
+        rgba(231,143,163,.4);
+    }
+
+    /* =========================================
+       PAGE
+    ========================================= */
+
+    .page {
+
+      width:
+        min(
+          1100px,
+          calc(100% - 30px)
+        );
+
+      margin: auto;
+    }
+
+    /* =========================================
+       INTRO
+    ========================================= */
+
+    .intro {
+
+      text-align: center;
+
+      margin-top: 35px;
+
+      padding: 40px 25px;
+
+      border-radius: 30px;
+
+      background:
+        rgba(255,255,255,.55);
+
+      backdrop-filter:
+        blur(22px);
+
+      border:
+        1px solid
+        rgba(255,255,255,.8);
+
+      box-shadow:
+        0 20px 55px
+        rgba(73,42,54,.08);
+    }
+
+    .eyebrow {
+
+      color:
+        var(--rose-dark);
+
+      text-transform:
+        uppercase;
+
+      letter-spacing: 4px;
+
+      font-size: 10px;
+
+      font-weight: 700;
+
+      margin-bottom: 10px;
+    }
+
+    .intro h1 {
+
+      font-family:
+        "Playfair Display",
+        serif;
+
+      color:
+        var(--plum);
+
+      font-size:
+        clamp(
+          40px,
+          6vw,
+          62px
+        );
+
+      font-weight: 500;
+
+      margin-bottom: 12px;
+    }
+
+    .intro p {
+
+      max-width: 560px;
+
+      margin: auto;
+
+      color:
+        var(--muted);
+
+      font-size: 13px;
+
+      line-height: 1.7;
+    }
+
+    /* =========================================
+       TRACKING SEARCH
+    ========================================= */
+
+    .tracking-search {
+
+      max-width: 650px;
+
+      margin: 25px auto 0;
+
+      display: flex;
+
+      gap: 8px;
+    }
+
+    .tracking-search input {
+
+      flex: 1;
+
+      min-width: 0;
+
+      height: 52px;
+
+      padding:
+        0 17px;
+
+      border:
+        1px solid
+        rgba(103,69,80,.12);
+
+      border-radius: 15px;
+
+      outline: none;
+
+      background:
+        rgba(255,255,255,.75);
+
+      color:
+        var(--text);
+
+      font-size: 12px;
+
+      box-shadow:
+        inset 0 1px 0
+        rgba(255,255,255,.8);
+    }
+
+    .tracking-search input:focus {
+
+      border-color:
+        rgba(168,95,115,.35);
+
+      box-shadow:
+        0 0 0 3px
+        rgba(217,140,157,.10);
+    }
+
+    .tracking-search button {
+
+      height: 52px;
+
+      padding:
+        0 22px;
+
+      border: none;
+
+      border-radius: 15px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #49313f,
+          #795465
+        );
+
+      color: white;
+
+      font-size: 11px;
+
+      font-weight: 700;
+
+      box-shadow:
+        0 10px 25px
+        rgba(73,49,63,.18);
+    }
+
+    .tracking-search button:hover {
+
+      transform:
+        translateY(-1px);
+    }
+
+    /* =========================================
+       TRACKING CARD
+    ========================================= */
+
+    .tracking-card {
+
+      margin-top: 25px;
+
+      padding: 25px;
+
+      border-radius: 28px;
+
+      background:
+        rgba(255,255,255,.58);
+
+      backdrop-filter:
+        blur(22px);
+
+      border:
+        1px solid
+        rgba(255,255,255,.80);
+
+      box-shadow:
+        0 20px 55px
+        rgba(73,42,54,.08);
+    }
+
+    .tracking-header {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 15px;
+
+      padding-bottom: 18px;
+
+      border-bottom:
+        1px solid
+        var(--border);
+    }
+
+    .tracking-label {
+
+      color:
+        var(--rose-dark);
+
+      text-transform:
+        uppercase;
+
+      letter-spacing: 3px;
+
+      font-size: 9px;
+
+      font-weight: 700;
+
+      margin-bottom: 6px;
+    }
+
+    .tracking-number {
+
+      color:
+        var(--plum);
+
+      font-family:
+        "Playfair Display",
+        serif;
+
+      font-size: 25px;
+
+      font-weight: 500;
+    }
+
+    .status-badge {
+
+      padding:
+        9px 13px;
+
+      border-radius: 20px;
+
+      background:
+        rgba(86,129,106,.12);
+
+      color:
+        var(--green);
+
+      font-size: 10px;
+
+      font-weight: 700;
+
+      white-space: nowrap;
+    }
+
+    /* =========================================
+       PROGRESS
+    ========================================= */
+
+    .progress-area {
+
+      padding:
+        35px 10px 20px;
+    }
+
+    .progress-line {
+
+      position: relative;
+
+      height: 5px;
+
+      margin:
+        0 45px;
+
+      border-radius: 10px;
+
+      background:
+        #eadcdf;
+    }
+
+    .progress-fill {
+
+      position: absolute;
+
+      left: 0;
+      top: 0;
+
+      height: 100%;
+
+      width: 0%;
+
+      border-radius: 10px;
+
+      background:
+        linear-gradient(
+          90deg,
+          #d98c9d,
+          #a85f73,
+          #56816a
+        );
+
+      transition:
+        width .6s ease;
+    }
+
+    .steps {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(5, 1fr);
+
+      margin-top: -17px;
+    }
+
+    .step {
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      gap: 8px;
+
+      text-align: center;
+
+      position: relative;
+    }
+
+    .step-circle {
+
+      width: 35px;
+      height: 35px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 50%;
+
+      background:
+        #f3e5e7;
+
+      border:
+        3px solid
+        #fffaf7;
+
+      color:
+        #a58e95;
+
+      font-size: 12px;
+
+      font-weight: 700;
+
+      position: relative;
+
+      z-index: 2;
+
+      transition:
+        .35s ease;
+    }
+
+    .step.active .step-circle,
+    .step.completed .step-circle {
+
+      background:
+        var(--rose-dark);
+
+      color: white;
+
+      box-shadow:
+        0 7px 18px
+        rgba(168,95,115,.22);
+    }
+
+    .step.completed .step-circle {
+
+      background:
+        var(--green);
+    }
+
+    .step-title {
+
+      color:
+        var(--muted);
+
+      font-size: 9px;
+
+      font-weight: 600;
+    }
+
+    .step.active .step-title,
+    .step.completed .step-title {
+
+      color:
+        var(--plum);
+
+      font-weight: 700;
+    }
+        /* =========================================
+       ORDER INFORMATION
+    ========================================= */
+
+    .order-info {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 12px;
+
+      margin-top: 15px;
+    }
+
+    .info-card {
+
+      padding: 16px;
+
+      border-radius: 17px;
+
+      background:
+        rgba(255,255,255,.55);
+
+      border:
+        1px solid
+        rgba(103,69,80,.08);
+    }
+
+    .info-label {
+
+      color:
+        var(--muted);
+
+      font-size: 9px;
+
+      text-transform:
+        uppercase;
+
+      letter-spacing: 1.5px;
+
+      margin-bottom: 6px;
+    }
+
+    .info-value {
+
+      color:
+        var(--plum);
+
+      font-size: 12px;
+
+      font-weight: 700;
+
+      line-height: 1.5;
+    }
+
+
+    /* =========================================
+       DELIVERY DETAILS
+    ========================================= */
+
+    .delivery-section {
+
+      display: grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap: 20px;
+
+      margin-top: 20px;
+    }
+
+    .details-card {
+
+      padding: 22px;
+
+      border-radius: 24px;
+
+      background:
+        rgba(255,255,255,.52);
+
+      border:
+        1px solid
+        rgba(103,69,80,.08);
+
+      box-shadow:
+        0 12px 30px
+        rgba(73,42,54,.05);
+    }
+
+    .details-card h2 {
+
+      color:
+        var(--plum);
+
+      font-family:
+        "Playfair Display",
+        serif;
+
+      font-size: 23px;
+
+      font-weight: 500;
+
+      margin-bottom: 17px;
+    }
+
+    .detail-row {
+
+      display: flex;
+
+      justify-content:
+        space-between;
+
+      gap: 20px;
+
+      padding: 11px 0;
+
+      border-bottom:
+        1px solid
+        rgba(103,69,80,.08);
+
+      font-size: 11px;
+    }
+
+    .detail-row:last-child {
+
+      border-bottom: none;
+    }
+
+    .detail-row span {
+
+      color:
+        var(--muted);
+    }
+
+    .detail-row strong {
+
+      color:
+        var(--plum);
+
+      text-align:
+        right;
+
+      max-width: 65%;
+    }
+
+
+    /* =========================================
+       ORDER ITEMS
+    ========================================= */
+
+    .items-card {
+
+      margin-top: 20px;
+
+      padding: 22px;
+
+      border-radius: 24px;
+
+      background:
+        rgba(255,255,255,.52);
+
+      border:
+        1px solid
+        rgba(103,69,80,.08);
+
+      box-shadow:
+        0 12px 30px
+        rgba(73,42,54,.05);
+    }
+
+    .items-card h2 {
+
+      color:
+        var(--plum);
+
+      font-family:
+        "Playfair Display",
+        serif;
+
+      font-size: 23px;
+
+      font-weight: 500;
+
+      margin-bottom: 15px;
+    }
+
+    .order-item {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 13px;
+
+      padding: 13px 0;
+
+      border-bottom:
+        1px solid
+        rgba(103,69,80,.08);
+    }
+
+    .order-item:last-child {
+
+      border-bottom: none;
+    }
+
+    .order-item img {
+
+      width: 62px;
+      height: 70px;
+
+      border-radius: 13px;
+
+      object-fit: cover;
+
+      background:
+        #f0dfdb;
+    }
+
+    .order-item-info {
+
+      flex: 1;
+    }
+
+    .order-item-name {
+
+      color:
+        var(--plum);
+
+      font-family:
+        "Playfair Display",
+        serif;
+
+      font-size: 15px;
+
+      margin-bottom: 5px;
+    }
+
+    .order-item-meta {
+
+      color:
+        var(--muted);
+
+      font-size: 10px;
+
+      line-height: 1.6;
+    }
+
+    .order-item-price {
+
+      color:
+        var(--plum);
+
+      font-size: 12px;
+
+      font-weight: 700;
+
+      white-space: nowrap;
+    }
+
+
+    /* =========================================
+       STATUS MESSAGE
+    ========================================= */
+
+    .status-message {
+
+      margin-top: 20px;
+
+      padding: 20px;
+
+      border-radius: 20px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(249,226,228,.85),
+          rgba(244,216,208,.70)
+        );
+
+      border:
+        1px solid
+        rgba(168,95,115,.08);
+    }
+
+    .status-message-title {
+
+      color:
+        var(--plum);
+
+      font-size: 12px;
+
+      font-weight: 700;
+
+      margin-bottom: 6px;
+    }
+
+    .status-message-text {
+
+      color:
+        var(--muted);
+
+      font-size: 10px;
+
+      line-height: 1.7;
+    }
+
+
+    /* =========================================
+       ACTION BUTTONS
+    ========================================= */
+
+    .actions {
+
+      display: grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap: 10px;
+
+      margin-top: 25px;
+    }
+
+    .action-btn {
+
+      min-height: 50px;
+
+      border-radius: 15px;
+
+      font-size: 11px;
+
+      font-weight: 700;
+
+      transition:
+        .25s ease;
+    }
+
+    .primary-btn {
+
+      border: none;
+
+      background:
+        linear-gradient(
+          135deg,
+          #49313f,
+          #795465
+        );
+
+      color: white;
+
+      box-shadow:
+        0 10px 25px
+        rgba(73,49,63,.18);
+    }
+
+    .secondary-btn {
+
+      border:
+        1px solid
+        rgba(73,49,63,.14);
+
+      background:
+        rgba(255,255,255,.65);
+
+      color:
+        var(--plum);
+    }
+
+    .action-btn:hover {
+
+      transform:
+        translateY(-2px);
+    }
+
+
+    /* =========================================
+       NOT FOUND
+    ========================================= */
+
+    .not-found {
+
+      display: none;
+
+      margin-top: 25px;
+
+      padding: 55px 25px;
+
+      text-align: center;
+
+      border-radius: 28px;
+
+      background:
+        rgba(255,255,255,.58);
+
+      backdrop-filter:
+        blur(20px);
+
+      border:
+        1px solid
+        rgba(255,255,255,.8);
+
+      box-shadow:
+        0 20px 50px
+        rgba(73,42,54,.07);
+    }
+
+    .not-found-icon {
+
+      width: 70px;
+      height: 70px;
+
+      margin:
+        0 auto 17px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 50%;
+
+      background:
+        #f3dce0;
+
+      font-size: 28px;
+    }
+
+    .not-found h2 {
+
+      color:
+        var(--plum);
+
+      font-family:
+        "Playfair Display",
+        serif;
+
+      font-size: 29px;
+
+      font-weight: 500;
+
+      margin-bottom: 8px;
+    }
+
+    .not-found p {
+
+      color:
+        var(--muted);
+
+      font-size: 11px;
+
+      line-height: 1.7;
+
+      max-width: 450px;
+
+      margin: auto;
+    }
+
+
+    /* =========================================
+       RESPONSIVE
+    ========================================= */
+
+    @media (max-width: 800px) {
+
+      .delivery-section {
+
+        grid-template-columns:
+          1fr;
+      }
+
+      .order-info {
+
+        grid-template-columns:
+          1fr 1fr 1fr;
+      }
+
+    }
+
+
+    @media (max-width: 650px) {
+
+      .topbar {
+
+        padding:
+          18px 15px;
+      }
+
+      .brand {
+
+        font-size: 36px;
+      }
+
+      .icon-btn {
+
+        width: 38px;
+        height: 38px;
+      }
+
+      .page {
+
+        width:
+          calc(100% - 20px);
+      }
+
+      .intro {
+
+        margin-top: 20px;
+
+        padding:
+          30px 15px;
+
+        border-radius: 24px;
+      }
+
+      .intro h1 {
+
+        font-size: 43px;
+      }
+
+      .tracking-search {
+
+        flex-direction:
+          column;
+      }
+
+      .tracking-search button {
+
+        width: 100%;
+      }
+
+      .tracking-card {
+
+        padding:
+          17px;
+
+        border-radius: 23px;
+      }
+
+      .tracking-header {
+
+        align-items:
+          flex-start;
+
+        flex-direction:
+          column;
+      }
+
+      .progress-area {
+
+        padding:
+          30px 0 15px;
+
+        overflow-x:
+          auto;
+      }
+
+      .progress-line {
+
+        margin:
+          0 30px;
+      }
+
+      .steps {
+
+        min-width:
+          530px;
+      }
+
+      .order-info {
+
+        grid-template-columns:
+          1fr;
+
+      }
+
+      .delivery-section {
+
+        grid-template-columns:
+          1fr;
+      }
+
+      .details-card,
+      .items-card {
+
+        padding:
+          18px;
+
+        border-radius:
+          20px;
+      }
+
+      .actions {
+
+        grid-template-columns:
+          1fr;
+      }
+
+    }
+
+
+    @media (max-width: 420px) {
+
+      .tracking-number {
+
+        font-size: 21px;
+      }
+
+      .status-badge {
+
+        font-size: 9px;
+      }
+
+      .order-item img {
+
+        width: 55px;
+        height: 62px;
+      }
+
+      .order-item-name {
+
+        font-size: 14px;
+      }
+
+    }
+
+  </style>
+  </head>
+
+<body>
+
+  <!-- =========================================
+       HEADER
+  ========================================= -->
+
+  <header class="topbar">
+
+    <div>
+
+      <button
+        class="icon-btn"
+        onclick="goBack()"
+        aria-label="Go Back"
+      >
+        ←
+      </button>
+
+    </div>
+
+
+    <div class="brand">
+      arizeba
+    </div>
+
+
+    <div></div>
+
+  </header>
+
+
+  <!-- =========================================
+       MAIN
+  ========================================= -->
+
+  <main class="page">
+
+
+    <!-- INTRO -->
+
+    <section class="intro">
+
+      <div class="eyebrow">
+        Order Tracking
+      </div>
+
+      <h1>
+        Track Your <span>Order.</span>
+      </h1>
+
+      <p>
+        Enter your Arizeba order ID below to check
+        the latest status of your order.
+      </p>
+
+    </section>
+
+
+    <!-- =========================================
+         SEARCH
+    ========================================= -->
+
+    <section class="tracking-search">
+
+      <input
+        type="text"
+        id="orderSearch"
+        placeholder="Enter your order ID..."
+        autocomplete="off"
+      >
+
+      <button
+        type="button"
+        onclick="trackOrder()"
+      >
+        Track Order →
+      </button>
+
+    </section>
+
+
+    <!-- =========================================
+         TRACKING CARD
+    ========================================= -->
+
+    <section
+      class="tracking-card"
+      id="trackingCard"
+    >
+
+      <div class="tracking-header">
+
+        <div>
+
+          <div class="eyebrow">
+            Order Information
+          </div>
+
+          <div
+            class="tracking-number"
+            id="trackingOrderId"
+          >
+            Order ID
+          </div>
+
+        </div>
+
+
+        <div
+          class="status-badge"
+          id="statusBadge"
+        >
+          Order Placed
+        </div>
+
+      </div>
+
+
+      <!-- =====================================
+           PROGRESS
+      ===================================== -->
+
+      <div class="progress-area">
+
+        <div class="progress-line">
+
+          <div
+            class="progress-fill"
+            id="progressFill"
+          ></div>
+
+        </div>
+
+
+        <div class="steps">
+
+          <!-- STEP 1 -->
+
+          <div
+            class="step active"
+            id="stepPlaced"
+          >
+
+            <div class="step-circle">
+              ✓
+            </div>
+
+            <div class="step-title">
+              Order Placed
+            </div>
+
+            <div
+              class="step-date"
+              id="placedDate"
+            >
+              —
+            </div>
+
+          </div>
+
+
+          <!-- STEP 2 -->
+
+          <div
+            class="step"
+            id="stepConfirmed"
+          >
+
+            <div class="step-circle">
+              2
+            </div>
+
+            <div class="step-title">
+              Confirmed
+            </div>
+
+            <div
+              class="step-date"
+              id="confirmedDate"
+            >
+              —
+            </div>
+
+          </div>
+
+
+          <!-- STEP 3 -->
+
+          <div
+            class="step"
+            id="stepShipped"
+          >
+
+            <div class="step-circle">
+              3
+            </div>
+
+            <div class="step-title">
+              Shipped
+            </div>
+
+            <div
+              class="step-date"
+              id="shippedDate"
+            >
+              —
+            </div>
+
+          </div>
+
+
+          <!-- STEP 4 -->
+
+          <div
+            class="step"
+            id="stepOut"
+          >
+
+            <div class="step-circle">
+              4
+            </div>
+
+            <div class="step-title">
+              Out for Delivery
+            </div>
+
+            <div
+              class="step-date"
+              id="outDate"
+            >
+              —
+            </div>
+
+          </div>
+
+
+          <!-- STEP 5 -->
+
+          <div
+            class="step"
+            id="stepDelivered"
+          >
+
+            <div class="step-circle">
+              ✓
+            </div>
+
+            <div class="step-title">
+              Delivered
+            </div>
+
+            <div
+              class="step-date"
+              id="deliveredDate"
+            >
+              —
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- =====================================
+           STATUS MESSAGE
+      ===================================== -->
+
+      <div class="status-message">
+
+        <div
+          class="status-message-title"
+          id="statusMessageTitle"
+        >
+          Your order has been placed.
+        </div>
+
+        <div
+          class="status-message-text"
+          id="statusMessageText"
+        >
+          We have received your order and it is
+          waiting for confirmation from the seller.
+        </div>
+
+      </div>
+
+
+      <!-- =====================================
+           ORDER INFO CARDS
+      ===================================== -->
+
+      <div class="order-info">
+
+        <div class="info-card">
+
+          <div class="info-label">
+            Order Date
+          </div>
+
+          <div
+            class="info-value"
+            id="orderDate"
+          >
+            —
+          </div>
+
+        </div>
+
+
+        <div class="info-card">
+
+          <div class="info-label">
+            Payment
+          </div>
+
+          <div
+            class="info-value"
+            id="paymentMethod"
+          >
+            —
+          </div>
+
+        </div>
+
+
+        <div class="info-card">
+
+          <div class="info-label">
+            Total
+          </div>
+
+          <div
+            class="info-value"
+            id="orderTotal"
+          >
+            PKR 0
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================
+         DELIVERY + CUSTOMER DETAILS
+    ========================================= -->
+
+    <section
+      class="delivery-section"
+      id="detailsSection"
+    >
+
+      <!-- DELIVERY -->
+
+      <div class="details-card">
+
+        <h2>
+          Delivery Details
+        </h2>
+
+
+        <div class="detail-row">
+
+          <span>
+            Delivery Method
+          </span>
+
+          <strong id="deliveryMethod">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="detail-row">
+
+          <span>
+            Estimated Delivery
+          </span>
+
+          <strong id="estimatedDelivery">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="detail-row">
+
+          <span>
+            Tracking Number
+          </span>
+
+          <strong id="trackingNumber">
+            —
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <!-- CUSTOMER -->
+
+      <div class="details-card">
+
+        <h2>
+          Customer Details
+        </h2>
+
+
+        <div class="detail-row">
+
+          <span>
+            Name
+          </span>
+
+          <strong id="customerName">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="detail-row">
+
+          <span>
+            Phone
+          </span>
+
+          <strong id="customerPhone">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="detail-row">
+
+          <span>
+            Address
+          </span>
+
+          <strong id="customerAddress">
+            —
+          </strong>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================
+         ORDER ITEMS
+    ========================================= -->
+
+    <section
+      class="items-card"
+      id="itemsSection"
+    >
+
+      <h2>
+        Your Items
+      </h2>
+
+      <div id="orderItems">
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================
+         NOT FOUND
+    ========================================= -->
+
+    <section
+      class="not-found"
+      id="notFound"
+    >
+
+      <div class="not-found-icon">
+        🔎
+      </div>
+
+      <h2>
+        Order Not Found
+      </h2>
+
+      <p>
+        We couldn't find an order with that ID.
+        Please check the order ID and try again.
+      </p>
+
+    </section>
+
+
+    <!-- =========================================
+         ACTION BUTTONS
+    ========================================= -->
+
+    <div
+      class="actions"
+      id="actionButtons"
+    >
+
+      <button
+        class="action-btn primary-btn"
+        onclick="continueShopping()"
+      >
+        Continue Shopping →
+      </button>
+
+
+      <button
+        class="action-btn secondary-btn"
+        onclick="goHome()"
+      >
+        Back to Home
+      </button>
+
+    </div>
+
+  </main>
+
+
+  <!-- =========================================
+       JAVASCRIPT
+  ========================================= -->
+
+  <script>
+
+    /*
+      Part 4 mein JavaScript add hoga.
+      Is mein order ID search,
+      status tracking,
+      order details,
+      products aur navigation
+      ka complete logic hoga.
+    */
+
+  </script>
+
+</body>
+
+</html>
+<script>
+
+  /* =========================================
+     ORDER DATA
+  ========================================= */
+
+  let currentOrder = null;
+
+
+  /* =========================================
+     GET LAST ORDER
+  ========================================= */
+
+  function getLastOrder() {
+
+    try {
+
+      const saved =
+        localStorage.getItem(
+          "arizebaLastOrder"
+        );
+
+      if (!saved) {
+        return null;
+      }
+
+      return JSON.parse(saved);
+
+    } catch (error) {
+
+      console.error(
+        "Order loading error:",
+        error
+      );
+
+      return null;
+
+    }
+
+  }
+
+
+  /* =========================================
+     GET ALL ORDERS
+  ========================================= */
+
+  function getOrders() {
+
+    try {
+
+      const saved =
+        localStorage.getItem(
+          "arizebaOrders"
+        );
+
+      if (!saved) {
+        return [];
+      }
+
+      const orders =
+        JSON.parse(saved);
+
+      return Array.isArray(orders)
+        ? orders
+        : [];
+
+    } catch (error) {
+
+      return [];
+
+    }
+
+  }
+
+
+  /* =========================================
+     FIND ORDER
+  ========================================= */
+
+  function findOrder(orderId) {
+
+    const orders =
+      getOrders();
+
+    const lastOrder =
+      getLastOrder();
+
+
+    /*
+      Pehle complete orders list
+      mein search karenge.
+    */
+
+    const found =
+      orders.find(
+        order =>
+
+          String(
+            order.orderId || ""
+          ).toLowerCase() ===
+          String(
+            orderId
+          ).toLowerCase()
+      );
+
+
+    if (found) {
+      return found;
+    }
+
+
+    /*
+      Agar orders list available
+      nahi hai to last order check.
+    */
+
+    if (
+      lastOrder &&
+      String(
+        lastOrder.orderId || ""
+      ).toLowerCase() ===
+      String(
+        orderId
+      ).toLowerCase()
+    ) {
+
+      return lastOrder;
+
+    }
+
+
+    return null;
+
+  }
+
+
+  /* =========================================
+     FORMAT DATE
+  ========================================= */
+
+  function formatDate(dateValue) {
+
+    if (!dateValue) {
+      return "—";
+    }
+
+    const date =
+      new Date(dateValue);
+
+    if (
+      Number.isNaN(
+        date.getTime()
+      )
+    ) {
+
+      return "—";
+
+    }
+
+
+    return date.toLocaleDateString(
+      "en-PK",
+      {
+        day: "2-digit",
+        month: "short",
+        year: "numeric"
+      }
+    );
+
+  }
+
+
+  /* =========================================
+     PAYMENT NAME
+  ========================================= */
+
+  function getPaymentName(method) {
+
+    const names = {
+
+      cod:
+        "Cash on Delivery",
+
+      card:
+        "Debit / Credit Card",
+
+      jazzcash:
+        "JazzCash",
+
+      easypaisa:
+        "Easypaisa"
+
+    };
+
+
+    return (
+      names[
+        String(
+          method || ""
+        ).toLowerCase()
+      ] ||
+      method ||
+      "Cash on Delivery"
+    );
+
+  }
+
+
+  /* =========================================
+     STATUS NORMALIZER
+  ========================================= */
+
+  function normalizeStatus(status) {
+
+    const value =
+      String(
+        status || "placed"
+      )
+      .toLowerCase()
+      .trim()
+      .replace(
+        /[\s_-]+/g,
+        " "
+      );
+
+
+    if (
+      value.includes("deliver") &&
+      !value.includes("out")
+    ) {
+
+      return "delivered";
+
+    }
+
+
+    if (
+      value.includes("out") &&
+      value.includes("deliver")
+    ) {
+
+      return "out";
+
+    }
+
+
+    if (
+      value.includes("ship")
+    ) {
+
+      return "shipped";
+
+    }
+
+
+    if (
+      value.includes("confirm")
+    ) {
+
+      return "confirmed";
+
+    }
+
+
+    if (
+      value.includes("cancel")
+    ) {
+
+      return "cancelled";
+
+    }
+
+
+    return "placed";
+
+  }
+
+
+  /* =========================================
+     STATUS TEXT
+  ========================================= */
+
+  function getStatusTitle(status) {
+
+    const titles = {
+
+      placed:
+        "Order Placed",
+
+      confirmed:
+        "Order Confirmed",
+
+      shipped:
+        "Order Shipped",
+
+      out:
+        "Out for Delivery",
+
+      delivered:
+        "Order Delivered",
+
+      cancelled:
+        "Order Cancelled"
+
+    };
+
+
+    return (
+      titles[status] ||
+      "Order Placed"
+    );
+
+  }
+
+
+  /* =========================================
+     STATUS DESCRIPTION
+  ========================================= */
+
+  function getStatusDescription(status) {
+
+    const messages = {
+
+      placed:
+        "We have received your order and it is waiting for confirmation from the seller.",
+
+      confirmed:
+        "Your order has been confirmed. The seller is preparing your items for shipment.",
+
+      shipped:
+        "Your order has been shipped and is currently on its way to you.",
+
+      out:
+        "Your order is with the delivery partner and should arrive soon.",
+
+      delivered:
+        "Your order has been successfully delivered. We hope you enjoy your purchase.",
+
+      cancelled:
+        "This order has been cancelled. Please contact support if you need assistance."
+
+    };
+
+
+    return (
+      messages[status] ||
+      messages.placed
+    );
+
+  }
+
+
+  /* =========================================
+     STATUS STEP
+  ========================================= */
+
+  function getStatusStep(status) {
+
+    const steps = {
+
+      placed: 1,
+
+      confirmed: 2,
+
+      shipped: 3,
+
+      out: 4,
+
+      delivered: 5,
+
+      cancelled: 1
+
+    };
+
+
+    return (
+      steps[status] ||
+      1
+    );
+
+  }
+
+
+  /* =========================================
+     RESET STEPS
+  ========================================= */
+
+  function resetSteps() {
+
+    const stepIds = [
+
+      "stepPlaced",
+
+      "stepConfirmed",
+
+      "stepShipped",
+
+      "stepOut",
+
+      "stepDelivered"
+
+    ];
+
+
+    stepIds.forEach(
+      id => {
+
+        const step =
+          document.getElementById(id);
+
+        if (!step) {
+          return;
+        }
+
+        step.classList.remove(
+          "active"
+        );
+
+        step.classList.remove(
+          "completed"
+        );
+
+      }
+    );
+
+
+    document
+      .getElementById(
+        "progressFill"
+      )
+      .style.width =
+      "0%";
+
+  }
+
+
+  /* =========================================
+     UPDATE TRACKING STEPS
+  ========================================= */
+
+  function updateTrackingSteps(status) {
+
+    resetSteps();
+
+
+    const currentStep =
+      getStatusStep(status);
+
+
+    const stepIds = [
+
+      "stepPlaced",
+
+      "stepConfirmed",
+
+      "stepShipped",
+
+      "stepOut",
+
+      "stepDelivered"
+
+    ];
+
+
+    stepIds.forEach(
+      (id, index) => {
+
+        const step =
+          document.getElementById(id);
+
+        if (!step) {
+          return;
+        }
+
+
+        const stepNumber =
+          index + 1;
+
+
+        if (
+          stepNumber <
+          currentStep
+        ) {
+
+          step.classList.add(
+            "completed"
+          );
+
+        }
+
+
+        if (
+          stepNumber ===
+          currentStep
+        ) {
+
+          step.classList.add(
+            "active"
+          );
+
+        }
+
+      }
+    );
+
+
+    /*
+      Progress width:
+      0% → Placed
+      25% → Confirmed
+      50% → Shipped
+      75% → Out
+      100% → Delivered
+    */
+
+    const percentages = {
+
+      1: 0,
+
+      2: 25,
+
+      3: 50,
+
+      4: 75,
+
+      5: 100
+
+    };
+
+
+    document
+      .getElementById(
+        "progressFill"
+      )
+      .style.width =
+      (
+        percentages[
+          currentStep
+        ] || 0
+      ) + "%";
+
+  }
+
+
+  /* =========================================
+     UPDATE ORDER STATUS
+  ========================================= */
+
+  function updateStatus(status) {
+
+    const normalized =
+      normalizeStatus(status);
+
+
+    const badge =
+      document.getElementById(
+        "statusBadge"
+      );
+
+
+    badge.textContent =
+      getStatusTitle(
+        normalized
+      );
+
+
+    document.getElementById(
+      "statusMessageTitle"
+    ).textContent =
+      getStatusTitle(
+        normalized
+      );
+
+
+    document.getElementById(
+      "statusMessageText"
+    ).textContent =
+      getStatusDescription(
+        normalized
+      );
+
+
+    updateTrackingSteps(
+      normalized
+    );
+
+
+    if (
+      normalized ===
+      "cancelled"
+    ) {
+
+      badge.classList.add(
+        "cancelled"
+      );
+
+    } else {
+
+      badge.classList.remove(
+        "cancelled"
+      );
+
+    }
+
+  }
+
+
+  /* =========================================
+     LOAD ORDER
+  ========================================= */
+
+  function loadOrder(order) {
+
+    if (!order) {
+
+      showNotFound();
+
+      return;
+
+    }
+
+
+    currentOrder =
+      order;
+
+
+    hideNotFound();
+
+
+    /*
+      ORDER ID
+    */
+
+    document.getElementById(
+      "trackingOrderId"
+    ).textContent =
+      order.orderId ||
+      "Order";
+
+
+    /*
+      STATUS
+    */
+
+    updateStatus(
+      order.status ||
+      order.orderStatus ||
+      "placed"
+    );
+
+
+    /*
+      ORDER DATE
+    */
+
+    document.getElementById(
+      "orderDate"
+    ).textContent =
+      formatDate(
+        order.createdAt ||
+        order.created_at ||
+        order.date
+      );
+
+
+    /*
+      PAYMENT
+    */
+
+    document.getElementById(
+      "paymentMethod"
+    ).textContent =
+      getPaymentName(
+        order.payment ||
+        order.paymentMethod
+      );
+
+
+    /*
+      TOTAL
+    */
+
+    let subtotal = 0;
+
+
+    const items =
+      Array.isArray(
+        order.items
+      )
+        ? order.items
+        : [];
+
+
+    items.forEach(
+      product => {
+
+        subtotal +=
+          Number(
+            product.price || 0
+          ) *
+          Number(
+            product.quantity || 1
+          );
+
+      }
+    );
+
+
+    const delivery =
+      Number(
+        order.delivery?.price ||
+        order.deliveryPrice ||
+        0
+      );
+
+
+    const discount =
+      Number(
+        order.discount || 0
+      );
+
+
+    const total =
+      Number(
+        order.total
+      ) ||
+      (
+        subtotal +
+        delivery -
+        discount
+      );
+
+
+    document.getElementById(
+      "orderTotal"
+    ).textContent =
+      "PKR " +
+      total.toLocaleString();
+
+
+    /*
+      DELIVERY
+    */
+
+    const deliveryType =
+      order.delivery?.type ||
+      order.deliveryType ||
+      "standard";
+
+
+    document.getElementById(
+      "deliveryMethod"
+    ).textContent =
+      String(
+        deliveryType
+      ).toLowerCase() ===
+      "express"
+        ? "Express Delivery"
+        : "Standard Delivery";
+
+
+    /*
+      ESTIMATED DELIVERY
+    */
+
+    let estimatedDate;
+
+
+    if (
+      order.estimatedDelivery
+    ) {
+
+      estimatedDate =
+        order.estimatedDelivery;
+
+    } else {
+
+      const baseDate =
+        order.createdAt ||
+        order.created_at ||
+        new Date();
+
+
+      const date =
+        new Date(
+          baseDate
+        );
+
+
+      date.setDate(
+        date.getDate() +
+        (
+          String(
+            deliveryType
+          ).toLowerCase() ===
+          "express"
+            ? 2
+            : 5
+        )
+      );
+
+
+      estimatedDate =
+        date;
+
+    }
+
+
+    document.getElementById(
+      "estimatedDelivery"
+    ).textContent =
+      formatDate(
+        estimatedDate
+      );
+
+
+    /*
+      TRACKING NUMBER
+    */
+
+    document.getElementById(
+      "trackingNumber"
+    ).textContent =
+      order.trackingNumber ||
+      order.tracking_id ||
+      order.orderId ||
+      "Not assigned yet";
+
+
+    /*
+      CUSTOMER
+    */
+
+    const customer =
+      order.customer ||
+      order.shippingAddress ||
+      {};
+
+
+    document.getElementById(
+      "customerName"
+    ).textContent =
+      order.customerName ||
+      customer.name ||
+      order.name ||
+      "—";
+
+
+    document.getElementById(
+      "customerPhone"
+    ).textContent =
+      order.customerPhone ||
+      customer.phone ||
+      order.phone ||
+      "—";
+
+
+    document.getElementById(
+      "customerAddress"
+    ).textContent =
+      order.customerAddress ||
+      customer.address ||
+      order.address ||
+      "—";
+
+
+    /*
+      DATES FOR TRACKING
+    */
+
+    const createdDate =
+      order.createdAt ||
+      order.created_at ||
+      order.date;
+
+
+    document.getElementById(
+      "placedDate"
+    ).textContent =
+      formatDate(
+        createdDate
+      );
+
+
+    /*
+      Render items
+    */
+
+    renderOrderItems(
+      items
+    );
+
+  }
+
+
+  /* =========================================
+     RENDER ORDER ITEMS
+  ========================================= */
+
+  function renderOrderItems(items) {
+
+    const container =
+      document.getElementById(
+        "orderItems"
+      );
+
+
+    container.innerHTML =
+      "";
+
+
+    if (
+      !items ||
+      items.length === 0
+    ) {
+
+      container.innerHTML = `
+
+        <div
+          style="
+            padding:20px 0;
+            color:#8d7b82;
+            font-size:11px;
+          "
+        >
+          No item information available.
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+
+    items.forEach(
+      product => {
+
+        const quantity =
+          Number(
+            product.quantity || 1
+          );
+
+
+        const price =
+          Number(
+            product.price || 0
+          );
+
+
+        const total =
+          price *
+          quantity;
+
+
+        const item =
+          document.createElement(
+            "div"
+          );
+
+
+        item.className =
+          "order-item";
+
+
+        item.innerHTML = `
+
+          <img
+            src="${escapeHTML(
+              product.image ||
+              "https://via.placeholder.com/150x180?text=Arizeba"
+            )}"
+            alt="${escapeHTML(
+              product.name ||
+              "Product"
+            )}"
+          >
+
+
+          <div
+            class="order-item-info"
+          >
+
+            <div
+              class="order-item-name"
+            >
+              ${escapeHTML(
+                product.name ||
+                "Product"
+              )}
+            </div>
+
+
+            <div
+              class="order-item-meta"
+            >
+
+              Quantity:
+              ${quantity}
+
+              ${
+                product.color
+                  ? `
+                    <br>
+                    Color:
+                    ${escapeHTML(
+                      product.color
+                    )}
+                  `
+                  : ""
+              }
+
+              ${
+                product.version
+                  ? `
+                    <br>
+                    Variant:
+                    ${escapeHTML(
+                      product.version
+                    )}
+                  `
+                  : ""
+              }
+
+            </div>
+
+          </div>
+
+
+          <div
+            class="order-item-price"
+          >
+            PKR ${total.toLocaleString()}
+          </div>
+
+        `;
+
+
+        container.appendChild(
+          item
+        );
+
+      }
+    );
+
+  }
+
+
+  /* =========================================
+     TRACK ORDER
+  ========================================= */
+
+  function trackOrder() {
+
+    const input =
+      document.getElementById(
+        "orderSearch"
+      );
+
+
+    const orderId =
+      input.value
+        .trim();
+
+
+    if (!orderId) {
+
+      alert(
+        "Please enter your order ID."
+      );
+
+      input.focus();
+
+      return;
+
+    }
+
+
+    const found =
+      findOrder(
+        orderId
+      );
+
+
+    if (!found) {
+
+      showNotFound();
+
+      return;
+
+    }
+
+
+    loadOrder(
+      found
+    );
+
+  }
+
+
+  /* =========================================
+     SHOW NOT FOUND
+  ========================================= */
+
+  function showNotFound() {
+
+    document.getElementById(
+      "trackingCard"
+    ).style.display =
+      "none";
+
+
+    document.getElementById(
+      "detailsSection"
+    ).style.display =
+      "none";
+
+
+    document.getElementById(
+      "itemsSection"
+    ).style.display =
+      "none";
+
+
+    document.getElementById(
+      "actionButtons"
+    ).style.display =
+      "none";
+
+
+    document.getElementById(
+      "notFound"
+    ).style.display =
+      "block";
+
+  }
+
+
+  /* =========================================
+     HIDE NOT FOUND
+  ========================================= */
+
+  function hideNotFound() {
+
+    document.getElementById(
+      "trackingCard"
+    ).style.display =
+      "block";
+
+
+    document.getElementById(
+      "detailsSection"
+    ).style.display =
+      "grid";
+
+
+    document.getElementById(
+      "itemsSection"
+    ).style.display =
+      "block";
+
+
+    document.getElementById(
+      "actionButtons"
+    ).style.display =
+      "grid";
+
+
+    document.getElementById(
+      "notFound"
+    ).style.display =
+      "none";
+
+  }
+
+
+  /* =========================================
+     NAVIGATION
+  ========================================= */
+
+  function goBack() {
+
+    window.history.back();
+
+  }
+
+
+  function continueShopping() {
+
+    window.location.href =
+      "products.html";
+
+  }
+
+
+  function goHome() {
+
+    window.location.href =
+      "home.html";
+
+  }
+
+
+  /* =========================================
+     HTML ESCAPE
+  ========================================= */
+
+  function escapeHTML(value) {
+
+    return String(value)
+
+      .replace(
+        /&/g,
+        "&amp;"
+      )
+
+      .replace(
+        /</g,
+        "&lt;"
+      )
+
+      .replace(
+        />/g,
+        "&gt;"
+      )
+
+      .replace(
+        /"/g,
+        "&quot;"
+      )
+
+      .replace(
+        /'/g,
+        "&#039;"
+      );
+
+  }
+
+
+  /* =========================================
+     ENTER KEY
+  ========================================= */
+
+  document
+    .getElementById(
+      "orderSearch"
+    )
+    .addEventListener(
+      "keydown",
+      function(event) {
+
+        if (
+          event.key ===
+          "Enter"
+        ) {
+
+          trackOrder();
+
+        }
+
+      }
+    );
+
+
+  /* =========================================
+     AUTO LOAD LAST ORDER
+  ========================================= */
+
+  const lastOrder =
+    getLastOrder();
+
+
+  if (lastOrder) {
+
+    document.getElementById(
+      "orderSearch"
+    ).value =
+      lastOrder.orderId ||
+      "";
+
+
+    loadOrder(
+      lastOrder
+    );
+
+  } else {
+
+    showNotFound();
+
+  }
+
+</script>

@@ -1,0 +1,3066 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>AriZeba. — Order Confirmed</title>
+
+
+  <!-- GOOGLE FONTS -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
+
+  <style>
+
+    /* =====================================================
+       RESET
+    ===================================================== */
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+
+    :root {
+
+      --rose: #d98c9d;
+
+      --rose-dark: #a85f73;
+
+      --plum: #49313f;
+
+      --plum-light: #795465;
+
+      --text: #30252b;
+
+      --muted: #8d7b82;
+
+      --green: #56816a;
+
+      --border: rgba(103, 69, 80, 0.09);
+
+    }
+
+
+    body {
+
+      min-height: 100vh;
+
+      font-family:
+        "DM Sans",
+        sans-serif;
+
+      color: var(--text);
+
+      background:
+        radial-gradient(
+          circle at 8% 5%,
+          rgba(255, 255, 255, 0.96),
+          transparent 25%
+        ),
+
+        radial-gradient(
+          circle at 90% 20%,
+          rgba(220, 163, 173, 0.18),
+          transparent 30%
+        ),
+
+        linear-gradient(
+          135deg,
+          #fffaf7 0%,
+          #f7eae6 50%,
+          #f1dfdd 100%
+        );
+
+      padding-bottom: 35px;
+
+    }
+
+
+    button {
+
+      font-family: inherit;
+
+      cursor: pointer;
+
+    }
+
+
+    /* =====================================================
+       HEADER
+    ===================================================== */
+
+    .topbar {
+
+      width:
+        min(
+          1180px,
+          calc(100% - 40px)
+        );
+
+      margin: 0 auto;
+
+      padding:
+        20px 0 12px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+    }
+
+
+    .brand {
+
+      font-family:
+        "Playfair Display",
+        serif;
+
+      font-size:
+        clamp(
+          40px,
+          5vw,
+          58px
+        );
+
+      font-weight: 500;
+
+      letter-spacing: -2px;
+
+      color: #a96070;
+
+      white-space: nowrap;
+
+    }
+
+
+    /* =====================================================
+       MAIN PAGE
+    ===================================================== */
+
+    .page {
+
+      width:
+        min(
+          1120px,
+          calc(100% - 32px)
+        );
+
+      margin: 0 auto;
+
+    }
+
+
+    /* =====================================================
+       MAIN SUCCESS CARD
+    ===================================================== */
+
+    .success-card {
+
+      width: 100%;
+
+      padding:
+        25px 26px 24px;
+
+      text-align: center;
+
+      border-radius: 26px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          0.61
+        );
+
+      backdrop-filter:
+        blur(22px);
+
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          0.88
+        );
+
+      box-shadow:
+        0 16px 45px
+        rgba(
+          73,
+          42,
+          54,
+          0.08
+        );
+
+    }
+
+
+    /* =====================================================
+       SUCCESS ICON
+    ===================================================== */
+
+    .success-icon {
+
+      width: 64px;
+
+      height: 64px;
+
+      margin:
+        0 auto 11px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      border-radius: 50%;
+
+      background:
+        linear-gradient(
+          135deg,
+          #d98c9d,
+          #e5b69c
+        );
+
+      color: white;
+
+      font-size: 30px;
+
+      box-shadow:
+        0 10px 25px
+        rgba(
+          217,
+          140,
+          157,
+          0.25
+        );
+
+    }
+
+
+    .eyebrow {
+
+      text-transform: uppercase;
+
+      letter-spacing: 3px;
+
+      color:
+        var(--rose-dark);
+
+      font-size: 9px;
+
+      font-weight: 700;
+
+      margin-bottom: 5px;
+
+    }
+
+
+    h1 {
+
+      font-family:
+        "Playfair Display",
+        serif;
+
+      color:
+        var(--plum);
+
+      font-size:
+        clamp(
+          40px,
+          5vw,
+          55px
+        );
+
+      font-weight: 500;
+
+      line-height: 1.05;
+
+      margin-bottom: 8px;
+
+    }
+
+
+    .message {
+
+      color:
+        var(--muted);
+
+      font-size: 12px;
+
+      line-height: 1.55;
+
+      max-width: 560px;
+
+      margin:
+        0 auto;
+
+    }
+
+
+    /* =====================================================
+       ORDER ID
+    ===================================================== */
+
+    .order-id {
+
+      display: inline-block;
+
+      margin-top: 12px;
+
+      padding:
+        8px 14px;
+
+      border-radius: 10px;
+
+      background:
+        #f4dce0;
+
+      color:
+        var(--rose-dark);
+
+      font-size: 10px;
+
+      font-weight: 700;
+
+    }
+
+
+    /* =====================================================
+       TRACKING BOX
+    ===================================================== */
+
+    .tracking-box {
+
+      display: none;
+
+      width: fit-content;
+
+      margin:
+        9px auto 0;
+
+      padding:
+        8px 13px;
+
+      border-radius: 10px;
+
+      background:
+        rgba(
+          86,
+          129,
+          106,
+          0.10
+        );
+
+      border:
+        1px solid
+        rgba(
+          86,
+          129,
+          106,
+          0.15
+        );
+
+      color:
+        var(--green);
+
+      font-size: 10px;
+
+      font-weight: 700;
+
+    }
+
+
+    .tracking-box span {
+
+      color:
+        var(--text);
+
+      margin-left: 4px;
+
+    }
+
+
+    /* =====================================================
+       TWO COLUMN CONTENT
+    ===================================================== */
+
+    .order-content {
+
+      width: 100%;
+
+      display: grid;
+
+      grid-template-columns:
+        minmax(0, 1.28fr)
+        minmax(300px, 0.72fr);
+
+      gap: 16px;
+
+      margin-top: 16px;
+
+      align-items: start;
+
+    }
+
+
+    /* =====================================================
+       COMMON CARD
+    ===================================================== */
+
+    .card {
+
+      width: 100%;
+
+      height: auto !important;
+
+      min-height: 0 !important;
+
+      padding: 18px;
+
+      border-radius: 21px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          0.64
+        );
+
+      border:
+        1px solid
+        rgba(
+          103,
+          69,
+          80,
+          0.07
+        );
+
+      box-shadow:
+        0 10px 28px
+        rgba(
+          73,
+          42,
+          54,
+          0.05
+        );
+
+      overflow: hidden;
+
+    }
+
+
+    .card h2 {
+
+      font-family:
+        "Playfair Display",
+        serif;
+
+      color:
+        var(--plum);
+
+      font-size: 23px;
+
+      font-weight: 500;
+
+      margin-bottom: 8px;
+
+    }
+
+
+    /* =====================================================
+       YOUR ITEMS
+    ===================================================== */
+
+    #products {
+
+      width: 100%;
+
+      height: auto !important;
+
+      min-height: 0 !important;
+
+      max-height: none !important;
+
+    }
+
+
+    /* =====================================================
+       PRODUCT ROW
+    ===================================================== */
+
+    .product {
+
+      width: 100%;
+
+      display: grid;
+
+      grid-template-columns:
+        145px
+        minmax(0, 1fr)
+        auto;
+
+      align-items: center;
+
+      gap: 16px;
+
+      min-height: 145px;
+
+      padding:
+        8px 0;
+
+      border-bottom:
+        1px solid
+        var(--border);
+
+    }
+
+
+    .product:last-child {
+
+      border-bottom: none;
+
+      padding-bottom: 0;
+
+    }
+
+
+    /* =====================================================
+       PRODUCT IMAGE BOX
+
+       THIS IS THE IMPORTANT FIX
+    ===================================================== */
+
+    .product-image {
+
+      width: 145px;
+
+      height: 145px;
+
+      min-width: 145px;
+
+      min-height: 145px;
+
+      max-width: 145px;
+
+      max-height: 145px;
+
+      border-radius: 17px;
+
+      overflow: hidden;
+
+      background:
+        #eee0dc;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      box-shadow:
+        0 7px 18px
+        rgba(
+          73,
+          42,
+          54,
+          0.06
+        );
+
+    }
+
+
+    .product-image img {
+
+      width: 100% !important;
+
+      height: 100% !important;
+
+      min-width: 100% !important;
+
+      min-height: 100% !important;
+
+      max-width: none !important;
+
+      max-height: none !important;
+
+      display: block;
+
+      object-fit: cover !important;
+
+      object-position: center;
+
+    }
+
+
+    /* =====================================================
+       FALLBACK PRODUCT IMAGE
+    ===================================================== */
+
+    .product-placeholder {
+
+      width: 100%;
+
+      height: 100%;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      background:
+        #eee0dc;
+
+      color:
+        var(--rose-dark);
+
+      font-size: 27px;
+
+    }
+
+
+    /* =====================================================
+       PRODUCT INFORMATION
+    ===================================================== */
+
+    .product-info {
+
+      min-width: 0;
+
+      width: 100%;
+
+    }
+
+
+    .product-name {
+
+      color:
+        var(--plum);
+
+      font-family:
+        "Playfair Display",
+        serif;
+
+      font-size: 20px;
+
+      line-height: 1.28;
+
+      font-weight: 500;
+
+      margin-bottom: 6px;
+
+      overflow-wrap: anywhere;
+
+    }
+
+
+    .product-meta {
+
+      color:
+        var(--muted);
+
+      font-size: 11px;
+
+      line-height: 1.6;
+
+    }
+
+
+    /* =====================================================
+       PRODUCT PRICE
+
+       PRICE WILL ALWAYS STAY WITH PRODUCT
+    ===================================================== */
+
+    .product-price {
+
+      color:
+        var(--plum);
+
+      font-size: 15px;
+
+      font-weight: 700;
+
+      white-space: nowrap;
+
+      text-align: right;
+
+      align-self: center;
+
+      padding-left: 8px;
+
+    }
+
+
+    /* =====================================================
+       ORDER DETAILS
+    ===================================================== */
+
+    .info-row {
+
+      width: 100%;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 15px;
+
+      padding:
+        9px 0;
+
+      border-bottom:
+        1px solid
+        var(--border);
+
+      font-size: 11px;
+
+    }
+
+
+    .info-row span {
+
+      color:
+        var(--muted);
+
+      flex: 0 0 auto;
+
+    }
+
+
+    .info-row strong {
+
+      color:
+        var(--plum);
+
+      text-align: right;
+
+      font-weight: 700;
+
+      max-width: 65%;
+
+      overflow-wrap: anywhere;
+
+    }
+
+
+    /* =====================================================
+       ADDRESS
+    ===================================================== */
+
+    .address-box {
+
+      width: 100%;
+
+      margin-top: 11px;
+
+      padding: 12px;
+
+      border-radius: 13px;
+
+      background:
+        rgba(
+          244,
+          220,
+          224,
+          0.42
+        );
+
+      border:
+        1px solid
+        rgba(
+          168,
+          95,
+          115,
+          0.08
+        );
+
+    }
+
+
+    .address-title {
+
+      color:
+        var(--rose-dark);
+
+      text-transform: uppercase;
+
+      letter-spacing: 1.8px;
+
+      font-size: 8px;
+
+      font-weight: 700;
+
+      margin-bottom: 5px;
+
+    }
+
+
+    .address-text {
+
+      color:
+        var(--text);
+
+      font-size: 10px;
+
+      line-height: 1.55;
+
+    }
+
+
+    /* =====================================================
+       TOTAL
+    ===================================================== */
+
+    .total-box {
+
+      width: 100%;
+
+      margin-top: 11px;
+
+      padding: 13px;
+
+      border-radius: 14px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(
+            249,
+            226,
+            228,
+            0.85
+          ),
+          rgba(
+            244,
+            216,
+            208,
+            0.72
+          )
+        );
+
+    }
+
+
+    .total-row {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 10px;
+
+    }
+
+
+    .total-row span {
+
+      color:
+        var(--plum);
+
+      font-size: 11px;
+
+      font-weight: 600;
+
+    }
+
+
+    .total-row strong {
+
+      color:
+        var(--plum);
+
+      font-size: 20px;
+
+      white-space: nowrap;
+
+    }
+
+
+    /* =====================================================
+       WHAT HAPPENS NEXT
+    ===================================================== */
+
+    .status {
+
+      width: 100%;
+
+      margin-top: 14px;
+
+      padding:
+        13px 15px;
+
+      border-radius: 16px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          0.52
+        );
+
+      border:
+        1px solid
+        rgba(
+          103,
+          69,
+          80,
+          0.07
+        );
+
+      text-align: left;
+
+    }
+
+
+    .status-title {
+
+      color:
+        var(--plum);
+
+      font-size: 12px;
+
+      font-weight: 700;
+
+      margin-bottom: 4px;
+
+    }
+
+
+    .status-text {
+
+      color:
+        var(--muted);
+
+      font-size: 10px;
+
+      line-height: 1.6;
+
+    }
+
+
+    /* =====================================================
+       BUTTONS
+    ===================================================== */
+
+    .buttons {
+
+      width: 100%;
+
+      display: grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap: 10px;
+
+      margin-top: 14px;
+
+    }
+
+
+    .btn {
+
+      width: 100%;
+
+      min-height: 46px;
+
+      border-radius: 13px;
+
+      font-size: 11px;
+
+      font-weight: 700;
+
+      transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+
+    }
+
+
+    .primary {
+
+      border: none;
+
+      background:
+        linear-gradient(
+          135deg,
+          #49313f,
+          #795465
+        );
+
+      color: white;
+
+      box-shadow:
+        0 8px 20px
+        rgba(
+          73,
+          49,
+          63,
+          0.18
+        );
+
+    }
+
+
+    .secondary {
+
+      border:
+        1px solid
+        rgba(
+          73,
+          49,
+          63,
+          0.14
+        );
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          0.70
+        );
+
+      color:
+        var(--plum);
+
+    }
+
+
+    .primary:hover,
+    .secondary:hover {
+
+      transform:
+        translateY(-2px);
+
+    }
+
+
+    /* =====================================================
+       TRACK ORDER BUTTON
+    ===================================================== */
+
+    .tracking-btn {
+
+      display: none;
+
+      width: 100%;
+
+      margin-top: 9px;
+
+      min-height: 44px;
+
+      border: none;
+
+      border-radius: 13px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #56816a,
+          #78a589
+        );
+
+      color: white;
+
+      font-size: 11px;
+
+      font-weight: 700;
+
+    }
+
+
+    /* =====================================================
+       EMPTY MESSAGE
+    ===================================================== */
+
+    .empty-message {
+
+      padding:
+        25px 10px;
+
+      text-align: center;
+
+      color:
+        var(--muted);
+
+      font-size: 11px;
+
+    }
+
+
+    /* =====================================================
+       REMOVE UNWANTED PSEUDO ELEMENTS
+    ===================================================== */
+
+    .card::before,
+    .card::after,
+    .product::before,
+    .product::after,
+    #products::before,
+    #products::after {
+
+      content: none !important;
+
+      display: none !important;
+
+    }
+
+
+    /* =====================================================
+       TABLET
+    ===================================================== */
+
+    @media (max-width: 850px) {
+
+      .order-content {
+
+        grid-template-columns: 1fr;
+
+      }
+
+    }
+
+
+    /* =====================================================
+       MOBILE
+    ===================================================== */
+
+    @media (max-width: 600px) {
+
+      .topbar {
+
+        width:
+          calc(100% - 24px);
+
+        padding:
+          15px 0 8px;
+
+      }
+
+
+      .brand {
+
+        font-size: 36px;
+
+      }
+
+
+      .page {
+
+        width:
+          calc(100% - 14px);
+
+      }
+
+
+      .success-card {
+
+        padding:
+          22px 13px 20px;
+
+        border-radius: 22px;
+
+      }
+
+
+      .success-icon {
+
+        width: 60px;
+
+        height: 60px;
+
+        font-size: 28px;
+
+      }
+
+
+      h1 {
+
+        font-size: 38px;
+
+      }
+
+
+      .message {
+
+        font-size: 11px;
+
+      }
+
+
+      .order-content {
+
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+
+        margin-top: 13px;
+
+      }
+
+
+      .card {
+
+        padding: 15px;
+
+        border-radius: 18px;
+
+      }
+
+
+      .card h2 {
+
+        font-size: 21px;
+
+      }
+
+
+      /* PRODUCT MOBILE */
+
+      .product {
+
+        grid-template-columns:
+          92px
+          minmax(0, 1fr)
+          auto;
+
+        gap: 11px;
+
+        min-height: 92px;
+
+        padding:
+          7px 0;
+
+      }
+
+
+      .product-image {
+
+        width: 92px;
+
+        height: 92px;
+
+        min-width: 92px;
+
+        min-height: 92px;
+
+        max-width: 92px;
+
+        max-height: 92px;
+
+        border-radius: 14px;
+
+      }
+
+
+      .product-name {
+
+        font-size: 15px;
+
+      }
+
+
+      .product-meta {
+
+        font-size: 9px;
+
+      }
+
+
+      .product-price {
+
+        font-size: 11px;
+
+      }
+
+
+      .info-row {
+
+        font-size: 10px;
+
+      }
+
+
+      .buttons {
+
+        grid-template-columns: 1fr;
+
+      }
+
+    }
+
+
+    /* =====================================================
+       SMALL MOBILE
+    ===================================================== */
+
+    @media (max-width: 430px) {
+
+      .brand {
+
+        font-size: 33px;
+
+      }
+
+
+      h1 {
+
+        font-size: 34px;
+
+      }
+
+
+      .success-card {
+
+        padding:
+          21px 11px 19px;
+
+      }
+
+
+      .card {
+
+        padding: 13px;
+
+      }
+
+
+      .product {
+
+        grid-template-columns:
+          82px
+          minmax(0, 1fr)
+          auto;
+
+        gap: 9px;
+
+        min-height: 82px;
+
+      }
+
+
+      .product-image {
+
+        width: 82px;
+
+        height: 82px;
+
+        min-width: 82px;
+
+        min-height: 82px;
+
+        max-width: 82px;
+
+        max-height: 82px;
+
+      }
+
+
+      .product-name {
+
+        font-size: 14px;
+
+      }
+
+
+      .product-meta {
+
+        font-size: 8.5px;
+
+      }
+
+
+      .product-price {
+
+        font-size: 10px;
+
+      }
+
+
+      .total-row strong {
+
+        font-size: 18px;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- =====================================================
+       HEADER
+  ===================================================== -->
+
+  <header class="topbar">
+
+    <div class="brand">
+      AriZeba.
+    </div>
+
+  </header>
+
+
+  <!-- =====================================================
+       MAIN
+  ===================================================== -->
+
+  <main class="page">
+
+
+    <section class="success-card">
+
+
+      <!-- SUCCESS ICON -->
+
+      <div class="success-icon">
+        ✓
+      </div>
+
+
+      <div class="eyebrow">
+        Thank You
+      </div>
+
+
+      <h1>
+        Order Confirmed
+      </h1>
+
+
+      <p class="message">
+
+        Your order has been successfully placed.
+        We’ll prepare your beautiful selection and
+        get it on its way to you.
+
+      </p>
+
+
+      <!-- ORDER ID -->
+
+      <div
+        class="order-id"
+        id="orderId"
+      >
+
+        Order ID: Loading...
+
+      </div>
+
+
+      <!-- TRACKING NUMBER -->
+
+      <div
+        class="tracking-box"
+        id="trackingBox"
+      >
+
+        Tracking Number:
+
+        <span id="trackingNumber">
+          Loading...
+        </span>
+
+      </div>
+
+
+      <!-- =================================================
+           CONTENT
+      ================================================= -->
+
+      <div class="order-content">
+
+
+        <!-- =================================================
+             YOUR ITEMS
+        ================================================= -->
+
+        <section class="card">
+
+          <h2>
+            Your Items
+          </h2>
+
+
+          <div id="products">
+
+            <div class="empty-message">
+
+              Loading your order...
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- =================================================
+             ORDER DETAILS
+        ================================================= -->
+
+        <section class="card">
+
+          <h2>
+            Order Details
+          </h2>
+
+
+          <div class="info-row">
+
+            <span>
+              Delivery
+            </span>
+
+            <strong id="delivery">
+              Standard Delivery
+            </strong>
+
+          </div>
+
+
+          <div class="info-row">
+
+            <span>
+              Payment
+            </span>
+
+            <strong id="payment">
+              Cash on Delivery
+            </strong>
+
+          </div>
+
+
+          <div class="info-row">
+
+            <span>
+              Status
+            </span>
+
+            <strong id="orderStatus">
+              Order Placed
+            </strong>
+
+          </div>
+
+
+          <div class="info-row">
+
+            <span>
+              Customer
+            </span>
+
+            <strong id="customerName">
+              —
+            </strong>
+
+          </div>
+
+
+          <div class="info-row">
+
+            <span>
+              Phone
+            </span>
+
+            <strong id="customerPhone">
+              —
+            </strong>
+
+          </div>
+
+
+          <!-- ADDRESS -->
+
+          <div
+            class="address-box"
+            id="addressBox"
+          >
+
+            <div class="address-title">
+              Delivery Address
+            </div>
+
+
+            <div
+              class="address-text"
+              id="addressText"
+            >
+
+              Loading address...
+
+            </div>
+
+          </div>
+
+
+          <!-- TOTAL -->
+
+          <div class="total-box">
+
+            <div class="total-row">
+
+              <span>
+                Order Total
+              </span>
+
+              <strong id="total">
+                PKR 0
+              </strong>
+
+            </div>
+
+          </div>
+
+
+        </section>
+
+
+      </div>
+
+
+      <!-- =================================================
+           WHAT HAPPENS NEXT
+      ================================================= -->
+
+      <div class="status">
+
+        <div class="status-title">
+
+          🚚 What happens next?
+
+        </div>
+
+
+        <div
+          class="status-text"
+          id="statusText"
+        >
+
+          Your order is now confirmed.
+          Our seller will prepare your items
+          and arrange delivery.
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           BUTTONS
+      ================================================= -->
+
+      <div class="buttons">
+
+
+        <button
+          class="btn primary"
+          type="button"
+          onclick="continueShopping()"
+        >
+
+          Continue Shopping →
+
+        </button>
+
+
+        <button
+          class="btn secondary"
+          type="button"
+          onclick="goBackToCheckout()"
+        >
+
+          ← Back to Checkout
+
+        </button>
+
+
+      </div>
+
+
+      <!-- TRACK ORDER -->
+
+      <button
+        class="tracking-btn"
+        id="trackingButton"
+        type="button"
+        onclick="trackOrder()"
+      >
+
+        📦 Track Your Order
+
+      </button>
+
+
+    </section>
+
+
+  </main>
+
+
+  <script>
+
+    /* =====================================================
+       API
+    ===================================================== */
+
+    const API_URL =
+      "http://localhost:5000/api";
+
+
+    /* =====================================================
+       GET SAVED ORDER
+    ===================================================== */
+
+    function getSavedOrder() {
+
+      try {
+
+        const savedOrder =
+          localStorage.getItem(
+            "arizebaLastOrder"
+          );
+
+
+        if (!savedOrder) {
+
+          return null;
+
+        }
+
+
+        return JSON.parse(
+          savedOrder
+        );
+
+      }
+
+      catch (error) {
+
+        console.error(
+          "Saved order error:",
+          error
+        );
+
+        return null;
+
+      }
+
+    }
+
+
+    /* =====================================================
+       FORMAT PRICE
+    ===================================================== */
+
+    function formatPrice(value) {
+
+      const amount =
+        Number(value || 0);
+
+
+      return (
+        "PKR " +
+        amount.toLocaleString("en-PK")
+      );
+
+    }
+
+
+    /* =====================================================
+       ESCAPE HTML
+    ===================================================== */
+
+    function escapeHTML(value) {
+
+      return String(
+        value ?? ""
+      )
+
+        .replace(
+          /&/g,
+          "&amp;"
+        )
+
+        .replace(
+          /</g,
+          "&lt;"
+        )
+
+        .replace(
+          />/g,
+          "&gt;"
+        )
+
+        .replace(
+          /"/g,
+          "&quot;"
+        )
+
+        .replace(
+          /'/g,
+          "&#039;"
+        );
+
+    }
+
+
+    /* =====================================================
+       LOAD ORDER
+    ===================================================== */
+
+    function loadOrder() {
+
+      const order =
+        getSavedOrder();
+
+
+      if (!order) {
+
+        showEmptyOrder();
+
+        return;
+
+      }
+
+
+      /* =================================================
+         ORDER ID
+      ================================================= */
+
+      const orderId =
+
+        order.order_id ||
+
+        order.orderId ||
+
+        order.id ||
+
+        "—";
+
+
+      document
+        .getElementById("orderId")
+        .textContent =
+          "Order ID: " +
+          orderId;
+
+
+      /* =================================================
+         TRACKING
+      ================================================= */
+
+      const trackingNumber =
+
+        order.tracking_number ||
+
+        order.trackingNumber ||
+
+        order.tracking_no ||
+
+        "";
+
+
+      if (trackingNumber) {
+
+        document
+          .getElementById(
+            "trackingNumber"
+          )
+          .textContent =
+            trackingNumber;
+
+
+        document
+          .getElementById(
+            "trackingBox"
+          )
+          .style.display =
+            "block";
+
+
+        document
+          .getElementById(
+            "trackingButton"
+          )
+          .style.display =
+            "block";
+
+      }
+
+
+      /* =================================================
+         CUSTOMER
+      ================================================= */
+
+      const customer =
+
+        order.customer ||
+
+        order.customer_info ||
+
+        {};
+
+
+      const customerName =
+
+        order.customer_name ||
+
+        order.name ||
+
+        customer.name ||
+
+        customer.full_name ||
+
+        "—";
+
+
+      const customerPhone =
+
+        order.customer_phone ||
+
+        order.phone ||
+
+        customer.phone ||
+
+        "—";
+
+
+      document
+        .getElementById(
+          "customerName"
+        )
+        .textContent =
+          customerName;
+
+
+      document
+        .getElementById(
+          "customerPhone"
+        )
+        .textContent =
+          customerPhone;
+
+
+      /* =================================================
+         DELIVERY
+      ================================================= */
+
+      let delivery =
+
+        order.delivery_method ||
+
+        order.deliveryMethod ||
+
+        order.shipping_method ||
+
+        "";
+
+
+      if (
+        typeof order.delivery === "object" &&
+        order.delivery
+      ) {
+
+        delivery =
+          order.delivery.type ||
+          delivery;
+
+      }
+
+
+      if (
+        String(delivery)
+          .toLowerCase() ===
+        "standard"
+      ) {
+
+        delivery =
+          "Standard Delivery";
+
+      }
+
+
+      else if (
+        String(delivery)
+          .toLowerCase() ===
+        "express"
+      ) {
+
+        delivery =
+          "Express Delivery";
+
+      }
+
+
+      if (!delivery) {
+
+        delivery =
+          "Standard Delivery";
+
+      }
+
+
+      document
+        .getElementById(
+          "delivery"
+        )
+        .textContent =
+          delivery;
+
+
+      /* =================================================
+         PAYMENT
+      ================================================= */
+
+      let payment =
+
+        order.payment_method ||
+
+        order.paymentMethod ||
+
+        order.payment ||
+
+        "";
+
+
+      if (
+        typeof payment === "object" &&
+        payment
+      ) {
+
+        payment =
+
+          payment.type ||
+
+          payment.method ||
+
+          "";
+
+      }
+
+
+      const paymentValue =
+
+        String(payment)
+          .toLowerCase()
+          .trim();
+
+
+      if (
+        paymentValue === "cod" ||
+        paymentValue.includes("cash")
+      ) {
+
+        payment =
+          "Cash on Delivery";
+
+      }
+
+
+      else if (
+        paymentValue === "card" ||
+        paymentValue.includes("credit") ||
+        paymentValue.includes("debit")
+      ) {
+
+        payment =
+          "Credit / Debit Card";
+
+      }
+
+
+      else if (
+        paymentValue === "jazzcash"
+      ) {
+
+        payment =
+          "JazzCash";
+
+      }
+
+
+      else if (
+        paymentValue === "easypaisa"
+      ) {
+
+        payment =
+          "Easypaisa";
+
+      }
+
+
+      if (!payment) {
+
+        payment =
+          "Cash on Delivery";
+
+      }
+
+
+      document
+        .getElementById(
+          "payment"
+        )
+        .textContent =
+          payment;
+
+
+      /* =================================================
+         STATUS
+      ================================================= */
+
+      const status =
+
+        order.status ||
+
+        order.order_status ||
+
+        "Order Placed";
+
+
+      document
+        .getElementById(
+          "orderStatus"
+        )
+        .textContent =
+          status;
+
+
+      /* =================================================
+         ADDRESS
+      ================================================= */
+
+      renderAddress(order);
+
+
+      /* =================================================
+         PRODUCTS
+      ================================================= */
+
+      renderProducts(order);
+
+
+      /* =================================================
+         TOTAL
+      ================================================= */
+
+      renderTotal(order);
+
+
+      /* =================================================
+         STATUS MESSAGE
+      ================================================= */
+
+      updateStatusMessage(
+        status
+      );
+
+    }
+
+
+    /* =====================================================
+       RENDER ADDRESS
+    ===================================================== */
+
+    function renderAddress(order) {
+
+      const address =
+
+        order.address ||
+
+        order.delivery_address ||
+
+        order.shipping_address ||
+
+        order.customer_address ||
+
+        order.customer ||
+
+        {};
+
+
+      let addressParts = [];
+
+
+      if (
+        typeof address === "string"
+      ) {
+
+        addressParts.push(
+          address
+        );
+
+      }
+
+
+      else {
+
+        const house =
+
+          address.house ||
+
+          address.house_address ||
+
+          address.street ||
+
+          address.address ||
+
+          order.address_line ||
+
+          order.street_address ||
+
+          "";
+
+
+        const area =
+
+          address.area ||
+
+          address.locality ||
+
+          address.area_locality ||
+
+          "";
+
+
+        const city =
+
+          address.city ||
+
+          order.city ||
+
+          "";
+
+
+        const province =
+
+          address.province ||
+
+          address.state ||
+
+          order.province ||
+
+          "";
+
+
+        const postalCode =
+
+          address.postal_code ||
+
+          address.postalCode ||
+
+          order.postal_code ||
+
+          "";
+
+
+        if (house) {
+
+          addressParts.push(
+            house
+          );
+
+        }
+
+
+        if (area) {
+
+          addressParts.push(
+            area
+          );
+
+        }
+
+
+        if (city) {
+
+          addressParts.push(
+            city
+          );
+
+        }
+
+
+        if (province) {
+
+          addressParts.push(
+            province
+          );
+
+        }
+
+
+        if (postalCode) {
+
+          addressParts.push(
+            postalCode
+          );
+
+        }
+
+      }
+
+
+      const addressText =
+        document.getElementById(
+          "addressText"
+        );
+
+
+      if (
+        addressParts.length
+      ) {
+
+        addressText.innerHTML =
+
+          addressParts
+
+            .map(
+              item =>
+                escapeHTML(item)
+            )
+
+            .join(
+              "<br>"
+            );
+
+      }
+
+      else {
+
+        addressText.textContent =
+          "Delivery address not available.";
+
+      }
+
+    }
+
+
+    /* =====================================================
+       RENDER PRODUCTS
+    ===================================================== */
+
+    function renderProducts(order) {
+
+      const container =
+        document.getElementById(
+          "products"
+        );
+
+
+      let items =
+
+        order.items ||
+
+        order.products ||
+
+        order.order_items ||
+
+        [];
+
+
+      /* =================================================
+         OBJECT → ARRAY
+      ================================================= */
+
+      if (
+        !Array.isArray(items) &&
+        items
+      ) {
+
+        items = [
+          items
+        ];
+
+      }
+
+
+      if (
+        !Array.isArray(items)
+      ) {
+
+        items = [];
+
+      }
+
+
+      /* =================================================
+         FALLBACK SINGLE PRODUCT
+      ================================================= */
+
+      if (
+
+        items.length === 0 &&
+
+        (
+          order.product ||
+          order.product_name ||
+          order.name
+        )
+
+      ) {
+
+        items = [
+
+          order.product ||
+
+          {
+
+            name:
+              order.product_name ||
+              order.name,
+
+            price:
+              order.price ||
+              order.total ||
+              0,
+
+            quantity:
+              order.quantity ||
+              1,
+
+            image:
+              order.image ||
+              order.product_image ||
+              ""
+
+          }
+
+        ];
+
+      }
+
+
+      /* =================================================
+         EMPTY
+      ================================================= */
+
+      if (
+        items.length === 0
+      ) {
+
+        container.innerHTML = `
+
+          <div class="empty-message">
+
+            No products found in this order.
+
+          </div>
+
+        `;
+
+        return;
+
+      }
+
+
+      container.innerHTML =
+        "";
+
+
+      /* =================================================
+         PRODUCTS
+      ================================================= */
+
+      items.forEach(
+        item => {
+
+          const name =
+
+            item.name ||
+
+            item.product_name ||
+
+            item.title ||
+
+            "Product";
+
+
+          const quantity =
+
+            Number(
+
+              item.quantity ||
+
+              item.qty ||
+
+              1
+
+            );
+
+
+          const price =
+
+            Number(
+
+              item.price ||
+
+              item.unit_price ||
+
+              item.product_price ||
+
+              0
+
+            );
+
+
+          const image =
+
+            item.image ||
+
+            item.image_url ||
+
+            item.product_image ||
+
+            item.thumbnail ||
+
+            "";
+
+
+          const total =
+
+            Number(
+
+              item.total ||
+
+              item.subtotal ||
+
+              (
+                price *
+                quantity
+              )
+
+            );
+
+
+          /* =================================================
+             IMAGE
+          ================================================= */
+
+          let imageHTML = "";
+
+
+          if (image) {
+
+            imageHTML = `
+
+              <div class="product-image">
+
+                <img
+                  src="${escapeHTML(image)}"
+                  alt="${escapeHTML(name)}"
+                  onerror="
+                    this.style.display='none';
+                    this.parentElement.innerHTML='<div class=&quot;product-placeholder&quot;>🛍</div>';
+                  "
+                >
+
+              </div>
+
+            `;
+
+          }
+
+          else {
+
+            imageHTML = `
+
+              <div class="product-image">
+
+                <div class="product-placeholder">
+
+                  🛍
+
+                </div>
+
+              </div>
+
+            `;
+
+          }
+
+
+          /* =================================================
+             PRODUCT HTML
+          ================================================= */
+
+          const productHTML = `
+
+            <div class="product">
+
+
+              ${imageHTML}
+
+
+              <div class="product-info">
+
+
+                <div class="product-name">
+
+                  ${escapeHTML(name)}
+
+                </div>
+
+
+                <div class="product-meta">
+
+                  Quantity:
+                  ${quantity}
+
+                  <br>
+
+                  Unit Price:
+                  ${formatPrice(price)}
+
+                </div>
+
+
+              </div>
+
+
+              <div class="product-price">
+
+                ${formatPrice(total)}
+
+              </div>
+
+
+            </div>
+
+          `;
+
+
+          container.insertAdjacentHTML(
+            "beforeend",
+            productHTML
+          );
+
+        }
+      );
+
+    }
+
+
+    /* =====================================================
+       RENDER TOTAL
+    ===================================================== */
+
+    function renderTotal(order) {
+
+      let total =
+
+        Number(
+
+          order.total ||
+
+          order.total_amount ||
+
+          order.grand_total ||
+
+          order.order_total ||
+
+          0
+
+        );
+
+
+      /* =================================================
+         CALCULATE IF TOTAL MISSING
+      ================================================= */
+
+      if (!total) {
+
+        let items =
+
+          order.items ||
+
+          order.products ||
+
+          order.order_items ||
+
+          [];
+
+
+        if (
+          !Array.isArray(items) &&
+          items
+        ) {
+
+          items = [
+            items
+          ];
+
+        }
+
+
+        if (
+          Array.isArray(items)
+        ) {
+
+          total =
+
+            items.reduce(
+
+              (
+                sum,
+                item
+              ) => {
+
+                const price =
+
+                  Number(
+
+                    item.price ||
+
+                    item.unit_price ||
+
+                    item.product_price ||
+
+                    0
+
+                  );
+
+
+                const quantity =
+
+                  Number(
+
+                    item.quantity ||
+
+                    item.qty ||
+
+                    1
+
+                  );
+
+
+                return (
+
+                  sum +
+
+                  (
+                    price *
+                    quantity
+                  )
+
+                );
+
+              },
+
+              0
+
+            );
+
+        }
+
+      }
+
+
+      document
+        .getElementById(
+          "total"
+        )
+        .textContent =
+          formatPrice(total);
+
+    }
+
+
+    /* =====================================================
+       STATUS MESSAGE
+    ===================================================== */
+
+    function updateStatusMessage(
+      status
+    ) {
+
+      const statusText =
+        document.getElementById(
+          "statusText"
+        );
+
+
+      if (!statusText) {
+
+        return;
+
+      }
+
+
+      const normalized =
+
+        String(status)
+          .toLowerCase();
+
+
+      if (
+        normalized.includes(
+          "deliver"
+        )
+      ) {
+
+        statusText.textContent =
+
+          "Your order is on its way. Please keep your phone available for the delivery rider.";
+
+      }
+
+
+      else if (
+        normalized.includes(
+          "ship"
+        )
+      ) {
+
+        statusText.textContent =
+
+          "Your order has been shipped and is now on its way to you.";
+
+      }
+
+
+      else if (
+        normalized.includes(
+          "cancel"
+        )
+      ) {
+
+        statusText.textContent =
+
+          "This order has been cancelled.";
+
+      }
+
+
+      else if (
+
+        normalized.includes(
+          "confirm"
+        ) ||
+
+        normalized.includes(
+          "placed"
+        )
+
+      ) {
+
+        statusText.textContent =
+
+          "Your order is confirmed. Our seller will prepare your items and arrange delivery.";
+
+      }
+
+
+      else {
+
+        statusText.textContent =
+
+          "Your order is now confirmed. Our seller will prepare your items and arrange delivery.";
+
+      }
+
+    }
+
+
+    /* =====================================================
+       BACK TO CHECKOUT
+    ===================================================== */
+
+    function goBackToCheckout() {
+
+      window.location.href =
+        "checkout.html";
+
+    }
+
+
+    /* =====================================================
+       CONTINUE SHOPPING
+    ===================================================== */
+
+    function continueShopping() {
+
+      window.location.href =
+        "products.html";
+
+    }
+
+
+    /* =====================================================
+       TRACK ORDER
+    ===================================================== */
+
+    function trackOrder() {
+
+      const order =
+        getSavedOrder();
+
+
+      if (!order) {
+
+        alert(
+          "Order information could not be found."
+        );
+
+        return;
+
+      }
+
+
+      const orderId =
+
+        order.order_id ||
+
+        order.orderId ||
+
+        order.id ||
+
+        "";
+
+
+      if (!orderId) {
+
+        alert(
+          "Order ID could not be found."
+        );
+
+        return;
+
+      }
+
+
+      window.location.href =
+
+        "track-order.html?id=" +
+
+        encodeURIComponent(
+          orderId
+        );
+
+    }
+
+
+    /* =====================================================
+       EMPTY ORDER
+    ===================================================== */
+
+    function showEmptyOrder() {
+
+      document
+        .getElementById(
+          "orderId"
+        )
+        .textContent =
+          "Order information unavailable";
+
+
+      document
+        .getElementById(
+          "products"
+        )
+        .innerHTML = `
+
+          <div class="empty-message">
+
+            We couldn't find your order information.
+
+          </div>
+
+        `;
+
+
+      document
+        .getElementById(
+          "addressText"
+        )
+        .textContent =
+          "Delivery address not available.";
+
+    }
+
+
+    /* =====================================================
+       PAGE LOAD
+    ===================================================== */
+
+    document.addEventListener(
+
+      "DOMContentLoaded",
+
+      function() {
+
+        loadOrder();
+
+      }
+
+    );
+
+
+    /* =====================================================
+       DEBUG
+    ===================================================== */
+
+    console.log(
+      "AriZeba. Order Confirmation loaded."
+    );
+
+
+    console.log(
+      "Saved Order:",
+      getSavedOrder()
+    );
+
+  </script>
+
+</body>
+
+</html>

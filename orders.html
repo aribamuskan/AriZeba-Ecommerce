@@ -10,7 +10,7 @@
   content="width=device-width, initial-scale=1.0"
 >
 
-<title>arizeba. — My Orders</title>
+<title>AriZeba. — My Orders</title>
 
 <link
   rel="preconnect"
@@ -1305,7 +1305,7 @@ button {
   </button>
 
   <div class="brand">
-    arizeba
+    AriZeba
   </div>
 
   <div></div>
@@ -1470,7 +1470,7 @@ function loadOrders() {
   try {
 
     const savedOrders =
-      localStorage.getItem("arizebaOrders");
+      localStorage.getItem("AriZebaOrders");
 
     if (savedOrders) {
 
@@ -2074,7 +2074,7 @@ function trackOrder(
 ) {
 
   localStorage.setItem(
-    "arizebaTrackingOrder",
+    "AriZebaTrackingOrder",
     orderId
   );
 
@@ -2143,7 +2143,7 @@ function reorder(
 
     const savedCart =
       localStorage.getItem(
-        "arizebaCart"
+        "AriZebaCart"
       );
 
 
@@ -2251,7 +2251,7 @@ function reorder(
 
 
   localStorage.setItem(
-    "arizebaCart",
+    "AriZebaCart",
     JSON.stringify(cart)
   );
 
@@ -2359,3 +2359,5 @@ loadOrders();
 </body>
 
 </html>
+
+

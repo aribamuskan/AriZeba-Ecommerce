@@ -3169,7 +3169,7 @@ button[type="submit"]:active {
 <script>
 
 /* =====================================================
-   ARIZEBA CHECKOUT — PART 2
+   AriZeba CHECKOUT — PART 2
    Cart + Address + Saved Address + Delivery
    + Payment + Order
 ===================================================== */
@@ -3238,7 +3238,7 @@ function loadCart() {
 
     const storedCart =
       localStorage.getItem(
-        "arizebaCart"
+        "AriZebaCart"
       );
 
 
@@ -3563,7 +3563,7 @@ function saveCart() {
 
     localStorage.setItem(
 
-      "arizebaCart",
+      "AriZebaCart",
 
       JSON.stringify(cart)
 
@@ -4132,7 +4132,7 @@ function deleteSavedAddress() {
 
 
   localStorage.removeItem(
-    "arizebaSavedAddress"
+    "AriZebaSavedAddress"
   );
 
 
@@ -5147,7 +5147,7 @@ async function placeOrder() {
 
     localStorage.setItem(
 
-      "arizebaLastOrder",
+      "AriZebaLastOrder",
 
       JSON.stringify({
 
@@ -5350,4 +5350,6 @@ window.addEventListener(
 
 </body>
 </html>
+
+
 

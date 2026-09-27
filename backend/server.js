@@ -3449,4 +3449,8 @@ app.use(
 // START
 // =====================================================
 
-startServer();
+if (process.env.VERCEL) {
+  module.exports = app;
+} else {
+  startServer();
+}
